@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Database\Seeders\ProductosSeeder\BocadilloSeeder;
 use Database\Seeders\ProductosSeeder\SandwichSeeder;
+use Database\Seeders\ProductosSeeder\CroissantSeeder;
 
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ProductoTipoSeeder::class,
             BocadilloSeeder::class,
             SandwichSeeder::class,
+            CroissantSeeder::class,
         ]);
     }
 }
