@@ -12,6 +12,7 @@ use Database\Seeders\ProductosSeeder\HamburguesaSeeder;
 use Database\Seeders\ProductosSeeder\PerritoSeeder;
 use Database\Seeders\ProductosSeeder\EntranteSeeder;
 use Database\Seeders\ProductosSeeder\PapaSeeder;
+use Database\Seeders\ProductosSeeder\EnsaladaSeeder;
 use Database\Seeders\EstadoPedidoSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -31,6 +32,7 @@ class DatabaseSeeder extends Seeder
             PerritoSeeder::class,
             EntranteSeeder::class,
             PapaSeeder::class,
+            EnsaladaSeeder::class,
             EstadoPedidoSeeder::class,
         ]);
     }
