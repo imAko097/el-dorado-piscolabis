@@ -10,8 +10,8 @@ use Database\Seeders\ProductosSeeder\CroissantSeeder;
 use Database\Seeders\ProductosSeeder\KebabSeeder;
 use Database\Seeders\ProductosSeeder\HamburguesaSeeder;
 use Database\Seeders\ProductosSeeder\PerritoSeeder;
+use Database\Seeders\ProductosSeeder\EntranteSeeder;
 use Database\Seeders\EstadoPedidoSeeder;
-
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             KebabSeeder::class,
             HamburguesaSeeder::class,
             PerritoSeeder::class,
+            EntranteSeeder::class,
             EstadoPedidoSeeder::class,
         ]);
     }
