@@ -25,4 +25,15 @@ class Producto extends Model
     {
         return $this->belongsTo(ProductoTipo::class, 'id_producto_tipo');
     }
+
+    /**
+     * Relación con Pedido
+     * Un pedido puede tener muchos productos
+     */
+    public function pedidos()
+    {
+        return $this->belongsToMany(Pedido::class, 'pedido_productos', 'id_producto', 'id_pedido')
+                    ->withPivot('comentario', 'cantidad', 'precio_unitario', 'precio_total')
+                    ->withTimestamps();
+    }
 }

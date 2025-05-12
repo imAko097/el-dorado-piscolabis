@@ -15,7 +15,6 @@ class KebabSeeder extends Seeder
     {
         $tipo = 4; // ID Kebab
 
-        // Kebabs
         $kebabs = [
             [
                 'id_producto_tipos' => $tipo,
