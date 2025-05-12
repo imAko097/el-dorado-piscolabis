@@ -2,8 +2,8 @@
 
 namespace Database\Seeders\ProductosSeeder;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 use App\Models\Producto;
 
 class BocadilloSeeder extends Seeder
@@ -68,6 +68,15 @@ class BocadilloSeeder extends Seeder
             ],
         ];
 
+        // Añadir timestamps a cada producto
+        $now = Carbon::now();
+        $bocadillos = array_map(function ($item) use ($now) {
+            $item['created_at'] = $now;
+            $item['updated_at'] = $now;
+            return $item;
+        }, $bocadillos);
+
+        // Insertar en la tabla
         foreach ($bocadillos as $bocadillo) {
             Producto::updateOrInsert(
                 ['nombre' => $bocadillo['nombre']], // clave
