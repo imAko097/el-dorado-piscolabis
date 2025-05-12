@@ -30,7 +30,7 @@ class ProductoTipoSeeder extends Seeder
 
         // Poblar base de datos
         foreach ($tipos as $tipo) {
-            DB::table('producto_tipo')->updateOrInsert([
+            DB::table('producto_tipos')->updateOrInsert([
                 'tipo' => $tipo,
             ]);
         }
