@@ -4,12 +4,10 @@
         $user = auth()->user();
     @endphp
 
-    @if ($user && ($user->role === 'admin' || $user->id === $usuario->id))
         <button wire:click="showModal"
             class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm px-4 py-2 rounded-md">
             Editar
         </button>
-    @endif
 
     <!-- Modal -->
     @if ($showForm)
@@ -57,6 +55,21 @@
                                 <input type="password" wire:model="password_confirmation"
                                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                                 @error('password_confirmation') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Rol -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Rol</label>
+                                <select wire:model="role"
+                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                    <option value="">Seleccionar rol</option>
+                                    <option value="admin">Administrador</option>
+                                    <option value="empleado">Empleado</option>
+                                    <option value="cliente">Cliente</option>
+                                </select>
+                                @error('role') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
                         </div>
 

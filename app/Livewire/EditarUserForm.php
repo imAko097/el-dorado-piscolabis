@@ -29,7 +29,7 @@ class EditarUserForm extends Component
     protected function puedeEditar()
     {
         $authUser = Auth::user();
-        return $authUser && ($authUser->role->name === 'admin' || $authUser->id === $this->usuario->id);
+        return $authUser && ($authUser->role === 'admin' || $authUser->id === $this->usuario->id);
     }
 
 
@@ -41,22 +41,23 @@ class EditarUserForm extends Component
 
     public function showModal()
     {
-        if (!$this->puedeEditar()) {
-            abort(403, 'No tienes permiso para editar este usuario.');
-        }
+        //if (!$this->puedeEditar()) {
+          //  abort(403, 'No tienes permiso para editar este usuario.');
+        //}
 
         $this->name = $this->usuario->name;
         $this->email = $this->usuario->email;
         $this->password = '';
         $this->password_confirmation = '';
+        $this->role = $this->usuario->role;
         $this->showForm = true;
     }
 
     public function storage()
     {
-        if (!$this->puedeEditar()) {
-            abort(403, 'No tienes permiso para actualizar este usuario.');
-        }
+        //if (!$this->puedeEditar()) {
+          //  abort(403, 'No tienes permiso para actualizar este usuario.');
+        //}
 
         // Validación dinámica
         $rules = [
@@ -65,7 +66,7 @@ class EditarUserForm extends Component
             'password' => 'nullable|min:8|same:password_confirmation',
         ];
 
-        if (Auth::user()->role->name === 'admin') {
+        if (Auth::user()->role === 'admin') {
             $rules['role'] = 'required|in:admin,empleado,cliente';
         }
 
@@ -85,8 +86,7 @@ class EditarUserForm extends Component
             $datos['password'] = Hash::make($this->password);
         }
 
-        // Solo permitir cambiar el rol si el usuario actual es admin
-        if (Auth::user()->role->name === 'admin') {
+        if (Auth::user()->role === 'admin') {
             $datos['role'] = $this->role;
         }
 
