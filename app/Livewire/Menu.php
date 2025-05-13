@@ -30,7 +30,7 @@ class Menu extends Component
             ? Producto::where('id_producto_tipos', $tipo->id)->get()
             : collect();
 
-        return view('livewire.productos.menu-productos', [
+        return view('livewire.menu.menu-productos', [
             'productos' => $productos,
             'categoria' => $this->categoria,
         ]);

@@ -11,9 +11,9 @@ class InicioController extends Controller
         return view('inicio.inicio');
     }
 
-    public function menu()
+    public function menu($categoria = null)
     {
-        return view('inicio.menu');
+        return view('inicio.menu', ['categoria' => $categoria]);
     }
 
     public function contacto()
