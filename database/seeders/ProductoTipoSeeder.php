@@ -25,6 +25,7 @@ class ProductoTipoSeeder extends Seeder
             'papas',
             'ensaladas',
             'platos combinados',
+            'pizzas',
             'bebidas'
         ];
 

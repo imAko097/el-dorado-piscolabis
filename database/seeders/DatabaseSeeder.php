@@ -8,8 +8,15 @@ use Database\Seeders\ProductosSeeder\BocadilloSeeder;
 use Database\Seeders\ProductosSeeder\SandwichSeeder;
 use Database\Seeders\ProductosSeeder\CroissantSeeder;
 use Database\Seeders\ProductosSeeder\KebabSeeder;
+use Database\Seeders\ProductosSeeder\HamburguesaSeeder;
+use Database\Seeders\ProductosSeeder\PerritoSeeder;
+use Database\Seeders\ProductosSeeder\EntranteSeeder;
+use Database\Seeders\ProductosSeeder\PapaSeeder;
+use Database\Seeders\ProductosSeeder\EnsaladaSeeder;
+use Database\Seeders\ProductosSeeder\PlatoCombinadoSeeder;
+use Database\Seeders\ProductosSeeder\PizzaSeeder;
+use Database\Seeders\ProductosSeeder\BebidaSeeder;
 use Database\Seeders\EstadoPedidoSeeder;
-
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,7 +31,14 @@ class DatabaseSeeder extends Seeder
             SandwichSeeder::class,
             CroissantSeeder::class,
             KebabSeeder::class,
-
+            HamburguesaSeeder::class,
+            PerritoSeeder::class,
+            EntranteSeeder::class,
+            PapaSeeder::class,
+            EnsaladaSeeder::class,
+            PlatoCombinadoSeeder::class,
+            PizzaSeeder::class,
+            BebidaSeeder::class,
             EstadoPedidoSeeder::class,
         ]);
     }
