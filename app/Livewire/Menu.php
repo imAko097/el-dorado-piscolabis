@@ -14,6 +14,10 @@ class Menu extends Component
 
     public function mount($categoria = null)
     {
+        // Si no hay categoría en la URL, intentar obtenerla de la ruta actual
+        if ($categoria === null) {
+            $categoria = request()->route('categoria');
+        }
         $this->categoria = $categoria ?? 'bocadillos';
     }
 

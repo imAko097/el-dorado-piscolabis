@@ -18,10 +18,7 @@
             <li>
                 <a
                     href="{{ route('menu', ['categoria' => $cat]) }}"
-                    @click.prevent="
-                        history.pushState(null, '', '{{ route('menu', ['categoria' => $cat]) }}');
-                        Livewire.dispatch('navigate', { categoria: '{{ $cat }}' });
-                    "
+                    wire:navigate
                     class="px-4 py-2 rounded-full transition duration-200 
                            {{ $categoria === $cat ? 'bg-yellow-400 text-black font-semibold' : 'bg-gray-200 hover:bg-yellow-300 text-gray-700' }}"
                 >
