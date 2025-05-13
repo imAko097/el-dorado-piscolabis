@@ -13,7 +13,17 @@
     <!-- Navegador principal -->
     <livewire:menu-dropdown />
     
-    <!-- Carta -->
-    <livewire:menu />
+    
+
+    <!-- Contenido principal -->
+    <div class="pt-32 px-6 md:px-40 bg-white text-black min-h-screen">
+        <!-- Volver al inicio -->
+        <a href="{{ route('inicio') }}" class="text-gray-500 flex items-center gap-2 mb-4">
+            <i class="bi bi-arrow-left"></i>
+            Volver
+        </a>
+        <h1 class="text-4xl font-bold mb-8 text-center">NUESTRA CARTA</h1>
+        <livewire:menu />
+    </div>
 </body>
 </html>
