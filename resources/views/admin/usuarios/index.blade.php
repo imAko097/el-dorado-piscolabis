@@ -30,7 +30,17 @@
                     <th class="px-4 py-2 font-medium text-gray-800 whitespace-nowrap">{{ $i }}</th>
                     <td class="px-4 py-2 whitespace-nowrap">{{ $usuario->name }}</td>
                     <td class="px-4 py-2 whitespace-nowrap">{{ $usuario->email }}</td>
-                    <td class="px-4 py-2 whitespace-nowrap">{{ $usuario->role }}</td>
+                    <td class="px-4 py-2 whitespace-nowrap">
+                        @php
+                            $roles = [
+                                'admin' => 'Administrador',
+                                'empleado' => 'Empleado',
+                                'cliente' => 'Cliente'
+                            ];
+                        @endphp
+                        {{ $roles[$usuario->role] ?? ucfirst($usuario->role) }}
+                    </td>
+
                     <td class="px-4 py-2 text-right whitespace-nowrap">
                         @livewire('editar-user-form', ['usuario' => $usuario], key('editar-user-form-'.$usuario->id))
                     </td>
