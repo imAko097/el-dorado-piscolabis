@@ -17,9 +17,9 @@ class Menu extends Component
         $this->categoria = $categoria ?? 'bocadillos';
     }
 
-    public function navigate($data)
+    public function navigate(string $categoria)
     {
-        $this->categoria = $data['categoria'];
+        $this->categoria = $categoria;
     }
 
     public function render()
