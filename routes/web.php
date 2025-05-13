@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InicioController;
 use App\Livewire\Menu;
@@ -12,6 +14,9 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::resource('usuarios', UsuariosController::class);
+Route::resource('productos', ProductoController::class);
 
 require __DIR__.'/auth.php';
 
