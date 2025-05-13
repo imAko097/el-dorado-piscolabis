@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
-@section('page-title', 'Inicio del Panel')
+@section('page-title', 'Usuarios')
+@section('page-description', 'Administración de usuarios')
 @section('styles')
 <script src="https://cdn.tailwindcss.com"></script>
 @endsection

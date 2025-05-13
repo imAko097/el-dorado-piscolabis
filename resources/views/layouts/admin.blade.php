@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sidebar y Contenido</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>@yield('page-title', 'Título por defecto')</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  @livewireStyles
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-100 dark:bg-gray-900">
 
@@ -44,7 +48,7 @@
           </a>
         </li>
         <li>
-          <a href="#" class="flex items-center p-2 rounded-lg hover:bg-yellow-500 hover:text-white group">
+          <a href="{{ route('productos.index') }}" class="flex items-center p-2 rounded-lg hover:bg-yellow-500 hover:text-white group">
             <svg class="w-5 h-5 transition duration-75 group-hover:text-white" fill="currentColor"
               viewBox="0 -960 960 960">
               <path
@@ -64,11 +68,15 @@
       </ul>
     </div>
   </aside>
-
+  <div class="">
   <main class="pl-64 p-4">
+
     @yield('content')
   </main>
-
+    @yield('scripts')
+    @stack('scripts')
+    @livewireScripts
+</div>
   <!-- Script para abrir/cerrar sidebar -->
   <script>
     const toggleButton = document.getElementById('sidebar-toggle');

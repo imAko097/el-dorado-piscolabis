@@ -23,7 +23,7 @@ class Producto extends Model
      */
     public function tipo()
     {
-        return $this->belongsTo(ProductoTipo::class, 'id_producto_tipo');
+        return $this->belongsTo(ProductoTipo::class, 'id_producto_tipos');
     }
 
     /**

@@ -18,6 +18,14 @@ class UserForm extends Component
         'role' => 'required|in:admin, empleado, cliente',
     ];
 
+    protected $messages = [
+        'name.required' => 'El nombre es obligatorio.',
+        'email.required' => 'El correo electrónico es obligatorio.',
+        'password.required' => 'La contraseña es obligatoria.',
+        'role.required' => 'El rol es obligatorio.',
+        'role.in' => 'El rol debe ser uno de los siguientes: admin, empleado, cliente.',
+    ];
+
     public function showModal()
     {
         $this->reset();
