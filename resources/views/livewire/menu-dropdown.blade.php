@@ -18,7 +18,7 @@
                 </button>
             </nav>
             <ul class="p-5">
-                <li class="my-5"><a href="#" class="text-2xl hover:text-yellow-400">Carta</a></li>
+                <li class="my-5"><a href="{{ route('menu') }}" class="text-2xl hover:text-yellow-400">Carta</a></li>
                 <li class="my-5"><a href="#" class="text-2xl hover:text-yellow-400">Promociones</a></li>
                 <li class="my-5"><a href="#" class="text-2xl hover:text-yellow-400">Sobre Nosotros</a></li>
                 <li class="my-5"><a href="#" class="text-2xl hover:text-yellow-400">Contáctanos</a></li>
