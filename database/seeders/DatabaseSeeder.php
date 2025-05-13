@@ -14,6 +14,7 @@ use Database\Seeders\ProductosSeeder\EntranteSeeder;
 use Database\Seeders\ProductosSeeder\PapaSeeder;
 use Database\Seeders\ProductosSeeder\EnsaladaSeeder;
 use Database\Seeders\ProductosSeeder\PlatoCombinadoSeeder;
+use Database\Seeders\ProductosSeeder\PizzaSeeder;
 use Database\Seeders\ProductosSeeder\BebidaSeeder;
 use Database\Seeders\EstadoPedidoSeeder;
 
@@ -36,6 +37,7 @@ class DatabaseSeeder extends Seeder
             PapaSeeder::class,
             EnsaladaSeeder::class,
             PlatoCombinadoSeeder::class,
+            PizzaSeeder::class,
             BebidaSeeder::class,
             EstadoPedidoSeeder::class,
         ]);
