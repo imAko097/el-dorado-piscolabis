@@ -4,7 +4,6 @@ use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InicioController;
-use App\Livewire\Menu;
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
