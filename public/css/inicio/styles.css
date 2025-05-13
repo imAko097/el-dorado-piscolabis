@@ -1,3 +1,5 @@
+    @import 'animate.css';
+
     #dropdownMenu {
         position: fixed;
         top: 0;
@@ -6,8 +8,17 @@
         height: 100vh;
         background-color: white;
         z-index: 1000;
-        text-align: center;
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
     }
+
+    /* Cuando el menú está abierto */
+    #dropdownMenu.open {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
 
     #dropdownMenu ul {
         list-style: none;

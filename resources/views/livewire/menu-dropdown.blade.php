@@ -1,6 +1,7 @@
-<div>  
-    <nav
-        class="p-6 pl-40 pr-40 flex justify-between items-center absolute top-0 left-0 w-full bg-transparent text-white z-50">
+<div>
+    
+    <nav id="mainMenu"
+         class="p-6 pl-40 pr-40 flex justify-between items-center fixed top-0 left-0 w-full bg-transparent text-white z-50 transition-all duration-300 ease-in-out">
         <img src="{{ asset('storage/img/eldorado.png') }}" alt="Logo" class="bg-white w-20 h-20 rounded-full" />
         <button wire:click="toggleMenu" class="text-3xl">
             <i class="bi {{ $menuOpen ? 'bi-x' : 'bi-list' }}"></i>
@@ -12,7 +13,7 @@
         <div id="dropdownMenu" class="fixed top-0 left-0 w-full h-screen bg-white z-[1000] text-center">
             <nav class="p-6 pl-40 pr-40 flex justify-between items-center">
                 <img src="{{ asset('storage/img/eldorado.png') }}" alt="Logo"
-                    class="bg-white w-20 h-20 rounded-full" />
+                     class="bg-white w-20 h-20 rounded-full" />
                 <button wire:click="toggleMenu" class="text-3xl">
                     <i class="bi bi-x"></i>
                 </button>
