@@ -7,7 +7,7 @@ use App\Models\Pedido;
 
 class EstadoProducto extends Model
 {
-    protected $fillable = ['tipo'];
+    protected $fillable = ['estado'];
     
     /**
      * Relación con los pedidos
