@@ -2,62 +2,54 @@
 
 @section('page-title', 'Productos')
 @section('page-description', 'Administración de productos')
-@section('styles')
-<script src="https://cdn.tailwindcss.com"></script>
-@endsection
+
+@php
+    use Illuminate\Support\Str;
+@endphp
 
 @section('content')
-
-<div class="max-w-7xl mx-auto p-4 py-6">
+<div class="max-w-7xl mx-auto px-4 py-6">
     @livewire('productos.producto-form')
 
-    <div class="overflow-x-auto bg-white rounded-lg shadow-sm">
-        <table class="min-w-full text-sm text-left text-gray-700">
-            <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
-                <tr>
-                    <th class="px-4 py-3 w-10">#</th>
-                    <th class="px-4 py-3">Nombre</th>
-                    <th class="px-4 py-3">Ingredientes</th>
-                    <th class="px-4 py-3">Tipo de Producto</th>
-                    <th class="px-4 py-3">Imagen</th>
-                    <th class="px-4 py-3">Precio</th>
-                    <th class="px-4 py-3">Stock</th>
-                    <th class="px-4 py-3 w-10 text-right"></th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200">
-                @if (isset($productos) && count($productos) > 0)
-                @php $i = 1; @endphp
-                @foreach ($productos as $producto)
-                <tr class="hover:bg-gray-50">
-                    <th class="px-4 py-2 font-medium text-gray-800 whitespace-nowrap">{{ $i }}</th>
-                    <td class="px-4 py-2 whitespace-nowrap">{{ $producto->nombre }}</td>
-                    <td class="px-4 py-2 whitespace-nowrap">{{ $producto->ingredientes }}</td>
-                    <td class="px-4 py-2 whitespace-nowrap">{{ $producto->tipo ? $producto->tipo->tipo : 'Sin tipo' }}</td>
-                    <td class="px-4 py-2 whitespace-nowrap">
-                        @if ($producto->imagen)
-                        <img src="{{ asset('storage/' . $producto->imagen) }}" alt="{{ $producto->nombre }}" class="w-16 h-16 object-cover rounded">
-                        @else
-                        Sin imagen
-                        @endif
-                    </td>
-                    <td class="px-4 py-2 whitespace-nowrap">{{ $producto->precio }}</td>
-                    <td class="px-4 py-2 whitespace-nowrap">{{ $producto->stock }}</td>
-                    <td class="px-4 py-2 text-right whitespace-nowrap">
-                        @livewire('productos.editar-producto-form', ['producto' => $producto], key('producto.editar-producto-form-'.$producto->id))
-                    </td>
-                </tr>
-                @php $i++; @endphp
-                @endforeach
-                @else
-                <tr>
-                    <td colspan="6" class="px-4 py-4 text-center text-gray-500">
-                        No hay productos disponibles.
-                    </td>
-                </tr>
-                @endif
-            </tbody>
-        </table>
-    </div>
+    @if (isset($productos) && count($productos) > 0)
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+            @foreach ($productos as $producto)
+                <div class="flex flex-col bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full">
+                    
+                    @if ($producto->imagen)
+                        <img src="{{ asset('storage/' . $producto->imagen) }}" alt="{{ $producto->nombre }}" class="w-full h-48 object-cover">
+                    @endif
+
+                    <!-- Contenido -->
+                    <div class="flex flex-col flex-grow p-4 text-center">
+                        <h5 class="text-lg font-bold text-gray-800">
+                            {{ Str::ucfirst($producto->nombre) }}
+                        </h5>
+                        <h6 class="text-sm text-gray-600 mb-2">
+                            {{ $producto->tipo ? Str::ucfirst($producto->tipo->tipo) : 'Sin tipo' }}
+                        </h6>
+                        <p class="text-sm text-gray-700"><strong>Stock:</strong> {{ $producto->stock }}</p>
+                        <p class="text-sm text-gray-700 mt-1 line-clamp-4">
+                            <strong>Ingredientes:</strong> {{ $producto->ingredientes }}
+                        </p>
+                        
+                        <div class="mt-auto flex justify-center items-center pt-4">
+                            @livewire('productos.editar-producto-form', ['producto' => $producto], key('producto.editar-producto-form-'.$producto->id))
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-100 px-4 py-2 text-center">
+                        <span class="text-blue-700 font-semibold text-md">
+                            {{ number_format($producto->precio, 2, ',', '.') }} €
+                        </span>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @else
+        <div class="text-center text-gray-500 py-12">
+            No hay productos disponibles.
+        </div>
+    @endif
 </div>
 @endsection
