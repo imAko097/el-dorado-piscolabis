@@ -5,7 +5,6 @@ use App\Http\Controllers\InicioController;
 use App\Livewire\Menu;
 
 
-
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

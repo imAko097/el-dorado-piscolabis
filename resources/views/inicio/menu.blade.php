@@ -13,6 +13,7 @@
     <!-- Navegador principal -->
     <livewire:menu-dropdown />
     
-    
+    <!-- Carta -->
+    <livewire:menu />
 </body>
 </html>

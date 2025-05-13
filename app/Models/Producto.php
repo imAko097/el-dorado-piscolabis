@@ -10,7 +10,7 @@ class Producto extends Model
 {
     // Los campos a llenar
     protected $fillable = [
-        'id_producto_tipo',
+        'id_producto_tipos',
         'nombre',
         'ingredientes',
         'imagen',
@@ -23,7 +23,7 @@ class Producto extends Model
      */
     public function tipo()
     {
-        return $this->belongsTo(ProductoTipo::class, 'id_producto_tipo');
+        return $this->belongsTo(ProductoTipo::class, 'id_producto_tipos');
     }
 
     /**
