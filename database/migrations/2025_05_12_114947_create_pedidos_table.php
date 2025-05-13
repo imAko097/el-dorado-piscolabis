@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_usuario')->constrained('users')->onDelete('cascade'); // Relación con la tabla 'users'
+            $table->foreignId('id_usuario')->constrained('users')->onDelete('cascade')->nullable(); // Relación con la tabla 'users'
             $table->foreignId('id_estado_pedido')->constrained('estado_pedido')->onDelete('cascade'); // Relación con la tabla 'estado_pedidos'
             $table->string('direccion', 500)->nullable(); // Dirección de entrega, puede ser nula
             $table->text('observaciones')->nullable(); // Observaciones, puede ser nulo

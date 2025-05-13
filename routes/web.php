@@ -23,3 +23,11 @@ Route::get('/', [InicioController::class, 'inicio'])->name('inicio');
 Route::get('/menu/{categoria?}', [InicioController::class, 'menu'])->name('menu');
 Route::get('/contacto', [InicioController::class, 'contacto'])->name('contacto');
 Route::get('/sobrenosotros', [InicioController::class, 'sobreNosotros'])->name('sobrenosotros');
+
+// Rutas del carrito y checkout
+Route::get('/checkout', \App\Livewire\Checkout::class)->name('checkout');
+Route::get('/pedido/confirmacion/{id}', \App\Livewire\PedidoConfirmacion::class)->name('pedido.confirmacion');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/pedidos/mis-pedidos', \App\Livewire\Pedidos\MisPedidos::class)->name('pedidos.mis-pedidos');
+});

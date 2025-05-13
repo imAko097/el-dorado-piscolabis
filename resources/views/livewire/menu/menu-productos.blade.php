@@ -39,7 +39,7 @@
                 <p class="text-gray-600 mb-4">{{ ucfirst($producto->ingredientes) }}</p>
                 <div class="flex items-center justify-between">
                     <p class="text-xl font-semibold text-yellow-600">{{ number_format($producto->precio, 2, ',', '.') }} €</p>
-                    <button class="bg-yellow-400 text-black font-semibold py-2 px-6 rounded-full">
+                    <button wire:click="agregarAlCarrito({{ $producto->id }})" class="bg-yellow-400 text-black font-semibold py-2 px-6 rounded-full hover:bg-yellow-500 transition-colors">
                         Añadir
                     </button>
                 </div>
