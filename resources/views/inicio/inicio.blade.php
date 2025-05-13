@@ -164,7 +164,7 @@
             </button>
         </nav>
         <ul class="p-5">
-            <li><a href="#">Carta</a></li>
+            <li><a href="{{ route('menu') }}">Carta</a></li>
             <li><a href="#">Promociones</a></li>
             <li><a href="#">Sobre Nosotros</a></li>
             <li><a href="#">Contáctanos</a></li>
