@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Usuarios;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -43,7 +43,7 @@ class UserForm extends Component
 
     public function render()
     {
-        return view('livewire.user-form');
+        return view('livewire.usuarios.user-form');
     }
 
 }

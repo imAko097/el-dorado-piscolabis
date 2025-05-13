@@ -9,7 +9,7 @@
 
 
 <div class="max-w-7xl mx-auto p-4 py-6">
-    @livewire('user-form')
+    @livewire('usuarios.user-form')
 
     <div class="overflow-x-auto bg-white rounded-lg shadow-sm">
         <table class="min-w-full text-sm text-left text-gray-700">
@@ -42,7 +42,7 @@
                     </td>
 
                     <td class="px-4 py-2 text-right whitespace-nowrap">
-                        @livewire('editar-user-form', ['usuario' => $usuario], key('editar-user-form-'.$usuario->id))
+                        @livewire('usuarios.editar-user-form', ['usuario' => $usuario], key('usuarios.editar-user-form-'.$usuario->id))
                     </td>
                 </tr>
                 @php $i++; @endphp

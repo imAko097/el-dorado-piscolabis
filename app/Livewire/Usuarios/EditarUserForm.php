@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Usuarios;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,7 +37,7 @@ class EditarUserForm extends Component
 
     public function render()
     {
-        return view('livewire.editar-user-form');
+        return view('livewire.usuarios.editar-user-form');
     }
 
     public function showModal()
