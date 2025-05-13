@@ -43,8 +43,8 @@
                     </td>
                     <td class="px-4 py-2 whitespace-nowrap">{{ $producto->precio }}</td>
                     <td class="px-4 py-2 whitespace-nowrap">{{ $producto->stock }}</td>
-
                     <td class="px-4 py-2 text-right whitespace-nowrap">
+                        @livewire('productos.editar-producto-form', ['producto' => $producto], key('producto.editar-producto-form-'.$producto->id))
                     </td>
                 </tr>
                 @php $i++; @endphp

@@ -1,17 +1,18 @@
 <?php
 
 namespace App\Livewire\Productos;
-
 use Livewire\WithFileUploads;
 use App\Models\Producto;
 use App\Models\ProductoTipo;
+use Illuminate\Support\Facades\Storage;
+
 use Livewire\Component;
 
-class ProductoForm extends Component
+class EditarProductoForm extends Component
 {
     use WithFileUploads;
-
     public $nombre, $ingredientes, $precio, $stock, $imagen;
+    public $imagen_actual;
     public $id_producto_tipos;
     public $producto;
     public $showForm = false;
@@ -32,22 +33,36 @@ class ProductoForm extends Component
         'imagen.image' => 'La imagen debe ser un archivo de imagen.',
         'id_producto_tipos.required' => 'El tipo de producto es obligatorio.'
     ];
+    public function mount($producto)
+    {
+        $this->producto = $producto;
+    }
 
     public function showModal()
     {
-        $this->reset();
+
+        $this->nombre = $this->producto->nombre;
+        $this->ingredientes = $this->producto->ingredientes;
+        $this->precio = $this->producto->precio;
+        $this->stock = $this->producto->stock;
+        $this->imagen_actual = $this->producto->imagen;
+        $this->id_producto_tipos = $this->producto->id_producto_tipos;
         $this->showForm = true;
     }
 
-    public function save()
+    public function storage()
     {
         $this->validate();
-        // Guardar imagen si existe
         if ($this->imagen) {
+            if ($this->imagen_actual) {
+                Storage::disk('public')->delete($this->imagen_actual);
+            }
             $path = $this->imagen->store('productos', 'public');
+        } else {
+            $path = $this->imagen_actual;
         }
 
-        Producto::create([
+        $this->producto->update([
             'nombre' => $this->nombre,
             'ingredientes' => $this->ingredientes,
             'precio' => $this->precio,
@@ -56,13 +71,12 @@ class ProductoForm extends Component
             'id_producto_tipos' => $this->id_producto_tipos,
         ]);
 
-        session()->flash('message', 'Producto agregado correctamente.');
+        session()->flash('message', 'Producto actualizado correctamente.');
         return redirect()->route('productos.index');
     }
 
-
     public function render()
     {
-        return view('livewire.productos.producto-form');
+        return view('livewire.productos.editar-producto-form');
     }
 }

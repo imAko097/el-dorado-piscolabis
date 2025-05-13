@@ -1,8 +1,8 @@
 <div>
     <!-- Botón para abrir el modal -->
     <div>
-        <button wire:click="showModal" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 mb-2 rounded-md text-sm">
-            Agregar Producto
+        <button wire:click="showModal" class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm px-4 py-2 rounded-md">
+            Editar
         </button>
     </div>
 
@@ -18,7 +18,7 @@
 
                 <!-- Cuerpo del formulario -->
                 <div class="px-4 sm:px-6 py-4">
-                    <form wire:submit.prevent="save" enctype="multipart/form-data" class="space-y-4">
+                    <form wire:submit.prevent="storage" enctype="multipart/form-data" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <!-- Nombre -->
                             <div>
@@ -54,7 +54,7 @@
                                         <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
                                     @endforeach
                                 </select>
-                                @error('id_producto_tipos') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                                @error('id_producto_tipo') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
