@@ -58,7 +58,6 @@
 
 <body class="bg-white text-black">
     <livewire:menu-dropdown />
-
     <!-- Carrusel -->
     <div class="relative overflow-hidden">
         <div class="carousel">
@@ -69,7 +68,7 @@
                 <img src="{{ asset('storage/img/promo2.jpg') }}" alt="Promo 2" />
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('storage/img/promo3.jpg') }}" alt="Promo 3" />
+                <img src="{{ asset('storage/img/promo3.webp') }}" alt="Promo 3" />
             </div>
         </div>
 

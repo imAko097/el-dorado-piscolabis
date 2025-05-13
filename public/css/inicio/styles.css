@@ -31,8 +31,8 @@
 
     .carousel {
         display: flex;
-        transition: transform 0.5s ease-in-out;
-        width: 300%;
+        transition: transform 1s ease-in-out;
+        width: 100%;
     }
 
     .carousel-item {
