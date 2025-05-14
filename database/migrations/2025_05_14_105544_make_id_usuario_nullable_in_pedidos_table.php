@@ -9,12 +9,13 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::table('pedidos', function (Blueprint $table) {
-            $table->foreignId('id_usuario')->nullable()->change();
+            $table->unsignedBigInteger('id_usuario')->nullable()->change();
         });
     }
+
 
     /**
      * Reverse the migrations.
@@ -22,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('pedidos', function (Blueprint $table) {
-            $table->foreignId('id_usuario')->nullable(false)->change();
+            //
         });
     }
 };

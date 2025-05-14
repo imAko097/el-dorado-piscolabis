@@ -32,7 +32,7 @@
                                 <img src="{{ asset('storage/' . $producto['imagen']) }}" alt="{{ $producto['nombre'] }}" class="w-20 h-20 object-cover rounded-lg">
                             @endif
                             <div class="flex-1">
-                                <h3 class="font-semibold">{{ $producto['nombre'] }}</h3>
+                                <h3 class="font-semibold">{{ ucfirst($producto['nombre']) }}</h3>
                                 <p class="text-yellow-600 font-medium">{{ number_format($producto['precio'], 2, ',', '.') }} €</p>
                                 <div class="flex items-center gap-2 mt-2">
                                     <button wire:click="actualizarCantidad({{ $id }}, {{ $producto['cantidad'] - 1 }})" class="text-gray-500 hover:text-gray-700">
@@ -64,10 +64,10 @@
                         <!-- Botones de acción -->
                         <div class="space-y-3">
                             <a href="{{ route('checkout') }}" class="block w-full bg-yellow-400 text-black text-center py-3 rounded-lg font-semibold hover:bg-yellow-500 transition-colors">
-                                Pedir Ahora
+                                Finalizar pedido
                             </a>
                             <button wire:click="toggleCarrito" class="block w-full bg-gray-200 text-gray-700 text-center py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
-                                Seguir Comprando
+                                Seguir comprando
                             </button>
                         </div>
                     </div>

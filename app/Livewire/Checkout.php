@@ -26,11 +26,11 @@ class Checkout extends Component
         }
         $this->calcularTotal();
         
-        // Si el usuario está autenticado, prellenar datos
-        if (Auth::check()) {
-            $this->direccion = Auth::user()->direccion ?? '';
-            $this->telefono = Auth::user()->telefono ?? '';
-        }
+        // // Si el usuario está autenticado, prellenar datos
+        // if (Auth::check()) {
+        //     $this->direccion = Auth::user()->direccion ?? '';
+        //     $this->telefono = Auth::user()->telefono ?? '';
+        // }
     }
 
     private function calcularTotal()
@@ -55,7 +55,7 @@ class Checkout extends Component
         // Crear el pedido
         $pedido = Pedido::create([
             'id_usuario' => Auth::check() ? Auth::id() : null,
-            'id_estado_pedido' => EstadoPedido::where('estado', 'pendiente')->first()->id,
+            'id_estado_pedido' => EstadoPedido::where('estado', 'recibido')->first()->id,
             'direccion' => $this->tipoEntrega === 'domicilio' ? $this->direccion : null,
             'observaciones' => $this->observaciones,
             'telefono_contacto' => $this->telefono,

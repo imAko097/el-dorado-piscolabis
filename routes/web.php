@@ -26,8 +26,14 @@ Route::get('/contacto', [InicioController::class, 'contacto'])->name('contacto')
 Route::get('/sobrenosotros', [InicioController::class, 'sobreNosotros'])->name('sobrenosotros');
 
 // Rutas del carrito y checkout
-Route::get('/checkout', \App\Livewire\Checkout::class)->name('checkout');
-Route::get('/pedido/confirmacion/{id}', \App\Livewire\PedidoConfirmacion::class)->name('pedido.confirmacion');
+Route::get('/confirmar-pedido', function () {
+    return view('pedido.checkout');
+})->name('checkout');
+
+// Pedido confirmado
+Route::get('/pedido/confirmacion/{id}', function ($id) {
+    return view('pedido.confirmacion', compact('id'));
+})->name('pedido.confirmacion');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/pedidos/mis-pedidos', \App\Livewire\Pedidos\MisPedidos::class)->name('pedidos.mis-pedidos');

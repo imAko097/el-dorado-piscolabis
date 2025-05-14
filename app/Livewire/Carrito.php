@@ -19,14 +19,11 @@ class Carrito extends Component
         $this->calcularTotal();
     }
 
+    // Agrega productos al carrito
     #[On('agregarAlCarrito')]
     public function agregarProducto($id)
     {
-        $producto = Producto::find($id);
-        
-        if (!$producto) {
-            return;
-        }
+        $producto = Producto::findOrFail($id);
 
         if (isset($this->productos[$id])) {
             $this->productos[$id]['cantidad']++;
@@ -41,17 +38,19 @@ class Carrito extends Component
         }
 
         $this->actualizarCarrito();
-        $this->mostrarCarrito = true;
     }
 
+    // Elimina los productos del carrito
     public function eliminarProducto($idProducto)
     {
+        // Verifica si el producto está en el carrito
         if (isset($this->productos[$idProducto])) {
-            unset($this->productos[$idProducto]);
+            unset($this->productos[$idProducto]); // Lo elimina del array
             $this->actualizarCarrito();
         }
     }
 
+    // Actualiza la cantidad de los productos seleccionados
     public function actualizarCantidad($idProducto, $cantidad)
     {
         if (isset($this->productos[$idProducto])) {
@@ -64,12 +63,14 @@ class Carrito extends Component
         }
     }
 
+    // Actualiza el carrito
     private function actualizarCarrito()
     {
         Session::put('carrito', $this->productos);
         $this->calcularTotal();
     }
 
+    // Calcula el total a pagar
     private function calcularTotal()
     {
         $this->total = collect($this->productos)->sum(function ($item) {
@@ -77,6 +78,7 @@ class Carrito extends Component
         });
     }
 
+    // Abre/Cierra el panel lateral con el carrito
     public function toggleCarrito()
     {
         $this->mostrarCarrito = !$this->mostrarCarrito;

@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Pedido;
 
-class EstadoProducto extends Model
+class EstadoPedido extends Model
 {
+    protected $table = 'estado_pedido';
+
     protected $fillable = ['estado'];
     
     /**
