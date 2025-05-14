@@ -54,10 +54,65 @@
             goToSlide(0); // Init
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            const $menu = $('#dropdownMenu');
+            const $icon = $('#menuIcon');
+            const $mainMenu = $('#mainMenu');
+            let isOpen = false;
+
+            function openMenu() {
+                $('#dropdownMenu').addClass('show'); /* Mostrar el menú */
+                $('#menuIcon').removeClass('bi-list').addClass('bi-x');
+                $('#mainMenu').removeClass('bg-transparent text-white').addClass('bg-white text-black shadow-lg');
+                isOpen = true;
+            }
+
+            function closeMenu() {
+                $('#dropdownMenu').removeClass('show'); /* Ocultar el menú */
+                $('#menuIcon').removeClass('bi-x').addClass('bi-list');
+                $('#mainMenu').removeClass('bg-white text-black shadow-lg').addClass('bg-transparent text-white');
+                isOpen = false;
+            }
+
+            // Alternar el menú al hacer clic en el icono
+            $('#menuToggle').click(function() {
+                if (!isOpen) {
+                    openMenu();
+                } else {
+                    closeMenu();
+                }
+            });
+
+            // Cerrar el menú al hacer clic fuera del área del menú
+            $('#closeMenu').click(function() {
+                closeMenu();
+            });
+        });
+    </script>
 </head>
 
 <body class="bg-white text-black">
-    <livewire:menu-dropdown />
+    <div>
+        <nav id="mainMenu"
+            class="p-6 pl-40 pr-40 flex justify-between items-center fixed top-0 left-0 w-full bg-transparent text-white z-50 transition-all duration-300 ease-in-out">
+            <img src="{{ asset('storage/img/eldorado.png') }}" alt="Logo" class="bg-white w-20 h-20 rounded-full" />
+            <!-- Botón de menú en el navbar -->
+            <button id="menuToggle" class="text-3xl">
+                <i id="menuIcon" class="bi bi-list"></i>
+            </button>
+        </nav>
+        <div id="dropdownMenu">
+            <ul class="p-6 text-5xl">
+                <li><a href="#inicio">Inicio <i class="bi bi-chevron-right"></i></a></li>
+                <li><a href="#Carta">Carta <i class="bi bi-chevron-right"></i></a></li>
+                <li><a href="#Sobre Nosotros">Sobre Nosotros <i class="bi bi-chevron-right"></i></a></li>
+                <li><a href="#Contacto">Contacto <i class="bi bi-chevron-right"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+
     <!-- Carrusel -->
     <div class="relative overflow-hidden">
         <div class="carousel">
@@ -84,8 +139,9 @@
     <section class="bg-yellow-400 py-10 px-4">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-6">
             <!-- Tarjeta 1 -->
-            <div class="rounded-2xl overflow-hidden shadow-lg relative h-72 bg-cover bg-center"
-                style="background-image: url('/ruta/a/imagen1.jpg')">
+            <div class="relative rounded-2xl overflow-hidden shadow-lg h-72">
+                <img src="{{ asset('storage/img/div1.webp') }}" alt="Delicias para compartir"
+                    class="absolute inset-0 w-full h-full object-cover" />
                 <div class="absolute inset-0 bg-black bg-opacity-40 p-6 flex flex-col justify-end text-white">
                     <h2 class="text-2xl font-bold mb-2">¡Delicias para compartir!</h2>
                     <p class="text-sm mb-4">Prueba nuestras especialidades caseras ideales para cualquier ocasión.</p>
@@ -95,8 +151,9 @@
             </div>
 
             <!-- Tarjeta 2 -->
-            <div class="rounded-2xl overflow-hidden shadow-lg relative h-72 bg-cover bg-center"
-                style="background-image: url('/ruta/a/imagen2.jpg')">
+            <div class="relative rounded-2xl overflow-hidden shadow-lg h-72">
+                <img src="/ruta/a/imagen2.jpg" alt="Haz tu pedido online"
+                    class="absolute inset-0 w-full h-full object-cover" />
                 <div class="absolute inset-0 bg-black bg-opacity-40 p-6 flex flex-col justify-end text-white">
                     <h2 class="text-2xl font-bold mb-2">¡Haz tu pedido online!</h2>
                     <p class="text-sm mb-4">Pide desde casa y recógelo en nuestro local sin esperar.</p>
@@ -107,10 +164,10 @@
                 </div>
             </div>
 
-
             <!-- Tarjeta 3 -->
-            <div class="md:col-span-2 rounded-2xl overflow-hidden shadow-lg relative h-72 bg-cover bg-center"
-                style="background-image: url('/ruta/a/imagen3.jpg')">
+            <div class="relative md:col-span-2 rounded-2xl overflow-hidden shadow-lg h-72">
+                <img src="/ruta/a/imagen3.jpg" alt="Nuestra pasión: calidad y cercanía"
+                    class="absolute inset-0 w-full h-full object-cover" />
                 <div class="absolute inset-0 bg-black bg-opacity-40 p-6 flex flex-col justify-end text-white">
                     <h2 class="text-3xl font-bold mb-2">Nuestra pasión: calidad y cercanía</h2>
                     <p class="text-sm mb-4">Conoce nuestro compromiso con los ingredientes frescos y el buen servicio.
@@ -120,6 +177,7 @@
             </div>
         </div>
     </section>
+
 
     <section class="bg-white py-12 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4">
@@ -196,7 +254,6 @@
             });
         });
     </script>
-
 </body>
 
 </html>
