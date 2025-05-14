@@ -38,13 +38,13 @@
       </div>
       <ul class="space-y-2 font-medium mt-6">
         <li>
-          <a href="{{ route('dashboard') }}" class="flex items-center p-2 rounded-lg hover:bg-yellow-500 hover:text-white group">
+          <a href="{{ route('inicio') }}" class="flex items-center p-2 rounded-lg hover:bg-yellow-500 hover:text-white group">
             <svg class="w-5 h-5 transition duration-75 group-hover:text-white" fill="currentColor"
               viewBox="0 -960 960 960">
               <path
                 d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z" />
             </svg>
-            <span class="ms-3">Dashboard</span>
+            <span class="ms-3">Inicio</span>
           </a>
         </li>
         <li>
@@ -69,7 +69,8 @@
     </div>
   </aside>
   <div class="">
-  <main class="pl-64 p-4">
+<main id="main-content" class="pl-64 p-4 transition-all duration-300">
+
 
     @yield('content')
   </main>
@@ -79,11 +80,6 @@
 </div>
   <!-- Script para abrir/cerrar sidebar -->
   <script>
-    const toggleButton = document.getElementById('sidebar-toggle');
-    const sidebar = document.getElementById('logo-sidebar');
-    const icon = document.getElementById('toggle-icon');
-    let sidebarVisible = true;
-
     const hamburgerIcon = `
       <path clip-rule="evenodd" fill-rule="evenodd"
         d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
@@ -98,10 +94,42 @@
         10 4.293 5.707a1 1 0 010-1.414z"/>
     `;
 
-    toggleButton.addEventListener('click', () => {
-      sidebarVisible = !sidebarVisible;
-      sidebar.classList.toggle('-translate-x-full', !sidebarVisible);
-      icon.innerHTML = sidebarVisible ? closeIcon : hamburgerIcon;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleButton = document.getElementById('sidebar-toggle');
+      const sidebar = document.getElementById('logo-sidebar');
+      const icon = document.getElementById('toggle-icon');
+      const mainContent = document.getElementById('main-content');
+
+      let sidebarVisible = true;
+
+      if (window.innerWidth < 768) {
+        sidebar.classList.add('-translate-x-full');
+        mainContent.classList.remove('pl-64');
+        mainContent.classList.add('pl-8');
+        icon.innerHTML = hamburgerIcon;
+        sidebarVisible = false;
+      } else {
+        sidebar.classList.remove('-translate-x-full');
+        mainContent.classList.remove('pl-8');
+        mainContent.classList.add('pl-64');
+        icon.innerHTML = closeIcon;
+        sidebarVisible = true;
+      }
+
+      toggleButton.addEventListener('click', () => {
+        sidebarVisible = !sidebarVisible;
+        sidebar.classList.toggle('-translate-x-full', !sidebarVisible);
+        icon.innerHTML = sidebarVisible ? closeIcon : hamburgerIcon;
+
+        if (sidebarVisible) {
+          mainContent.classList.remove('pl-8');
+          mainContent.classList.add('pl-64');
+        } else {
+          mainContent.classList.remove('pl-64');
+          mainContent.classList.add('pl-8');
+        }
+      });
     });
   </script>
 

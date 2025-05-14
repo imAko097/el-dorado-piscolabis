@@ -1,22 +1,24 @@
 <div>
-    <!-- Botón para abrir el modal -->
-    <div>
-        <button wire:click="showModal" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 mb-2 rounded-md text-sm">
-            Agregar Producto
-        </button>
-    </div>
+    <button wire:click="showModal"
+        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-md shadow transition duration-200"
+        title="Agregar nuevo producto">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+        Agregar Producto
+    </button>
 
-    <!-- Modal -->
+
     @if ($showForm)
         <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto px-4">
             <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl sm:max-w-3xl md:max-w-4xl mx-auto my-10">
-                <!-- Encabezado -->
                 <div class="flex justify-between items-center border-b px-4 sm:px-6 py-3 sm:py-4">
                     <h2 class="text-lg sm:text-xl font-semibold">Agregar Nuevo Usuario</h2>
                     <button wire:click="$set('showForm', false)" class="text-gray-600 hover:text-gray-900 text-xl">✕</button>
                 </div>
 
-                <!-- Cuerpo del formulario -->
+
                 <div class="px-4 sm:px-6 py-4">
                     <form wire:submit.prevent="save" enctype="multipart/form-data" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">

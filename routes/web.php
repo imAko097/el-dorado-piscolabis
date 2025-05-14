@@ -16,6 +16,7 @@ Route::view('profile', 'profile')
 Route::resource('usuarios', UsuariosController::class);
 Route::resource('productos', ProductoController::class);
 
+
 require __DIR__.'/auth.php';
 
 // ruta para pagina de inicio el dorado
