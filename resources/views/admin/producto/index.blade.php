@@ -11,8 +11,7 @@
 <div class="max-w-7xl mx-auto px-4 py-6">
     @livewire('productos.producto-form')
 
-    <!-- Filtro por categorías -->
-   <ul class="flex flex-wrap justify-center gap-4 mb-6 mt-4">
+    <ul class="flex flex-wrap justify-center gap-4 mb-6 mt-4">
         <li>
             <a href="{{ route('productos.index') }}"
             class="px-4 py-2 rounded-full transition duration-200 {{ request('categoria') ? 'bg-gray-200 hover:bg-yellow-300 text-gray-700' : 'bg-yellow-400 text-black font-semibold' }}">
@@ -39,7 +38,6 @@
                         <img src="{{ asset('storage/' . $producto->imagen) }}" alt="{{ $producto->nombre }}" class="w-full h-48 object-cover">
                     @endif
 
-                    <!-- Contenido -->
                     <div class="flex flex-col flex-grow p-4 text-center">
                         <h5 class="text-lg font-bold text-gray-800">
                             {{ Str::ucfirst($producto->nombre) }}
