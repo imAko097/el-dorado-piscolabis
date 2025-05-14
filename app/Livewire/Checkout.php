@@ -25,12 +25,6 @@ class Checkout extends Component
             return redirect()->route('menu');
         }
         $this->calcularTotal();
-        
-        // // Si el usuario está autenticado, prellenar datos
-        // if (Auth::check()) {
-        //     $this->direccion = Auth::user()->direccion ?? '';
-        //     $this->telefono = Auth::user()->telefono ?? '';
-        // }
     }
 
     private function calcularTotal()
@@ -40,6 +34,7 @@ class Checkout extends Component
         });
     }
 
+    // Realiza el pedido (añade a la base de datos el pedido y los productos)
     public function realizarPedido()
     {
         $this->validate([
@@ -65,12 +60,15 @@ class Checkout extends Component
             'total' => $this->total,
         ]);
 
-        // Agregar productos al pedido
+        
+
+        // Agregar productos al pedido (tabla intermedia pedido_productos)
         foreach ($this->productos as $producto) {
             $pedido->productos()->attach($producto['id'], [
                 'cantidad' => $producto['cantidad'],
                 'precio_unitario' => $producto['precio'],
-                'precio_total' => $producto['precio'] * $producto['cantidad']
+                'precio_total' => $producto['precio'] * $producto['cantidad'],
+                'comentario' => (string) ($producto['comentario'] ?? ''),
             ]);
         }
 

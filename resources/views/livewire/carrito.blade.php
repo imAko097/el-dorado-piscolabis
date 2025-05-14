@@ -43,6 +43,20 @@
                                         <i class="bi bi-plus-circle"></i>
                                     </button>
                                 </div>
+                                <div>
+                                    @if($producto['nombre'] == 'refrescos lata' || $producto['nombre'] == 'refrescos botella 1.5L')
+                                        <select name="comentario" id="comentario" class="h-10 border-2 border-gray-300 rounded-lg px-2 text-sm appearance-none w-[180px] mt-1" wire:change="actualizarComentario({{ $id }}, $event.target.value)">
+                                            <option value="">¿Qué refresco quieres?</option>
+                                            <option value="Coca Cola">Coca Cola</option>
+                                            <option value="Fanta">Fanta</option>
+                                            <option value="Sprite">Sprite</option>
+                                            <option value="Clipper de fresa">Clipper de fresa</option>
+                                            <option value="Clipper de naranja">Clipper de naranja</option>
+                                        </select>
+                                    @else
+                                        <textarea name="comentario" id="comentario" class="h-[75px] border-2 border-gray-300 rounded-lg px-2 text-sm w-full mt-1" placeholder="¿Quieres quitar algún ingrediente? ¿Tienes alguna alergia? ¡Comentanos!" wire:model="productos.{{ $id }}.comentario" style="resize: none;"></textarea>
+                                    @endif
+                                </div>
                             </div>
                             <button wire:click="eliminarProducto({{ $id }})" class="text-red-500 hover:text-red-700">
                                 <i class="bi bi-trash"></i>

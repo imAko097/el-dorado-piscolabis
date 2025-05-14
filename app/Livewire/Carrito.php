@@ -33,7 +33,8 @@ class Carrito extends Component
                 'nombre' => $producto->nombre,
                 'precio' => $producto->precio,
                 'cantidad' => 1,
-                'imagen' => $producto->imagen
+                'imagen' => $producto->imagen,
+                'comentario' => null,
             ];
         }
 
@@ -82,6 +83,15 @@ class Carrito extends Component
     public function toggleCarrito()
     {
         $this->mostrarCarrito = !$this->mostrarCarrito;
+    }
+
+    // Actualiza el comentario de un producto
+    public function actualizarComentario($idProducto, $comentario)
+    {
+        if (isset($this->productos[$idProducto])) {
+            $this->productos[$idProducto]['comentario'] = $comentario;
+            $this->actualizarCarrito();
+        }
     }
 
     public function render()
