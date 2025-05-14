@@ -1,15 +1,20 @@
 <div>
-    <!-- Botón para abrir el modal -->
     @php
         $user = auth()->user();
     @endphp
-
+    <div>
         <button wire:click="showModal"
-            class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm px-4 py-2 rounded-md">
+            class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 rounded-md shadow transition duration-200"
+            title="Editar producto">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5m-10 2l6-6m0 0l3 3m-3-3v0" />
+            </svg>
             Editar
         </button>
+    </div>
 
-    <!-- Modal -->
     @if ($showForm)
         <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
             <div class="bg-white rounded-lg shadow-xl w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl">
