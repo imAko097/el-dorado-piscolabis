@@ -11,18 +11,21 @@
     <title>El Dorado - Menú</title>
 </head>
 <body>
-    <!-- Navegador principal -->
+    <!-- Navegador -->
     <livewire:menu-dropdown />
     
-    
-
-    <!-- Contenido principal -->
+    <!-- Contenido -->
     <div class="pt-32 px-6 md:px-40 bg-white text-black min-h-screen">
         <!-- Volver al inicio -->
         <a href="{{ route('inicio') }}" class="text-gray-500 flex items-center gap-2 mb-4 hover:text-black hover:underline transition-colors">
             <i class="bi bi-arrow-left"></i>
             Volver
         </a>
+        
+        <!-- Carrito -->
+        <livewire:carrito />
+
+        <!-- Carta -->
         <h1 class="text-4xl font-bold mb-8 text-center">NUESTRA CARTA</h1>
         <livewire:menu />
     </div>
