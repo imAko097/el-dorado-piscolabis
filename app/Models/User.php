@@ -66,4 +66,11 @@ class User extends Authenticatable
     public function isEmpleado() {
         return $this->role === 'empleado';
     }
+
+    
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class, 'id_usuario');
+    }
+
 }

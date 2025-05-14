@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\PedidoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InicioController;
 
@@ -15,6 +16,7 @@ Route::view('profile', 'profile')
 
 Route::resource('usuarios', UsuariosController::class);
 Route::resource('productos', ProductoController::class);
+Route::resource('pedidos', PedidoController::class);
 
 
 require __DIR__.'/auth.php';
