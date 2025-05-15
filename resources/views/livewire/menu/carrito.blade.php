@@ -14,7 +14,7 @@
     <!-- Panel del carrito -->
     @if($mostrarCarrito)
         <div class="fixed inset-0 bg-black bg-opacity-50 z-40" wire:click="toggleCarrito"></div>
-        <div class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-xl z-50 overflow-y-auto">
+        <div class="fixed top-0 right-0 h-full w-full md:w-[35rem] bg-white shadow-xl z-50 overflow-y-auto">
             <div class="p-6">
                 <!-- Encabezado -->
                 <div class="flex justify-between items-center mb-6">

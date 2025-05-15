@@ -96,6 +96,6 @@ class Carrito extends Component
 
     public function render()
     {
-        return view('livewire.carrito');
+        return view('livewire.menu.carrito');
     }
 } 
