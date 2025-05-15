@@ -13,6 +13,15 @@ class Carrito extends Component
     public $total = 0;
     public $mostrarCarrito = false;
 
+    // Extras para los bocadillos
+    public array $extrasBocadillos = [
+        'sin extra' => ['nombre' => 'Sin extra', 'precio' => '0'],
+        'queso' => ['nombre' => 'Queso', 'precio' => '0.30'],
+        'especial' => ['nombre' => 'Especial', 'precio' => '0.50'],
+    ];
+
+    public array $extraSeleccionado = []; // Guarda por producto el extra seleccionado
+
     public function mount()
     {
         $this->productos = Session::get('carrito', []);
@@ -23,7 +32,13 @@ class Carrito extends Component
     #[On('agregarAlCarrito')]
     public function agregarProducto($id)
     {
-        $producto = Producto::findOrFail($id);
+        $producto = Producto::with('tipo')->findOrFail($id);
+
+        // Obtener el extra seleccionado (si existe)
+        $claveExtra = $this->extraSeleccionado[$id] ?? 'ninguno';
+        $extra = $this->extrasBocadillos[$claveExtra] ?? ['nombre' => 'Sin extra', 'precio' => 0];
+
+        $precioFinal = $producto->precio + $extra['precio'];
 
         if (isset($this->productos[$id])) {
             $this->productos[$id]['cantidad']++;
@@ -31,10 +46,10 @@ class Carrito extends Component
             $this->productos[$id] = [
                 'id' => $producto->id,
                 'nombre' => $producto->nombre,
-                'precio' => $producto->precio,
+                'precio' => $precioFinal,
                 'cantidad' => 1,
                 'imagen' => $producto->imagen,
-                'comentario' => null,
+                'comentario' => $extra['nombre'],
             ];
         }
 

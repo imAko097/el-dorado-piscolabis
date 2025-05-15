@@ -18,6 +18,7 @@ class Menu extends Component
         if ($categoria === null) {
             $categoria = request()->route('categoria');
         }
+        
         $this->categoria = $categoria ?? 'bocadillos';
     }
 
