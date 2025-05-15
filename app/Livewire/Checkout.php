@@ -38,7 +38,7 @@ class Checkout extends Component
     public function realizarPedido()
     {
         $this->validate([
-            'tipoEntrega' => 'required|in:domicilio,tienda',
+            'tipoEntrega' => 'required|in:domicilio,local',
             'direccion' => 'required_if:tipoEntrega,domicilio',
             'telefono' => 'required',
             'formaPago' => 'required|in:efectivo,tarjeta',
@@ -51,7 +51,7 @@ class Checkout extends Component
         $pedido = Pedido::create([
             'id_usuario' => Auth::check() ? Auth::id() : null,
             'id_estado_pedido' => EstadoPedido::where('estado', 'recibido')->first()->id,
-            'direccion' => $this->tipoEntrega === 'domicilio' ? $this->direccion : null,
+            'direccion' => $this->tipoEntrega === 'domicilio' ? $this->direccion : $this->tipoEntrega,
             'observaciones' => $this->observaciones,
             'telefono_contacto' => $this->telefono,
             'forma_pago' => $this->formaPago,

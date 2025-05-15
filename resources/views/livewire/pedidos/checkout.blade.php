@@ -40,11 +40,11 @@
                         <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Entrega</label>
                         <div class="flex gap-4">
                             <label class="flex items-center">
-                                <input type="radio" wire:model="tipoEntrega" value="domicilio" class="mr-2">
+                                <input type="radio" wire:model.live="tipoEntrega" value="domicilio" class="mr-2">
                                 <span>Entrega a Domicilio</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" wire:model="tipoEntrega" value="tienda" class="mr-2">
+                                <input type="radio" wire:model.live="tipoEntrega" value="local" class="mr-2">
                                 <span>Recoger en Tienda</span>
                             </label>
                         </div>
@@ -52,13 +52,15 @@
                     </div>
 
                     <!-- Dirección -->
-                    @if($tipoEntrega === 'domicilio')
-                        <div>
-                            <label for="direccion" class="block text-sm font-medium text-gray-700">Dirección de Entrega</label>
-                            <input type="text" wire:model="direccion" id="direccion" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500">
-                            @error('direccion') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                        </div>
-                    @endif
+                    <div wire:key="address-field">
+                        @if($tipoEntrega === 'domicilio')
+                            <div>
+                                <label for="direccion" class="block text-sm font-medium text-gray-700">Dirección de Entrega</label>
+                                <input type="text" wire:model.live="direccion" id="direccion" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500">
+                                @error('direccion') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                            </div>
+                        @endif
+                    </div>
 
                     <!-- Teléfono -->
                     <div>
