@@ -1,13 +1,16 @@
 <div>
-    <button wire:click="showModal"
-        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-md shadow transition duration-200"
-        title="Agregar nuevo producto">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
-            stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-        </svg>
-        Agregar Producto
-    </button>
+    <div>
+        <button wire:click="showModal"
+            class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 rounded-md shadow transition duration-200"
+            title="Editar producto">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5m-10 2l6-6m0 0l3 3m-3-3v0" />
+            </svg>
+            Editar
+        </button>
+    </div>
 
 
     @if ($showForm)
@@ -18,9 +21,8 @@
                     <button wire:click="$set('showForm', false)" class="text-gray-600 hover:text-gray-900 text-xl">✕</button>
                 </div>
 
-
                 <div class="px-4 sm:px-6 py-4">
-                    <form wire:submit.prevent="save" enctype="multipart/form-data" class="space-y-4">
+                    <form wire:submit.prevent="storage" enctype="multipart/form-data" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <!-- Nombre -->
                             <div>
@@ -56,7 +58,7 @@
                                         <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
                                     @endforeach
                                 </select>
-                                @error('id_producto_tipos') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                                @error('id_producto_tipo') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
