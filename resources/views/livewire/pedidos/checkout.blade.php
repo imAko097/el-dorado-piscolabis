@@ -85,6 +85,39 @@
                         @error('formaPago') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                     </div>
 
+                    <!-- Formulario de tarjeta -->
+                    <div wire:key="card-form">
+                        @if($formaPago === 'tarjeta')
+                            <div class="space-y-4 border-t pt-4">
+                                <div>
+                                    <label for="numeroTarjeta" class="block text-sm font-medium text-gray-700">Número de Tarjeta</label>
+                                    <input type="text" wire:model="numeroTarjeta" id="numeroTarjeta" maxlength="16" placeholder="1234 5678 9012 3456" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500">
+                                    @error('numeroTarjeta') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+
+                                <div>
+                                    <label for="nombreTitular" class="block text-sm font-medium text-gray-700">Nombre del Titular</label>
+                                    <input type="text" wire:model="nombreTitular" id="nombreTitular" placeholder="Como aparece en la tarjeta" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500">
+                                    @error('nombreTitular') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="fechaExpiracion" class="block text-sm font-medium text-gray-700">Fecha de Expiración</label>
+                                        <input type="text" wire:model="fechaExpiracion" id="fechaExpiracion" placeholder="MM/YY" maxlength="5" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500">
+                                        @error('fechaExpiracion') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+
+                                    <div>
+                                        <label for="cvv" class="block text-sm font-medium text-gray-700">CVV</label>
+                                        <input type="text" wire:model="cvv" id="cvv" maxlength="3" placeholder="123" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500">
+                                        @error('cvv') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+
                     <!-- Observaciones -->
                     <div>
                         <label for="observaciones" class="block text-sm font-medium text-gray-700">Observaciones</label>
