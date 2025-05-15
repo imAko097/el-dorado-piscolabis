@@ -152,7 +152,7 @@
 
             <!-- Tarjeta 2 -->
             <div class="relative rounded-2xl overflow-hidden shadow-lg h-72">
-                <img src="/ruta/a/imagen2.jpg" alt="Haz tu pedido online"
+                <img src="{{ asset('storage/img/div2.jpg') }}" alt="Haz tu pedido online"
                     class="absolute inset-0 w-full h-full object-cover" />
                 <div class="absolute inset-0 bg-black bg-opacity-40 p-6 flex flex-col justify-end text-white">
                     <h2 class="text-2xl font-bold mb-2">¡Haz tu pedido online!</h2>
@@ -166,7 +166,7 @@
 
             <!-- Tarjeta 3 -->
             <div class="relative md:col-span-2 rounded-2xl overflow-hidden shadow-lg h-72">
-                <img src="/ruta/a/imagen3.jpg" alt="Nuestra pasión: calidad y cercanía"
+                <img src="{{ asset('storage/img/div3.webp') }}" alt="Nuestra pasión: calidad y cercanía"
                     class="absolute inset-0 w-full h-full object-cover" />
                 <div class="absolute inset-0 bg-black bg-opacity-40 p-6 flex flex-col justify-end text-white">
                     <h2 class="text-3xl font-bold mb-2">Nuestra pasión: calidad y cercanía</h2>
