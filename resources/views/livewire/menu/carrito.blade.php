@@ -55,7 +55,7 @@
                                             <option value="Clipper de naranja">Clipper de naranja</option>
                                         </select>
                                     @else
-                                        <textarea name="comentario" id="comentario" class="h-[75px] border-2 border-gray-300 rounded-lg px-2 text-sm w-full mt-1" placeholder="¿Quieres quitar algún ingrediente? ¿Tienes alguna alergia? ¡Comentanos!" wire:model="productos.{{ $id }}.comentario" style="resize: none;"></textarea>
+                                        <textarea name="comentario" id="comentario" class="h-[75px] border-2 border-gray-300 rounded-lg px-2 text-sm w-full mt-1" placeholder="¿Quieres quitar algún ingrediente? ¿Tienes alguna alergia? ¡Comentanos!" wire:change="actualizarComentario({{ $id }}, $event.target.value)" style="resize: none;">{{ $producto['comentario'] }}</textarea>
                                     @endif
                                 </div>
                             </div>
