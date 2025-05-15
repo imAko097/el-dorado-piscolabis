@@ -60,8 +60,6 @@ class Checkout extends Component
             'total' => $this->total,
         ]);
 
-        
-
         // Agregar productos al pedido (tabla intermedia pedido_productos)
         foreach ($this->productos as $producto) {
             $pedido->productos()->attach($producto['id'], [

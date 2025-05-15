@@ -23,7 +23,7 @@ class Carrito extends Component
     #[On('agregarAlCarrito')]
     public function agregarProducto($id)
     {
-        $producto = Producto::findOrFail($id);
+        $producto = Producto::with('tipo')->findOrFail($id);
 
         if (isset($this->productos[$id])) {
             $this->productos[$id]['cantidad']++;
@@ -34,7 +34,7 @@ class Carrito extends Component
                 'precio' => $producto->precio,
                 'cantidad' => 1,
                 'imagen' => $producto->imagen,
-                'comentario' => null,
+                'comentario' => '',
             ];
         }
 
