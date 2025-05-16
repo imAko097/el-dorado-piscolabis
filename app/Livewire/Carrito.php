@@ -40,7 +40,7 @@ class Carrito extends Component
             $this->productos[$id] = [
                 'id' => $producto->id,
                 'nombre' => $producto->nombre,
-                'precio' => $precioFinal,
+                'precio' => $producto->precio,
                 'cantidad' => 1,
                 'imagen' => $producto->imagen,
                 'comentario' => '',
