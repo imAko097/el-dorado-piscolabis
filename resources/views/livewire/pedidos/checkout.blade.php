@@ -74,11 +74,11 @@
                         <label class="block text-sm font-medium text-gray-700 mb-2">Forma de Pago</label>
                         <div class="flex gap-4">
                             <label class="flex items-center">
-                                <input type="radio" wire:model="formaPago" value="efectivo" class="mr-2">
+                                <input type="radio" wire:model.live="formaPago" value="efectivo" class="mr-2">
                                 <span>Efectivo</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" wire:model="formaPago" value="tarjeta" class="mr-2">
+                                <input type="radio" wire:model.live="formaPago" value="tarjeta" class="mr-2">
                                 <span>Tarjeta</span>
                             </label>
                         </div>

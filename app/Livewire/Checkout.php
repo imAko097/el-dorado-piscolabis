@@ -22,15 +22,6 @@ class Checkout extends Component
     public $fechaExpiracion = '';
     public $cvv = '';
 
-    protected $listeners = ['updatedFormaPago'];
-
-    public function updatedFormaPago($value)
-    {
-        if ($value !== 'tarjeta') {
-            $this->reset(['numeroTarjeta', 'nombreTitular', 'fechaExpiracion', 'cvv']);
-        }
-    }
-
     public function mount()
     {
         $this->productos = Session::get('carrito', []);
@@ -40,6 +31,7 @@ class Checkout extends Component
         $this->calcularTotal();
     }
 
+    // Calcula el total del pedido
     private function calcularTotal()
     {
         $this->total = collect($this->productos)->sum(function ($item) {

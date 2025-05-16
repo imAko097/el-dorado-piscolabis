@@ -55,35 +55,35 @@ class BebidaSeeder extends Seeder
             ],
             [
                 'id_producto_tipos' => $tipo,
-                'nombre' => 'Coca cola botella 1.5L',
+                'nombre' => 'coca cola botella 1.5L',
                 'ingredientes' => '',
                 'imagen' => '',
                 'precio' => '2.20',
             ],
-                        [
+            [
                 'id_producto_tipos' => $tipo,
-                'nombre' => 'Fanta botella 1.5L',
+                'nombre' => 'fanta botella 1.5L',
                 'ingredientes' => '',
                 'imagen' => '',
                 'precio' => '2.20',
             ],
-                        [
+            [
                 'id_producto_tipos' => $tipo,
                 'nombre' => '7up botella 1.5L',
                 'ingredientes' => '',
                 'imagen' => '',
                 'precio' => '2.20',
             ],
-                        [
+            [
                 'id_producto_tipos' => $tipo,
-                'nombre' => 'Clipper de fresa botella 1.5L',
+                'nombre' => 'clipper de fresa botella 1.5L',
                 'ingredientes' => '',
                 'imagen' => '',
                 'precio' => '2.20',
             ],
-                        [
+            [
                 'id_producto_tipos' => $tipo,
-                'nombre' => 'Clipper de naranja botella 1.5L',
+                'nombre' => 'clipper de naranja botella 1.5L',
                 'ingredientes' => '',
                 'imagen' => '',
                 'precio' => '2.20',
