@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('id_usuario')->constrained('users')->onDelete('cascade')->nullable(); // Relación con la tabla 'users'
             $table->foreignId('id_estado_pedido')->constrained('estado_pedido')->onDelete('cascade'); // Relación con la tabla 'estado_pedido'
             $table->string('direccion', 500)->nullable(); // Dirección de entrega, puede ser nula
-            $table->text('observaciones')->nullable(); // Observaciones, puede ser nulo
+            $table->string('observaciones', 1000)->nullable(); // Observaciones, puede ser nulo
             $table->string('telefono_contacto', 9); // Teléfono de contacto
             $table->string('forma_pago', 50); // Forma de pago
             $table->timestamp('fecha_entrega')->nullable(); // Fecha de entrega, puede ser nula

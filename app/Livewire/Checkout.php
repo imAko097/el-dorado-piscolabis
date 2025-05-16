@@ -14,6 +14,7 @@ class Checkout extends Component
     public $subtotal = 0;
     public $igic = 0;
     public $total = 0;
+    public $recargoEntrega = 1.5;
     public $tipoEntrega = 'domicilio';
     public $direccion = '';
     public $telefono = '';
@@ -36,12 +37,34 @@ class Checkout extends Component
     // Calcula el total del pedido, incluido el igic (extraido)
     private function calcularTotal()
     {
-        $this->total = collect($this->productos)->sum(function ($item) {
-            return $item['precio'] * $item['cantidad'];
-        });
+        // calcular subtotal de productos (sumando los precios de los productos multiplicados por la cantidad; IGIC incluido)
+        $subtotalProductosIgicIncluido = collect($this->productos)->sum(fn($item) => 
+            $item['precio'] * $item['cantidad']
+        );
+
+        // Extraer el igic del subtotal
+        $subtotalProductosIgicExcluido = $subtotalProductosIgicIncluido / 1.07;        
         
-        $this->igic = $this->total  - ($this->total  / 1.07);
-        $this->subtotal = $this->total - $this->igic;
+        // Añadir recargo de entrega
+        $recargo = $this->tipoEntrega === 'domicilio' ? $this->recargoEntrega : 0; // recargo de entrega
+        $baseImponible = $subtotalProductosIgicExcluido + $recargo; // base imponible del pedido
+
+        // Calcular igic del pedido
+        $igicCalculado = $baseImponible * 0.07;
+
+        // Total del pedido
+        $totalPedido = $baseImponible + $igicCalculado;
+
+        // Asignar los valores a las propiedades
+        $this->subtotal = round($subtotalProductosIgicExcluido, 2);
+        $this->igic = round($igicCalculado, 2);
+        $this->total = round($totalPedido, 2);
+    }
+
+    // Actualiza el total del pedido cuando se cambia el tipo de entrega
+    public function updatedTipoEntrega()
+    {
+        $this->calcularTotal();
     }
 
     // Realiza el pedido (añade a la base de datos el pedido y los productos)
@@ -56,6 +79,7 @@ class Checkout extends Component
             'nombreTitular' => 'required_if:formaPago,tarjeta|min:3',
             'fechaExpiracion' => ['required_if:formaPago,tarjeta', 'regex:/^(0[1-9]|1[0-2])\/([0-9]{2})$/'],
             'cvv' => 'required_if:formaPago,tarjeta|digits:3',
+            'observaciones' => 'nullable|string|max:1000',
         ], [
             'direccion.required_if' => 'La dirección es obligatoria para entrega a domicilio.',
             'telefono.required' => 'El teléfono es obligatorio.',
