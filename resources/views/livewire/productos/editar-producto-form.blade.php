@@ -40,14 +40,6 @@
                                 @error('precio') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                             </div>
 
-                            <!-- Stock -->
-                            <div>
-                                <label for="stock" class="block text-sm font-medium text-gray-700">Stock</label>
-                                <input wire:model="stock" id="stock" type="number"
-                                       class="py-2 mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm" />
-                                @error('stock') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
-                            </div>
-
                             <!-- Tipo de Producto -->
                             <div>
                                 <label for="id_producto_tipos" class="block text-sm font-medium text-gray-700">Tipo de Producto</label>

@@ -11,7 +11,7 @@ class ProductoForm extends Component
 {
     use WithFileUploads;
 
-    public $nombre, $ingredientes, $precio, $stock, $imagen;
+    public $nombre, $ingredientes, $precio, $imagen;
     public $id_producto_tipos;
     public $producto;
     public $showForm = false;
@@ -20,7 +20,6 @@ class ProductoForm extends Component
         'nombre' => 'required|string|max:255',
         'ingredientes' => 'required|string|max:255',
         'precio' => 'required|numeric|min:0',
-        'stock' => 'required|integer|min:0',
         'imagen' => 'nullable|image|max:2048',
         'id_producto_tipos' => 'required|exists:producto_tipos,id'
     ];
@@ -28,7 +27,6 @@ class ProductoForm extends Component
         'nombre.required' => 'El nombre es obligatorio.',
         'ingredientes.required' => 'Los ingredientes son obligatorios.',
         'precio.required' => 'El precio es obligatorio.',
-        'stock.required' => 'El stock es obligatorio.',
         'imagen.image' => 'La imagen debe ser un archivo de imagen.',
         'id_producto_tipos.required' => 'El tipo de producto es obligatorio.'
     ];
@@ -51,7 +49,6 @@ class ProductoForm extends Component
             'nombre' => $this->nombre,
             'ingredientes' => $this->ingredientes,
             'precio' => $this->precio,
-            'stock' => $this->stock,
             'imagen' => $path ?? null,
             'id_producto_tipos' => $this->id_producto_tipos,
         ]);
