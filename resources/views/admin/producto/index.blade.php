@@ -45,7 +45,6 @@
                         <h6 class="text-sm text-gray-600 mb-2">
                             {{ $producto->tipo ? Str::ucfirst($producto->tipo->tipo) : 'Sin tipo' }}
                         </h6>
-                        <p class="text-sm text-gray-700"><strong>Stock:</strong> {{ $producto->stock }}</p>
                         <p class="text-sm text-gray-700 mt-1 line-clamp-4">
                             <strong>Ingredientes:</strong> {{ $producto->ingredientes }}
                         </p>
