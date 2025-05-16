@@ -160,7 +160,7 @@ class BebidaSeeder extends Seeder
             ],
             [
                 'id_producto_tipos' => $tipo,
-                'nombre' => 'acuarius limon 50cl',
+                'nombre' => 'acuarius limón 50cl',
                 'ingredientes' => '',
                 'imagen' => '',
                 'precio' => '1.52',
