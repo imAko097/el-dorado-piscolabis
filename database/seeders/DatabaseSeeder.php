@@ -16,7 +16,9 @@ use Database\Seeders\ProductosSeeder\EnsaladaSeeder;
 use Database\Seeders\ProductosSeeder\PlatoCombinadoSeeder;
 use Database\Seeders\ProductosSeeder\PizzaSeeder;
 use Database\Seeders\ProductosSeeder\BebidaSeeder;
+use Database\Seeders\PedidoSeeder;
 use Database\Seeders\EstadoPedidoSeeder;
+use Database\Seeders\PedidoProductoSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -40,6 +42,9 @@ class DatabaseSeeder extends Seeder
             PizzaSeeder::class,
             BebidaSeeder::class,
             EstadoPedidoSeeder::class,
+            UserSeeder::class,
+            PedidoSeeder::class,
+            PedidoProductoSeeder::class,
         ]);
     }
 }
