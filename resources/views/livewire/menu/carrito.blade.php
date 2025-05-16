@@ -43,19 +43,7 @@
                                         <i class="bi bi-plus-circle"></i>
                                     </button>
                                 </div>
-                                <!-- Radio buttons para seleccionar el extra de los productos -->
-                                <div class="mt-4">
-                                    <p class="text-sm font-semibold mb-2">Extras:</p>
-                                    @foreach ($extrasBocadillos as $clave => $extra)
-                                        <label class="inline-flex items-center mr-4">
-                                            <input type="radio"
-                                                wire:model="extraSeleccionado.{{ $producto['id'] }}"
-                                                value="{{ $clave }}"
-                                                class="form-radio text-yellow-500">
-                                            <span class="ml-2">{{ $extra['nombre'] }} (+{{ number_format($extra['precio'], 2, ',', '.') }} €)</span>
-                                        </label>
-                                    @endforeach
-                                </div>
+                                <!-- Selección de extras/peticiones especiales / marca de refrescos -->
                                 <div>
                                     @if($producto['nombre'] == 'refrescos lata' || $producto['nombre'] == 'refrescos botella 1.5L')
                                         <select name="comentario" id="comentario" class="h-10 border-2 border-gray-300 rounded-lg px-2 text-sm appearance-none w-[180px] mt-1" wire:change="actualizarComentario({{ $id }}, $event.target.value)">
@@ -67,7 +55,7 @@
                                             <option value="Clipper de naranja">Clipper de naranja</option>
                                         </select>
                                     @else
-                                        <textarea name="comentario" id="comentario" class="h-[75px] border-2 border-gray-300 rounded-lg px-2 text-sm w-full mt-1" placeholder="¿Quieres quitar algún ingrediente? ¿Tienes alguna alergia? ¡Comentanos!" wire:model="productos.{{ $id }}.comentario" style="resize: none;"></textarea>
+                                        <textarea name="comentario" id="comentario" class="h-[75px] border-2 border-gray-300 rounded-lg px-2 text-sm w-full mt-1" placeholder="¿Quieres quitar algún ingrediente? ¿Tienes alguna alergia? ¡Comentanos!" wire:change="actualizarComentario({{ $id }}, $event.target.value)" style="resize: none;">{{ $producto['comentario'] }}</textarea>
                                     @endif
                                 </div>
                             </div>

@@ -34,12 +34,6 @@ class Carrito extends Component
     {
         $producto = Producto::with('tipo')->findOrFail($id);
 
-        // Obtener el extra seleccionado (si existe)
-        $claveExtra = $this->extraSeleccionado[$id] ?? 'ninguno';
-        $extra = $this->extrasBocadillos[$claveExtra] ?? ['nombre' => 'Sin extra', 'precio' => 0];
-
-        $precioFinal = $producto->precio + $extra['precio'];
-
         if (isset($this->productos[$id])) {
             $this->productos[$id]['cantidad']++;
         } else {
@@ -49,7 +43,7 @@ class Carrito extends Component
                 'precio' => $precioFinal,
                 'cantidad' => 1,
                 'imagen' => $producto->imagen,
-                'comentario' => $extra['nombre'],
+                'comentario' => '',
             ];
         }
 
