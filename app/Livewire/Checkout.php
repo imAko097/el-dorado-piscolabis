@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Session;
 class Checkout extends Component
 {
     public $productos = [];
+    public $subtotal = 0;
+    public $igic = 0;
     public $total = 0;
     public $tipoEntrega = 'domicilio';
     public $direccion = '';
@@ -31,12 +33,15 @@ class Checkout extends Component
         $this->calcularTotal();
     }
 
-    // Calcula el total del pedido
+    // Calcula el total del pedido, incluido el igic (extraido)
     private function calcularTotal()
     {
         $this->total = collect($this->productos)->sum(function ($item) {
             return $item['precio'] * $item['cantidad'];
         });
+        
+        $this->igic = $this->total  - ($this->total  / 1.07);
+        $this->subtotal = $this->total - $this->igic;
     }
 
     // Realiza el pedido (añade a la base de datos el pedido y los productos)

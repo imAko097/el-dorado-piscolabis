@@ -13,7 +13,7 @@
                                 <img src="{{ asset('storage/' . $producto['imagen']) }}" alt="{{ $producto['nombre'] }}" class="w-16 h-16 object-cover rounded-lg">
                             @endif
                             <div class="flex-1">
-                                <h3 class="font-semibold">{{ $producto['nombre'] }}</h3>
+                                <h3 class="font-semibold">{{ ucfirst($producto['nombre']) }}</h3>
                                 <p class="text-sm text-gray-600">Cantidad: {{ $producto['cantidad'] }}</p>
                                 <p class="text-yellow-600 font-medium">{{ number_format($producto['precio'] * $producto['cantidad'], 2, ',', '.') }} €</p>
                             </div>
@@ -23,9 +23,10 @@
 
                 <!-- Total -->
                 <div class="border-t pt-4">
-                    <div class="flex justify-between items-center">
-                        <span class="text-lg font-semibold">Total:</span>
-                        <span class="text-xl font-bold text-yellow-600">{{ number_format($total, 2, ',', '.') }} €</span>
+                    <div class="text-right mt-4">
+                        <p class="text-sm text-gray-600">Subtotal: {{ number_format($subtotal, 2, ',', '.') }} €</p>
+                        <p class="text-sm text-gray-600">IGIC incluido (7%): {{ number_format($igic, 2, ',', '.') }} €</p>
+                        <p class="text-lg font-semibold">Total: {{ number_format($total, 2, ',', '.') }} €</p>
                     </div>
                 </div>
             </div>
