@@ -1,4 +1,25 @@
 <div wire:poll.5s>
+    <div class="flex flex-wrap gap-3 justify-center mb-6">
+        @php
+            $estadosDisponibles = collect(['pendientes'])->merge($estados->pluck('estado')->map(fn($e) => strtolower($e)));
+        @endphp
+
+        @foreach($estadosDisponibles as $estado)
+            <button wire:click="toggleFiltroEstado('{{ $estado }}')"
+                class="px-4 py-2 rounded-full transition duration-200
+                {{ in_array($estado, $filtroEstados) ? 'bg-yellow-400 text-black font-semibold' : 'bg-gray-200 hover:bg-yellow-300 text-gray-700' }}">
+                {{ ucfirst($estado) }}
+            </button>
+        @endforeach
+    </div>
+    @if (!empty($filtroEstados))
+        <button wire:click="$set('filtroEstados', ['pendientes'])"
+                class="mb-4 px-4 py-2 bg-gray-200 hover:bg-red-300 text-gray-800 font-medium rounded-lg shadow transition">
+            Limpiar filtros
+        </button>
+    @endif
+
+
     @if($pedidos->count() > 0)
         <div class="grid grid-cols-1 gap-6 mt-6">
             @foreach ($pedidos as $pedido)
@@ -26,7 +47,6 @@
                         </div>
 
                         <div class="flex items-center space-x-2">
-
                             <span><strong>Total:</strong> {{ number_format($pedido->total, 2) }} €</span>
                         </div>
 
@@ -59,7 +79,8 @@
                             @endforeach
                         </select>
                     </div>
-                    @livewire('pedidos.mostrar-pedido', ['pedido' => $pedido], key('pedido.mostrar-pedido-'.$pedido->id))
+
+                    @livewire('pedidos.mostrar-pedido', ['pedido' => $pedido], 'mostrar-pedido-' . $pedido->id)
                 </div>
             @endforeach
         </div>
@@ -67,46 +88,3 @@
         <p class="text-gray-500 text-center mt-10">No tienes pedidos.</p>
     @endif
 </div>
-
-@if($mostrarModal)
-    <div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-        <div class="bg-white rounded-2xl shadow-xl w-full max-w-3xl p-6 relative">
-            <button wire:click="$set('mostrarModal', false)" class="absolute top-3 right-3 text-gray-500 hover:text-red-500">
-                ✕
-            </button>
-
-            <h2 class="text-xl font-bold mb-4">Detalles del Pedido #{{ $pedidoSeleccionado?->id }}</h2>
-
-            @if($pedidoSeleccionado)
-                <p><strong>Cliente:</strong> {{ $pedidoSeleccionado->usuario->name }}</p>
-                <p><strong>Estado:</strong> {{ ucfirst($pedidoSeleccionado->estadoPedido->estado) }}</p>
-                <p><strong>Total:</strong> ${{ number_format($pedidoSeleccionado->total, 2) }}</p>
-                <p><strong>Fecha:</strong> {{ $pedidoSeleccionado->created_at->format('d/m/Y H:i') }}</p>
-
-                <h3 class="text-lg font-semibold mt-6 mb-2">Productos:</h3>
-                <table class="w-full text-sm table-auto border-collapse">
-                    <thead>
-                        <tr class="bg-gray-100">
-                            <th class="p-2 text-left">Producto</th>
-                            <th class="p-2 text-left">Comentario</th>
-                            <th class="p-2 text-right">Cantidad</th>
-                            <th class="p-2 text-right">Precio Unitario</th>
-                            <th class="p-2 text-right">Precio Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($pedidoSeleccionado->productos as $item)
-                            <tr class="border-t">
-                                <td class="p-2">{{ $item->nombre ?? 'Producto #' . $item->id_producto }}</td>
-                                <td class="p-2">{{ $item->pivot->comentario }}</td>
-                                <td class="p-2 text-right">{{ $item->pivot->cantidad }}</td>
-                                <td class="p-2 text-right">${{ number_format($item->pivot->precio_unitario, 2) }}</td>
-                                <td class="p-2 text-right">${{ number_format($item->pivot->precio_total, 2) }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            @endif
-        </div>
-    </div>
-@endif

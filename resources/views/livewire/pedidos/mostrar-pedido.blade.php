@@ -18,13 +18,14 @@
             <h2 class="text-xl font-bold mb-4">Detalles del Pedido #{{ $pedido->id }}</h2>
 
             @if($pedido)
-                <p><strong>Cliente:</strong> {{ $pedido->usuario->name }}</p>
-                <p><strong>Estado:</strong> {{ ucfirst($pedido->estadoPedido->estado) }}</p>
-                <p><strong>Total:</strong> {{ number_format($pedido->total, 2) }} €</p>
-                <p><strong>Fecha:</strong> {{ $pedido->created_at->format('d/m/Y H:i') }}</p>
+                <div class="space-y-2">
+                    <p><strong>Cliente:</strong> {{ $pedido->usuario->name }}</p>
+                    <p><strong>Estado:</strong> {{ ucfirst($pedido->estadoPedido->estado) }}</p>
+                    <p><strong>Fecha:</strong> {{ $pedido->created_at->format('d/m/Y H:i') }}</p>
+                </div>
 
                 <h3 class="text-lg font-semibold mt-6 mb-2">Productos:</h3>
-                <table class="w-full text-sm table-auto border-collapse">
+                <table class="w-full text-sm table-auto border-collapse mb-4">
                     <thead>
                         <tr class="bg-gray-100">
                             <th class="p-2 text-left">Producto</th>
@@ -46,6 +47,18 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                @php
+                    $total = $pedido->total;
+                    $igic = $total * 0.07;
+                    $subtotal = $total - $igic;
+                @endphp
+
+                <div class="border-t pt-4 mt-4 text-right space-y-1 text-sm">
+                    <p><strong>Subtotal:</strong> {{ number_format($subtotal, 2) }} €</p>
+                    <p><strong>IGIC (7%):</strong> {{ number_format($igic, 2) }} €</p>
+                    <p class="text-lg font-bold"><strong>Total:</strong> {{ number_format($total, 2) }} €</p>
+                </div>
             @else
                 <p class="text-center text-gray-500">No se pudo cargar el pedido.</p>
             @endif

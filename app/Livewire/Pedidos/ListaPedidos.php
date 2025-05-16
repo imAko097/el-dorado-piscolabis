@@ -13,11 +13,36 @@ class ListaPedidos extends Component
     public $mostrarModal = false;
     public $pedidoSeleccionado;
 
+    public $filtroEstados = ['pendientes'];
+
+
+    protected $queryString = ['filtroEstados'];
 
     public function mount()
     {
         $this->estados = EstadoPedido::all();
     }
+
+    public function toggleFiltroEstado($estado)
+    {
+        if (in_array($estado, $this->filtroEstados)) {
+            // Si ya está activo, se desmarca (lo quitamos del array)
+            $this->filtroEstados = array_filter($this->filtroEstados, fn($e) => $e !== $estado);
+        } else {
+            if ($estado === 'pendientes') {
+                // Si activamos "pendientes", eliminamos todos los demás filtros
+                $this->filtroEstados = ['pendientes'];
+            } else {
+                // Si "pendientes" está activo, lo quitamos antes de añadir otros
+                $this->filtroEstados = array_filter($this->filtroEstados, fn($e) => $e !== 'pendientes');
+                $this->filtroEstados[] = $estado;
+            }
+        }
+
+        // Reindexamos y eliminamos duplicados por seguridad
+        $this->filtroEstados = array_values(array_unique($this->filtroEstados));
+    }
+
 
 
     public function cambiarEstado($pedidoId, $nuevoEstadoId)
@@ -28,7 +53,6 @@ class ListaPedidos extends Component
             $pedido->save();
         }
     }
-
 
     public function getColorEstado($estadoNombre)
     {
@@ -43,13 +67,27 @@ class ListaPedidos extends Component
         };
     }
 
-
     public function render()
     {
-        $this->pedidos = Pedido::with(['productos', 'usuario', 'estadoPedido'])
-            ->orderBy('created_at', 'desc')
-            ->get();
+        // INICIALIZAMOS LA CONSULTA
+        $query = Pedido::with(['productos', 'usuario', 'estadoPedido']);
+
+        // APLICAMOS FILTROS
+        if (in_array('pendientes', $this->filtroEstados)) {
+            $query->whereHas('estadoPedido', function ($q) {
+                $q->whereNotIn('estado', ['entregado', 'cancelado']);
+            });
+        } elseif (!empty($this->filtroEstados)) {
+            $query->whereHas('estadoPedido', function ($q) {
+                $q->whereIn('estado', $this->filtroEstados);
+            });
+        }
+
+        // OBTENEMOS LOS PEDIDOS FILTRADOS
+        $this->pedidos = $query->orderBy('created_at', 'desc')->get();
 
         return view('livewire.pedidos.lista-pedidos');
     }
+
+
 }

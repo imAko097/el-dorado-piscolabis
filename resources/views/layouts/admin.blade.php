@@ -13,9 +13,10 @@
 </head>
 <body class="bg-gray-100 dark:bg-gray-900">
 
-  <!-- Botón SIEMPRE visible -->
 <button id="sidebar-toggle" aria-controls="logo-sidebar" type="button"
-  class="fixed top-2 left-2 z-50 inline-flex items-center p-2 text-sm text-yellow-200 bg-black rounded-lg hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+  class="fixed top-2 z-50 inline-flex items-center p-2 text-sm text-yellow-200 bg-black rounded-lg hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400
+       right-2 md:left-2 md:right-auto"
+>
   <span class="sr-only">Abrir/cerrar sidebar</span>
   <svg id="toggle-icon" class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
     xmlns="http://www.w3.org/2000/svg">
@@ -28,10 +29,10 @@
 
 
   <!-- Sidebar -->
-  <aside id="logo-sidebar"
-    class="fixed top-0 left-0 z-40 w-64 h-screen bg-black -500 text-yellow-200 transition-transform transform translate-x-0"
-    aria-label="Sidebar">
-    <div class="h-full px-3 py-4 overflow-y-auto">
+<aside id="logo-sidebar"
+  class="fixed top-0 md:left-0 right-0 z-40 w-64 h-screen bg-black text-yellow-200 transform transition-transform duration-300 translate-x-full"
+  aria-label="Sidebar">
+  <div class="h-full px-3 py-4 overflow-y-auto">  
       <div class="p-6 text-center text-3xl font-extrabold border-b border-yellow-500">
         <span class="block text-3xl">El</span>
         <span class="block text-5xl">Dorado</span>
@@ -76,10 +77,8 @@
       </ul>
     </div>
   </aside>
-  <div class="">
-<main id="main-content" class="pl-64 p-4 transition-all duration-300">
-
-
+<div id="main-container" class="transition-all duration-300 pl-8">
+  <main id="main-content" class="p-4">
     @yield('content')
   </main>
     @yield('scripts')
@@ -87,11 +86,16 @@
     @livewireScripts
 </div>
   <!-- Script para abrir/cerrar sidebar -->
-  <script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.getElementById('sidebar-toggle');
+    const sidebar = document.getElementById('logo-sidebar');
+    const icon = document.getElementById('toggle-icon');
+    const mainContainer = document.getElementById('main-container');
+
     const hamburgerIcon = `
       <path clip-rule="evenodd" fill-rule="evenodd"
-        d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
-      </path>
+        d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"/>
     `;
 
     const closeIcon = `
@@ -102,45 +106,41 @@
         10 4.293 5.707a1 1 0 010-1.414z"/>
     `;
 
+    let sidebarVisible = window.innerWidth >= 768;
 
+    const updateUI = () => {
+      const isDesktop = window.innerWidth >= 768;
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggleButton = document.getElementById('sidebar-toggle');
-      const sidebar = document.getElementById('logo-sidebar');
-      const icon = document.getElementById('toggle-icon');
-      const mainContent = document.getElementById('main-content');
+      // Limpiar clases previas
+      sidebar.classList.remove('translate-x-full', '-translate-x-full', 'translate-x-0');
 
-      let sidebarVisible = true;
-
-      if (window.innerWidth < 768) {
-        sidebar.classList.add('-translate-x-full');
-        mainContent.classList.remove('pl-64');
-        mainContent.classList.add('pl-8');
-        icon.innerHTML = hamburgerIcon;
-        sidebarVisible = false;
-      } else {
-        sidebar.classList.remove('-translate-x-full');
-        mainContent.classList.remove('pl-8');
-        mainContent.classList.add('pl-64');
+      if (sidebarVisible) {
+        sidebar.classList.add('translate-x-0');
+        mainContainer.classList.remove('pl-8');
+        mainContainer.classList.add(isDesktop ? 'pl-64' : 'pl-8');
         icon.innerHTML = closeIcon;
-        sidebarVisible = true;
+      } else {
+        // Si es escritorio, lo ocultamos hacia la izquierda. Si es móvil, hacia la derecha.
+        sidebar.classList.add(isDesktop ? '-translate-x-full' : 'translate-x-full');
+        mainContainer.classList.remove('pl-64');
+        mainContainer.classList.add('pl-8');
+        icon.innerHTML = hamburgerIcon;
       }
+    };
 
-      toggleButton.addEventListener('click', () => {
-        sidebarVisible = !sidebarVisible;
-        sidebar.classList.toggle('-translate-x-full', !sidebarVisible);
-        icon.innerHTML = sidebarVisible ? closeIcon : hamburgerIcon;
-
-        if (sidebarVisible) {
-          mainContent.classList.remove('pl-8');
-          mainContent.classList.add('pl-64');
-        } else {
-          mainContent.classList.remove('pl-64');
-          mainContent.classList.add('pl-8');
-        }
-      });
+    toggleButton.addEventListener('click', () => {
+      sidebarVisible = !sidebarVisible;
+      updateUI();
     });
-  </script>
+
+    window.addEventListener('resize', () => {
+      sidebarVisible = window.innerWidth >= 768;
+      updateUI();
+    });
+
+    updateUI();
+  });
+</script>
 
 </body>
 </html>
