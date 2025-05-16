@@ -3,7 +3,10 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Resumen del pedido -->
             <div class="bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-2xl font-bold mb-6">RESUMEN DEL PEDIDO</h2>
+                <div class="flex items-center gap-4 mb-1">
+                    <x-icono-resumen-pedido width="50" height="50" />
+                    <h2 class="text-xl font-bold">RESUMEN DE TU PEDIDO</h2>
+                </div>
                 
                 <!-- Lista de productos -->
                 <div class="space-y-4 mb-6">
@@ -36,7 +39,11 @@
 
             <!-- Formulario de entrega -->
             <div class="bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-2xl font-bold mb-6">DETALLES DE ENTREGA</h2>
+                <div class="flex items-center gap-4 mb-1">
+                    <x-icono-repartidor width="50" height="50" />
+                    <h2 class="text-xl font-bold">DETALLES DE LA ENTREGA</h2>
+                </div>
+                <h4 class="text-lg mb-4">Por favor, rellena los siguientes datos.</h4>
                 
                 <form wire:submit.prevent="realizarPedido" class="space-y-6">
                     <!-- Tipo de entrega -->
@@ -125,16 +132,16 @@
                     <!-- Observaciones -->
                     <div>
                         <label for="observaciones" class="block text-sm font-medium text-gray-700">Observaciones</label>
-                        <textarea wire:model="observaciones" id="observaciones" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500" placeholder="¿Tienes alguna instrucción especial de entrega? ¡Cuéntanoslo!" maxlength="1000"></textarea>
+                        <textarea wire:model="observaciones" id="observaciones" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500" placeholder="¿Tienes alguna instrucción especial para la entrega? ¡Cuéntanoslo!" maxlength="1000"></textarea>
                     </div>
 
                     <!-- Botones -->
                     <div class="flex gap-4">
                         <a href="{{ route('menu') }}" class="flex-1 bg-gray-200 text-gray-700 text-center py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
-                            Volver al Menú
+                            Volver al menú
                         </a>
                         <button type="submit" class="flex-1 bg-yellow-400 text-black text-center py-3 rounded-lg font-semibold hover:bg-yellow-500 transition-colors">
-                            Realizar Pedido
+                            Realizar pedido
                         </button>
                     </div>
                 </form>
