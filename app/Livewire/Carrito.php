@@ -13,15 +13,6 @@ class Carrito extends Component
     public $total = 0;
     public $mostrarCarrito = false;
 
-    // Extras para los bocadillos
-    public array $extrasBocadillos = [
-        'sin extra' => ['nombre' => 'Sin extra', 'precio' => '0'],
-        'queso' => ['nombre' => 'Queso', 'precio' => '0.30'],
-        'especial' => ['nombre' => 'Especial', 'precio' => '0.50'],
-    ];
-
-    public array $extraSeleccionado = []; // Guarda por producto el extra seleccionado
-
     public function mount()
     {
         $this->productos = Session::get('carrito', []);
