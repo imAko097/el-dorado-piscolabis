@@ -1,8 +1,8 @@
-<div class="min-h-screen bg-gray-100 py-12">
+<div class="min-h-screen bg-yellow-50 py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Resumen del pedido -->
-            <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-yellow-300">
                 <div class="flex items-center gap-4 mb-1">
                     <x-icono-resumen-pedido width="50" height="50" />
                     <h2 class="text-xl font-bold">RESUMEN DE TU PEDIDO</h2>
@@ -38,7 +38,7 @@
             </div>
 
             <!-- Formulario de entrega -->
-            <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-yellow-300">
                 <div class="flex items-center gap-4 mb-1">
                     <x-icono-repartidor width="50" height="50" />
                     <h2 class="text-xl font-bold">DETALLES DE LA ENTREGA</h2>
@@ -51,11 +51,11 @@
                         <label class="block text-sm font-medium text-gray-700 mb-2">¿A domicilio o recogida en local?</label>
                         <div class="flex gap-4">
                             <label class="flex items-center">
-                                <input type="radio" wire:model.live="tipoEntrega" value="domicilio" class="mr-2">
+                                <input type="radio" wire:model.live="tipoEntrega" value="domicilio" class="mr-2" style="accent-color: #fbec96;">
                                 <span>Entrega a domicilio</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" wire:model.live="tipoEntrega" value="local" class="mr-2">
+                                <input type="radio" wire:model.live="tipoEntrega" value="local" class="mr-2" style="accent-color: #fbec96;">
                                 <span>Recoger en tienda</span>
                             </label>
                         </div>
@@ -85,11 +85,11 @@
                         <label class="block text-sm font-medium text-gray-700 mb-2">Forma de pago</label>
                         <div class="flex gap-4">
                             <label class="flex items-center">
-                                <input type="radio" wire:model.live="formaPago" value="efectivo" class="mr-2">
+                                <input type="radio" wire:model.live="formaPago" value="efectivo" class="mr-2" style="accent-color: #fbec96;">
                                 <span>Efectivo</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" wire:model.live="formaPago" value="tarjeta" class="mr-2">
+                                <input type="radio" wire:model.live="formaPago" value="tarjeta" class="mr-2" style="accent-color: #fbec96;">
                                 <span>Tarjeta</span>
                             </label>
                         </div>
