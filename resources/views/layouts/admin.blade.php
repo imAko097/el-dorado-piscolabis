@@ -83,6 +83,7 @@
         </div>
     </aside>
 
+
     <div>
         <main id="main-content" class="pl-64 p-4 transition-all duration-300" role="main" tabindex="-1">
             @yield('content')
@@ -116,7 +117,9 @@
             const icon = document.getElementById('toggle-icon');
             const mainContent = document.getElementById('main-content');
 
+
             let sidebarVisible = false;
+
 
             sidebar.classList.add('-translate-x-full');
             mainContent.classList.remove('pl-64');
