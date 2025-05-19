@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xml:lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="UTF-8">
@@ -19,36 +19,35 @@
     @yield('content_header')
 </head>
 
-<body class="bg-gray-100 dark:bg-gray-900">
-    
-    <!-- Botón SIEMPRE visible -->
-    <button id="sidebar-toggle" aria-controls="logo-sidebar" type="button"
-        class="fixed top-2 left-2 z-50 inline-flex items-center p-2 text-sm text-yellow-200 bg-black rounded-lg hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+<body class="bg-[#F0F4FA] text-black">
+
+    <!-- Botón accesible -->
+    <button id="sidebar-toggle" aria-controls="logo-sidebar" aria-expanded="false"
+        aria-label="Abrir o cerrar menú lateral"
+        class="fixed top-2 left-2 z-50 inline-flex items-center p-2 text-sm bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
         <span class="sr-only">Abrir/cerrar sidebar</span>
         <svg id="toggle-icon" class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg">
             <path clip-rule="evenodd" fill-rule="evenodd"
-                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
-            </path>
+                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z" />
         </svg>
     </button>
 
-
-
-    <!-- Sidebar -->
+    <!-- Sidebar accesible -->
     <aside id="logo-sidebar"
-        class="fixed top-0 left-0 z-40 w-64 h-screen bg-black -500 text-yellow-200 transition-transform transform translate-x-0"
-        aria-label="Sidebar">
-        <div class="h-full px-3 py-4 overflow-y-auto">
-            <div class="p-6 text-center text-3xl font-extrabold border-b border-yellow-500">
+        class="fixed top-0 left-0 z-40 w-64 h-screen bg-gray-200 text-black transition-transform transform -translate-x-full shadow-lg"
+        aria-label="Sidebar" role="complementary">
+        <div class="h-full px-3 py-4 overflow-y-auto" role="navigation" aria-label="Menú principal">
+            <div class="p-6 text-center text-3xl font-extrabold border-b border-gray-800">
                 <span class="block text-3xl">El</span>
                 <span class="block text-5xl">Dorado</span>
             </div>
             <ul class="space-y-2 font-medium mt-6">
                 <li>
                     <a href="{{ route('inicio') }}"
-                        class="flex items-center p-2 rounded-lg hover:bg-yellow-500 hover:text-white group">
-                        <svg class="w-5 h-5 transition duration-75 group-hover:text-white" fill="currentColor"
+                        class="flex items-center p-2 rounded-lg hover:bg-gray-400 hover:text-white focus:outline focus:ring-2 focus:ring-black"
+                        aria-label="Ir a inicio">
+                        <svg class="w-5 h-5 transition duration-75 group-hover:text-gray-100" fill="currentColor"
                             viewBox="0 -960 960 960">
                             <path
                                 d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z" />
@@ -58,7 +57,8 @@
                 </li>
                 <li>
                     <a href="{{ route('productos.index') }}"
-                        class="flex items-center p-2 rounded-lg hover:bg-yellow-500 hover:text-white group">
+                        class="flex items-center p-2 rounded-lg hover:bg-gray-400 hover:text-white focus:outline focus:ring-2 focus:ring-black"
+                        aria-label="Ir a productos">
                         <svg class="w-5 h-5 transition duration-75 group-hover:text-white" fill="currentColor"
                             viewBox="0 -960 960 960">
                             <path
@@ -69,7 +69,8 @@
                 </li>
                 <li>
                     <a href="{{ route('usuarios.index') }}"
-                        class="flex items-center p-2 rounded-lg hover:bg-yellow-500 hover:text-white group">
+                        class="flex items-center p-2 rounded-lg hover:bg-gray-400 hover:text-white focus:outline focus:ring-2 focus:ring-black"
+                        aria-label="Ir a usuarios">
                         <svg class="w-5 h-5 transition duration-75 group-hover:text-white" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
                             <path
@@ -81,32 +82,33 @@
             </ul>
         </div>
     </aside>
-    <div class="">
-        <main id="main-content" class="pl-64 p-4 transition-all duration-300">
 
-
+    <div>
+        <main id="main-content" class="pl-64 p-4 transition-all duration-300" role="main" tabindex="-1">
             @yield('content')
         </main>
         @yield('scripts')
         @stack('scripts')
         @livewireScripts
     </div>
-    <!-- Script para abrir/cerrar sidebar -->
+
+    <!-- Script para sidebar accesible -->
     <script>
         const hamburgerIcon = `
-      <path clip-rule="evenodd" fill-rule="evenodd"
-        d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
-      </path>
-    `;
+            <path clip-rule="evenodd" fill-rule="evenodd"
+            d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 
+            10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 
+            1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 
+            0 010 1.5H2.75A.75.75 0 012 10z"/>`;
 
         const closeIcon = `
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 
-        1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 
-        1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 
-        10 4.293 5.707a1 1 0 010-1.414z"/>
-    `;
-
+            <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 
+            8.586l4.293-4.293a1 1 0 011.414 
+            1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 
+            1.414L10 11.414l-4.293 4.293a1 1 0 
+            01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 
+            010-1.414z"/>`;
 
         document.addEventListener('DOMContentLoaded', () => {
             const toggleButton = document.getElementById('sidebar-toggle');
@@ -114,26 +116,18 @@
             const icon = document.getElementById('toggle-icon');
             const mainContent = document.getElementById('main-content');
 
-            let sidebarVisible = true;
+            let sidebarVisible = false;
 
-            if (window.innerWidth < 768) {
-                sidebar.classList.add('-translate-x-full');
-                mainContent.classList.remove('pl-64');
-                mainContent.classList.add('pl-8');
-                icon.innerHTML = hamburgerIcon;
-                sidebarVisible = false;
-            } else {
-                sidebar.classList.remove('-translate-x-full');
-                mainContent.classList.remove('pl-8');
-                mainContent.classList.add('pl-64');
-                icon.innerHTML = closeIcon;
-                sidebarVisible = true;
-            }
+            sidebar.classList.add('-translate-x-full');
+            mainContent.classList.remove('pl-64');
+            mainContent.classList.add('pl-8');
+            icon.innerHTML = hamburgerIcon;
 
             toggleButton.addEventListener('click', () => {
                 sidebarVisible = !sidebarVisible;
                 sidebar.classList.toggle('-translate-x-full', !sidebarVisible);
                 icon.innerHTML = sidebarVisible ? closeIcon : hamburgerIcon;
+                toggleButton.setAttribute('aria-expanded', sidebarVisible.toString());
 
                 if (sidebarVisible) {
                     mainContent.classList.remove('pl-8');

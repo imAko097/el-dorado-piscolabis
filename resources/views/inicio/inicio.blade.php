@@ -116,23 +116,19 @@
     <!-- Carrusel -->
     <div class="relative overflow-hidden">
         <div class="carousel">
-            <div class="carousel-item">
-                <img src="{{ asset('storage/img/promo1.jpg') }}" alt="Promo 1" />
-            </div>
-            <div class="carousel-item">
-                <img src="{{ asset('storage/img/promo2.jpg') }}" alt="Promo 2" />
-            </div>
-            <div class="carousel-item">
-                <img src="{{ asset('storage/img/promo3.webp') }}" alt="Promo 3" />
-            </div>
+            @foreach ($carrusel_imagenes as $imagen)
+                <div class="carousel-item">
+                    <img src="{{ $imagen->imagen }}" alt="Imagen del carrusel" />
+                </div>
+            @endforeach
         </div>
 
-        <!-- Indicadores -->
         <div class="carousel-indicators flex justify-center mt-4">
-            <div class="indicator" data-index="0"></div>
-            <div class="indicator" data-index="1"></div>
-            <div class="indicator" data-index="2"></div>
+            @foreach ($carrusel_imagenes as $index => $imagen)
+                <div class="indicator" data-index="{{ $index }}"></div>
+            @endforeach
         </div>
+
     </div>
 
 
