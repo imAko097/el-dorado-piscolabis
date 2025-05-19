@@ -17,9 +17,8 @@ Route::view('profile', 'profile')
 
 Route::resource('usuarios', UsuariosController::class);
 Route::resource('productos', ProductoController::class);
-Route::resource('carrusel_imagenes', \App\Http\Controllers\CarruselImagenes::class);
+Route::get('carrusel_imagenes', [CarruselImagenes::class, 'index'])->name('carrusel.index');
 Route::resource('pedidos', PedidoController::class);
-
 
 
 require __DIR__.'/auth.php';
