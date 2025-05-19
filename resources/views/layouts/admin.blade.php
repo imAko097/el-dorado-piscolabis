@@ -94,54 +94,61 @@
     </div>
 
     <!-- Script para sidebar accesible -->
-    <script>
-        const hamburgerIcon = `
-            <path clip-rule="evenodd" fill-rule="evenodd"
-            d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 
-            10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 
-            1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 
-            0 010 1.5H2.75A.75.75 0 012 10z"/>`;
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.getElementById('sidebar-toggle');
+    const sidebar = document.getElementById('logo-sidebar');
+    const icon = document.getElementById('toggle-icon');
+    const mainContainer = document.getElementById('main-container');
 
-        const closeIcon = `
-            <path fill-rule="evenodd" clip-rule="evenodd"
-            d="M4.293 4.293a1 1 0 011.414 0L10 
-            8.586l4.293-4.293a1 1 0 011.414 
-            1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 
-            1.414L10 11.414l-4.293 4.293a1 1 0 
-            01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 
-            010-1.414z"/>`;
+    const hamburgerIcon = `
+      <path clip-rule="evenodd" fill-rule="evenodd"
+        d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"/>
+    `;
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const toggleButton = document.getElementById('sidebar-toggle');
-            const sidebar = document.getElementById('logo-sidebar');
-            const icon = document.getElementById('toggle-icon');
-            const mainContent = document.getElementById('main-content');
+    const closeIcon = `
+      <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 
+        1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 
+        1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 
+        10 4.293 5.707a1 1 0 010-1.414z"/>
+    `;
 
+    let sidebarVisible = window.innerWidth >= 768;
 
-            let sidebarVisible = false;
+    const updateUI = () => {
+      const isDesktop = window.innerWidth >= 768;
 
+      // Limpiar clases previas
+      sidebar.classList.remove('translate-x-full', '-translate-x-full', 'translate-x-0');
 
-            sidebar.classList.add('-translate-x-full');
-            mainContent.classList.remove('pl-64');
-            mainContent.classList.add('pl-8');
-            icon.innerHTML = hamburgerIcon;
+      if (sidebarVisible) {
+        sidebar.classList.add('translate-x-0');
+        mainContainer.classList.remove('pl-8');
+        mainContainer.classList.add(isDesktop ? 'pl-64' : 'pl-8');
+        icon.innerHTML = closeIcon;
+      } else {
+        // Si es escritorio, lo ocultamos hacia la izquierda. Si es móvil, hacia la derecha.
+        sidebar.classList.add(isDesktop ? '-translate-x-full' : 'translate-x-full');
+        mainContainer.classList.remove('pl-64');
+        mainContainer.classList.add('pl-8');
+        icon.innerHTML = hamburgerIcon;
+      }
+    };
 
-            toggleButton.addEventListener('click', () => {
-                sidebarVisible = !sidebarVisible;
-                sidebar.classList.toggle('-translate-x-full', !sidebarVisible);
-                icon.innerHTML = sidebarVisible ? closeIcon : hamburgerIcon;
-                toggleButton.setAttribute('aria-expanded', sidebarVisible.toString());
+    toggleButton.addEventListener('click', () => {
+      sidebarVisible = !sidebarVisible;
+      updateUI();
+    });
 
-                if (sidebarVisible) {
-                    mainContent.classList.remove('pl-8');
-                    mainContent.classList.add('pl-64');
-                } else {
-                    mainContent.classList.remove('pl-64');
-                    mainContent.classList.add('pl-8');
-                }
-            });
-        });
-    </script>
+    window.addEventListener('resize', () => {
+      sidebarVisible = window.innerWidth >= 768;
+      updateUI();
+    });
+
+    updateUI();
+  });
+</script>
 
 </body>
 

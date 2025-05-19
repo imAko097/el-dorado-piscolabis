@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Pedidos;
 
+
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use App\Models\EstadoPedido;
 use App\Models\Pedido;
@@ -10,14 +12,61 @@ class ListaPedidos extends Component
 {
     public $pedidos;
     public $estados;
-    public $mostrarModal = false;
+    public $usuario;
+    public $productos;
     public $pedidoSeleccionado;
 
+
+
+    public $filtroEstados = ['pendientes'];
+
+
+    protected $queryString = ['filtroEstados'];
 
     public function mount()
     {
         $this->estados = EstadoPedido::all();
     }
+    
+
+
+
+    public function mostrarDetalles($pedidoId)
+    {
+        $this->pedidoSeleccionado = Pedido::find($pedidoId); // solo sin relaciones
+        $this->usuario = $this->pedidoSeleccionado->usuario;
+        $this->productos = $this->pedidoSeleccionado->productos;
+    }
+
+    public function cerrarModal()
+    {
+        $this->pedidoSeleccionado = null;
+        $this->usuario = null;
+        $this->productos = null;
+    }
+
+
+
+    public function toggleFiltroEstado($estado)
+    {
+        if (in_array($estado, $this->filtroEstados)) {
+            // Si ya está activo, se desmarca (lo quitamos del array)
+            $this->filtroEstados = array_filter($this->filtroEstados, fn($e) => $e !== $estado);
+        } else {
+            if ($estado === 'pendientes') {
+                // Si activamos "pendientes", eliminamos todos los demás filtros
+                $this->filtroEstados = ['pendientes'];
+            } else {
+                // Si "pendientes" está activo, lo quitamos antes de añadir otros
+                $this->filtroEstados = array_filter($this->filtroEstados, fn($e) => $e !== 'pendientes');
+                $this->filtroEstados[] = $estado;
+            }
+        }
+
+        // Reindexamos y eliminamos duplicados por seguridad
+        $this->filtroEstados = array_values(array_unique($this->filtroEstados));
+    }
+
 
 
     public function cambiarEstado($pedidoId, $nuevoEstadoId)
@@ -28,7 +77,6 @@ class ListaPedidos extends Component
             $pedido->save();
         }
     }
-
 
     public function getColorEstado($estadoNombre)
     {
@@ -46,10 +94,29 @@ class ListaPedidos extends Component
 
     public function render()
     {
-        $this->pedidos = Pedido::with(['productos', 'usuario', 'estadoPedido'])
-            ->orderBy('created_at', 'desc')
-            ->get();
+        if ($this->pedidoSeleccionado) {
+            $this->productos = $this->pedidoSeleccionado->productos;
+        }
 
-        return view('livewire.pedidos.lista-pedidos');
+        $query = Pedido::with(['usuario', 'estadoPedido', 'productos']);
+
+        if (!empty($this->filtroEstados)) {
+            $query->whereHas('estadoPedido', function ($q) {
+                if (in_array('pendientes', $this->filtroEstados)) {
+                    $q->whereNotIn(DB::raw('LOWER(estado)'), ['entregado', 'cancelado']);
+                } else {
+                    $q->whereIn(DB::raw('LOWER(estado)'), $this->filtroEstados);
+                }
+            });
+        }
+
+        $this->pedidos = $query->orderByDesc('created_at')->get();
+
+        return view('livewire.pedidos.lista-pedidos', [
+            'pedidos' => $this->pedidos,
+            'estados' => $this->estados,
+        ]);
     }
+
+
 }
