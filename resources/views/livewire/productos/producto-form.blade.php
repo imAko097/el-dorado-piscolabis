@@ -26,7 +26,7 @@
                             <div>
                                 <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
                                 <input wire:model="nombre" id="nombre" type="text"
-                                    class="py-2 mt-1 w-full rounded-md border-[1.5px] border-gray-400 bg-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 text-sm">
+                                    class="px-3 py-2 mt-1 w-full rounded-md border-[1.5px] border-gray-400 bg-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 text-sm">
                                 @error('nombre') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                             </div>
 
@@ -34,7 +34,7 @@
                             <div>
                                 <label for="precio" class="block text-sm font-medium text-gray-700">Precio</label>
                                 <input wire:model="precio" id="precio" type="number" step="0.01"
-                                    class="py-2 mt-1 w-full rounded-md border-[1.5px] border-gray-400 bg-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 text-sm" />
+                                    class="px-3 py-2 mt-1 w-full rounded-md border-[1.5px] border-gray-400 bg-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 text-sm">
                                 @error('precio') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                             </div>
 
@@ -42,7 +42,7 @@
                             <div class="sm:col-span-2">
                                 <label for="id_producto_tipos" class="block text-sm font-medium text-gray-700">Tipo de Producto</label>
                                 <select wire:model="id_producto_tipos" id="id_producto_tipos"
-                                    class="py-2 mt-1 w-full rounded-md border-[1.5px] border-gray-400 bg-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 text-sm capitalize">
+                                    class="px-3 py-2 mt-1 w-full rounded-md border-[1.5px] border-gray-400 bg-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 text-sm capitalize">
                                     <option value="">Seleccione un tipo</option>
                                     @foreach(\App\Models\ProductoTipo::all() as $tipo)
                                         <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
@@ -56,7 +56,7 @@
                         <div>
                             <label for="ingredientes" class="block text-sm font-medium text-gray-700">Ingredientes</label>
                             <textarea wire:model="ingredientes" id="ingredientes" rows="4"
-                                class="mt-1 w-full rounded-md border-[1.5px] border-gray-400 bg-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 text-sm"></textarea>
+                                class="px-3 py-2 mt-1 w-full rounded-md border-[1.5px] border-gray-400 bg-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 text-sm"></textarea>
                             @error('ingredientes') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                         </div>
 
@@ -89,7 +89,7 @@
                             </button>
                             <button type="submit"
                                     class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm transition duration-150">
-                                Guardar Producto
+                                Guardar
                             </button>
                         </div>
                     </form>

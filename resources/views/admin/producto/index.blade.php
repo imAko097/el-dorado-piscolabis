@@ -28,7 +28,8 @@
 
     @if (isset($productos) && count($productos) > 0)
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
-            @livewire('productos.producto-form')
+            @livewire('productos.producto-form', ['categoriaSeleccionada' => request('categoria')])
+
             @foreach ($productos as $producto)
                 <div class="flex flex-col bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full">
                     
@@ -64,7 +65,6 @@
                                             d="M4 3a1 1 0 011-1h10a1 1 0 011 1v1H4V3zm1 3h10v10a2 2 0 01-2 2H7a2 2 0 01-2-2V6z"
                                             clip-rule="evenodd" />
                                     </svg>
-                                    Eliminar
                                 </button>
                             </form>
                         </div>

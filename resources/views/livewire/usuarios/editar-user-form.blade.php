@@ -10,7 +10,6 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5m-10 2l6-6m0 0l3 3m-3-3v0" />
             </svg>
-            Editar
         </button>
     </div>
 
