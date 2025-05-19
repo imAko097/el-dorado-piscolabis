@@ -19,7 +19,7 @@ Route::resource('usuarios', UsuariosController::class);
 Route::resource('productos', ProductoController::class);
 Route::get('carrusel_imagenes', [CarruselImagenes::class, 'index'])->name('carrusel.index');
 Route::resource('pedidos', PedidoController::class);
-
+Route::patch('/productos/{producto}/toggle-destacado', [ProductoController::class, 'toggleDestacado'])->name('productos.toggleDestacado');
 
 require __DIR__.'/auth.php';
 
@@ -29,6 +29,7 @@ Route::get('/menu/{categoria?}', [InicioController::class, 'menu'])->name('menu'
 Route::get('/contacto', [InicioController::class, 'contacto'])->name('contacto');
 Route::get('/sobrenosotros', [InicioController::class, 'sobreNosotros'])->name('sobrenosotros');
 Route::post('/carrusel/update-order', [CarruselImagenes::class, 'updateOrder'])->name('carrusel.updateOrder');
+
 
 // Rutas del carrito y checkout
 Route::get('/confirmar-pedido', function () {

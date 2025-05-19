@@ -9,11 +9,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/inicio/styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <style>
         .carousel {
             position: relative;
             width: 100%;
-            height: 700px;
+            height: 610px;
             /* o lo que necesites */
         }
 
@@ -209,48 +211,58 @@
         </div>
     </section>
 
+    <section class="max-w-7xl mx-auto px-4 py-12">
+        <h2 class="text-3xl font-bold text-center mb-8">Productos Destacados</h2>
 
-    <section class="bg-white py-12 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Descubre nuestras especialidades</h2>
-                <p class="text-gray-600 mt-2">Tapas, postres caseros y bocados únicos, todos con el toque de El Dorado
-                    Piscolabis.</p>
-            </div>
+        @if ($productosDestacados->isEmpty())
+            <p class="text-center text-gray-500">No hay productos destacados por el momento.</p>
+        @else
+            <div class="w-full relative">
+                <div class="swiper multiple-slide-carousel swiper-container relative">
+                    <div class="swiper-wrapper mb-16">
+                        @foreach ($productosDestacados as $producto)
+                            <div class="swiper-slide">
+                                <div
+                                    class="bg-white rounded-2xl h-96 flex flex-col justify-center items-center shadow-md overflow-hidden max-w-xs mx-auto">
+                                    @if ($producto->imagen)
+                                        <img src="{{ asset('storage/' . $producto->imagen) }}"
+                                            alt="{{ $producto->nombre }}"
+                                            class="w-full h-48 object-cover rounded-t-2xl" />
+                                    @endif
+                                    <div class="p-4 text-center flex flex-col justify-center flex-grow">
+                                        <h3 class="text-xl font-semibold text-gray-800">{{ $producto->nombre }}</h3>
+                                        <p class="text-gray-600 mt-2 flex-grow">
+                                            {{ Str::limit($producto->ingredientes, 60) }}</p>
+                                        <div class="mt-4 font-semibold text-blue-700">
+                                            {{ number_format($producto->precio, 2, ',', '.') }} €
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
 
-            <!-- Productos carrusel -->
-            <div class="flex overflow-x-auto gap-6 pb-4 snap-x">
-                <!-- Producto 1 -->
-                <div class="min-w-[240px] snap-center bg-white shadow-lg rounded-xl p-4 text-center">
-                    <img src="/imagenes/tapa1.jpg" alt="Tapas" class="h-36 mx-auto object-cover rounded-md">
-                    <h3 class="text-lg font-semibold mt-3">Tapas Variadas</h3>
-                    <p class="text-sm text-gray-500">Delicias tradicionales reinventadas con un toque dorado.</p>
+                    <!-- Botones personalizados estilo que diste -->
+                    <div
+                        class="absolute top-1/2 left-0 right-0 w-full px-4 flex justify-between items-center -translate-y-1/2 z-50">
+                        <button id="slider-button-left"
+                            class="swiper-button-prev group p-2 flex justify-center items-center bg-white shadow-lg w-12 h-12 rounded-full transition-all duration-300 hover:bg-gray-100"
+                            style="color: black;">
+                            
+                        </button>
+
+                        <button id="slider-button-right"
+                            class="swiper-button-next group p-2 flex justify-center items-center bg-white shadow-lg w-12 h-12 rounded-full transition-all duration-300 hover:bg-gray-100"
+                            style="color: black;">
+                            
+                        </button>
+                    </div>
+
                 </div>
-
-                <!-- Producto 2 -->
-                <div class="min-w-[240px] snap-center bg-white shadow-lg rounded-xl p-4 text-center">
-                    <img src="/imagenes/postre.jpg" alt="Postre" class="h-36 mx-auto object-cover rounded-md">
-                    <h3 class="text-lg font-semibold mt-3">Postres Caseros</h3>
-                    <p class="text-sm text-gray-500">Endulza tu visita con sabores de toda la vida.</p>
-                </div>
-
-                <!-- Producto 3 -->
-                <div class="min-w-[240px] snap-center bg-white shadow-lg rounded-xl p-4 text-center">
-                    <img src="/imagenes/vegano.jpg" alt="Opciones Veganas" class="h-36 mx-auto object-cover rounded-md">
-                    <h3 class="text-lg font-semibold mt-3">Opción Vegana</h3>
-                    <p class="text-sm text-gray-500">Platos con alma verde, sabor sin límites.</p>
-                </div>
             </div>
-
-            <!-- Botón -->
-            <div class="mt-8 text-center">
-                <button
-                    class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-full shadow-md transition">
-                    EXPLORAR LA CARTA
-                </button>
-            </div>
-        </div>
+        @endif
     </section>
+
 
 
 
@@ -320,6 +332,30 @@
 
             // Estado inicial
             setNavbarState();
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            new Swiper('.multiple-slide-carousel', {
+                loop: true,
+                spaceBetween: 20,
+                slidesPerView: 1,
+                navigation: {
+                    nextEl: '#slider-button-right',
+                    prevEl: '#slider-button-left',
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 1,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    },
+                },
+            });
         });
     </script>
 
