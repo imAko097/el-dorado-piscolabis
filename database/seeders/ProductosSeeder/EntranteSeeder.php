@@ -26,14 +26,14 @@ class EntranteSeeder extends Seeder
             ],
             [
                 'id_producto_tipos' => $tipo,
-                'nombre' => 'pan ajo',
+                'nombre' => 'pan de ajo',
                 'ingredientes' => '',
                 'imagen' => '',
                 'precio' => '1.50',
             ],
             [
                 'id_producto_tipos' => $tipo,
-                'nombre' => 'ali-oli',
+                'nombre' => 'pan con ali-oli',
                 'ingredientes' => '',
                 'imagen' => '',
                 'precio' => '1.60',
@@ -47,7 +47,7 @@ class EntranteSeeder extends Seeder
             ],
             [
                 'id_producto_tipos' => $tipo,
-                'nombre' => 'nuggets y alitas',
+                'nombre' => 'nuggets y alitas 18 Uds.',
                 'ingredientes' => '',
                 'imagen' => '',
                 'precio' => '3.80',

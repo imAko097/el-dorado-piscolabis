@@ -14,7 +14,7 @@
     <!-- Panel del carrito -->
     @if($mostrarCarrito)
         <div class="fixed inset-0 bg-black bg-opacity-50 z-40" wire:click="toggleCarrito"></div>
-        <div class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-xl z-50 overflow-y-auto">
+        <div class="fixed top-0 right-0 h-full w-full md:w-[35rem] bg-white shadow-xl z-50 overflow-y-auto">
             <div class="p-6">
                 <!-- Encabezado -->
                 <div class="flex justify-between items-center mb-6">
@@ -43,6 +43,7 @@
                                         <i class="bi bi-plus-circle"></i>
                                     </button>
                                 </div>
+                                <!-- Selección de peticiones especiales / marca de refrescos -->
                                 <div>
                                     @if($producto['nombre'] == 'refrescos lata' || $producto['nombre'] == 'refrescos botella 1.5L')
                                         <select name="comentario" id="comentario" class="h-10 border-2 border-gray-300 rounded-lg px-2 text-sm appearance-none w-[180px] mt-1" wire:change="actualizarComentario({{ $id }}, $event.target.value)">
@@ -54,7 +55,7 @@
                                             <option value="Clipper de naranja">Clipper de naranja</option>
                                         </select>
                                     @else
-                                        <textarea name="comentario" id="comentario" class="h-[75px] border-2 border-gray-300 rounded-lg px-2 text-sm w-full mt-1" placeholder="¿Quieres quitar algún ingrediente? ¿Tienes alguna alergia? ¡Comentanos!" wire:model="productos.{{ $id }}.comentario" style="resize: none;"></textarea>
+                                        <textarea name="comentario" id="comentario" class="h-[75px] border-2 border-gray-300 rounded-lg px-2 text-sm w-full mt-1" placeholder="¿Quieres quitar algún ingrediente? ¿Tienes alguna alergia? ¡Comentanos!" wire:change="actualizarComentario({{ $id }}, $event.target.value)" style="resize: none;">{{ $producto['comentario'] }}</textarea>
                                     @endif
                                 </div>
                             </div>

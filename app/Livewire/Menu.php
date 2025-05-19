@@ -18,6 +18,7 @@ class Menu extends Component
         if ($categoria === null) {
             $categoria = request()->route('categoria');
         }
+        
         $this->categoria = $categoria ?? 'bocadillos';
     }
 
@@ -35,6 +36,7 @@ class Menu extends Component
         return $tipo ? Producto::where('id_producto_tipos', $tipo->id)->get() : collect();
     }
 
+    // Agregar producto al carrito, dispatch evento para el componente 'Carrito.php'
     public function agregarAlCarrito($id)
     {
         $this->dispatch('agregarAlCarrito', id: $id);

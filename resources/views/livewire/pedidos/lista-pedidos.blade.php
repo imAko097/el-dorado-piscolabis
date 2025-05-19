@@ -42,7 +42,7 @@
                             <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" stroke-width="1.5"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="M12 8c1.656 0 3-1.344 3-3S13.656 2 12 2 9 3.344 9 5s1.344 3 3 3zM3 20h18M3 20a9 9 0 0118 0"/>
+                                    d="M12 8c1.656 0 3-1.344 3-3S13.656 2 12 2 9 3.344 9 5s1.344 3 3 3zM3 20h18M3 20a9 9 0 0118 0"/>
                             </svg>
                             <span><strong>Cliente:</strong> {{ $pedido->usuario->name }}</span>
                         </div>
@@ -53,9 +53,9 @@
 
                         <div class="flex items-center space-x-2">
                             <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" stroke-width="1.5"
-                                 viewBox="0 0 24 24">
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                             <span><strong>Fecha:</strong> {{ $pedido->created_at->format('d/m/Y H:i') }}</span>
                         </div>
