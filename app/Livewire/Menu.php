@@ -35,6 +35,11 @@ class Menu extends Component
         return $tipo ? Producto::where('id_producto_tipos', $tipo->id)->get() : collect();
     }
 
+    public function agregarAlCarrito($id)
+    {
+        $this->dispatch('agregarAlCarrito', id: $id);
+    }
+
     // Función para renderizar la vista
     public function render()
     {
