@@ -16,6 +16,6 @@ class PedidoConfirmacion extends Component
 
     public function render()
     {
-        return view('livewire.pedido-confirmacion');
+        return view('livewire.pedidos.pedido-confirmacion');
     }
 } 
