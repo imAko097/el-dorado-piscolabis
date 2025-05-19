@@ -10,10 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/inicio/styles.css') }}">
     <title>El Dorado - Menú</title>
 </head>
-<body>
-    <!-- Navegador -->
-    <livewire:menu-dropdown />
-    
+<body>    
     <!-- Contenido -->
     <div class="pt-32 px-6 md:px-40 bg-white text-black min-h-screen">
         <!-- Volver al inicio -->
