@@ -29,14 +29,13 @@ class ListaPedidos extends Component
     }
     
 
-
-
     public function mostrarDetalles($pedidoId)
     {
-        $this->pedidoSeleccionado = Pedido::find($pedidoId); // solo sin relaciones
-        $this->usuario = $this->pedidoSeleccionado->usuario;
+        $this->pedidoSeleccionado = Pedido::find($pedidoId);
+        $this->usuario = $this->pedidoSeleccionado->usuario ?? null;
         $this->productos = $this->pedidoSeleccionado->productos;
     }
+
 
     public function cerrarModal()
     {

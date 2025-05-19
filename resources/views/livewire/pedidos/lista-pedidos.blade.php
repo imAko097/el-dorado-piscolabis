@@ -44,7 +44,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M12 8c1.656 0 3-1.344 3-3S13.656 2 12 2 9 3.344 9 5s1.344 3 3 3zM3 20h18M3 20a9 9 0 0118 0"/>
                                 </svg>
-                                <span><strong>Cliente:</strong> {{ $pedido->usuario->name }}</span>
+                                <span><strong>Cliente:</strong> {{ $pedido->usuario->name ?? 'Usuario no registrado' }}</span>
                             </div>
 
                             <div class="flex items-center space-x-2">
@@ -106,7 +106,7 @@
                 <h2 class="text-xl font-bold mb-4">Detalles del Pedido #{{ $pedidoSeleccionado->id }}</h2>
 
                 <div class="space-y-2 text-gray-700 text-sm">
-                    <p><strong>Cliente:</strong> {{ $usuario->name }}</p>
+                    <p><strong>Cliente:</strong> {{ $usuario->name ?? 'Usuario no registrado' }}</p>
                     <p><strong>Estado:</strong> {{ ucfirst($pedidoSeleccionado->estadoPedido->estado) }}</p>
                     <p><strong>Fecha:</strong> {{ $pedidoSeleccionado->created_at->format('d/m/Y H:i') }}</p>
                 </div>
