@@ -36,7 +36,6 @@
                                 {{ ucfirst($estado) }}
                             </span>
                         </div>
-
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 text-sm">
                             <div class="flex items-center space-x-2">
                                 <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -79,6 +78,7 @@
                                     </option>
                                 @endforeach
                             </select>
+
                         </div>
 
                         <div class="mt-4 text-right">
