@@ -9,6 +9,37 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/inicio/styles.css') }}">
+    <style>
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 700px;
+            /* o lo que necesites */
+        }
+
+        .carousel-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            z-index: 0;
+        }
+
+        .carousel-item.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+
     <script>
         $(document).ready(function() {
             let index = 0;
@@ -16,15 +47,18 @@
 
             function goToSlide(i) {
                 index = (i + totalItems) % totalItems;
-                $('.carousel').css('transform', `translateX(-${index * 100}%)`);
+                $('.carousel-item').removeClass('active');
+                $('.carousel-item').eq(index).addClass('active');
+
                 $('.indicator').removeClass('active');
                 $(`.indicator[data-index="${index}"]`).addClass('active');
             }
 
+
             // Auto slide
             let autoSlide = setInterval(() => {
                 goToSlide(index + 1);
-            }, 3000);
+            }, 7000);
 
             // Next/Prev controls
             $('#nextSlide').click(() => {
@@ -104,11 +138,12 @@
         </nav>
         <div id="dropdownMenu">
             <ul class="p-6 text-5xl">
-                <li><a href="#inicio">Inicio <i class="bi bi-chevron-right"></i></a></li>
+                <li><a href="{{ route('inicio') }}">Inicio <i class="bi bi-chevron-right"></i></a></li>
                 <li><a href="{{ route('menu') }}">Carta <i class="bi bi-chevron-right"></i></a></li>
-                <li><a href="#Sobre Nosotros">Sobre Nosotros <i class="bi bi-chevron-right"></i></a></li>
-                <li><a href="#Contacto">Contacto <i class="bi bi-chevron-right"></i></a></li>
+                <li><a href="{{ route('sobrenosotros') }}">Sobre Nosotros <i class="bi bi-chevron-right"></i></a></li>
+                <li><a href="{{ route('contacto') }}">Contacto <i class="bi bi-chevron-right"></i></a></li>
             </ul>
+
         </div>
     </div>
 
@@ -116,8 +151,8 @@
     <!-- Carrusel -->
     <div class="relative overflow-hidden">
         <div class="carousel">
-            @foreach ($carrusel_imagenes as $imagen)
-                <div class="carousel-item">
+            @foreach ($carrusel_imagenes as $index => $imagen)
+                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                     <img src="{{ $imagen->imagen }}" alt="Imagen del carrusel" />
                 </div>
             @endforeach
@@ -236,20 +271,58 @@
         </div>
     </footer>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const menu = document.getElementById('mainMenu');
+        $(document).ready(function() {
+            const $menu = $('#dropdownMenu');
+            const $icon = $('#menuIcon');
+            const $mainMenu = $('#mainMenu');
+            let isOpen = false;
 
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 100) {
-                    menu.classList.remove('bg-transparent', 'text-white');
-                    menu.classList.add('bg-white', 'text-black', 'shadow-md');
+            function setNavbarState() {
+                if (isOpen || window.scrollY > 100) {
+                    $mainMenu.removeClass('bg-transparent text-white').addClass('bg-white text-black shadow-lg');
                 } else {
-                    menu.classList.add('bg-transparent', 'text-white');
-                    menu.classList.remove('bg-white', 'text-black', 'shadow-md');
+                    $mainMenu.removeClass('bg-white text-black shadow-lg').addClass('bg-transparent text-white');
+                }
+            }
+
+            function openMenu() {
+                $menu.addClass('show');
+                $icon.removeClass('bi-list').addClass('bi-x');
+                $('body').addClass('overflow-hidden');
+                isOpen = true;
+                setNavbarState();
+            }
+
+            function closeMenu() {
+                $menu.removeClass('show');
+                $icon.removeClass('bi-x').addClass('bi-list');
+                $('body').removeClass('overflow-hidden');
+                isOpen = false;
+                setNavbarState(); // vuelve a aplicar estilo según scroll
+            }
+
+            $('#menuToggle').click(function() {
+                if (!isOpen) {
+                    openMenu();
+                } else {
+                    closeMenu();
                 }
             });
+
+            $('#closeMenu').click(function() {
+                closeMenu();
+            });
+
+            // Detectar scroll
+            $(window).on('scroll', function() {
+                setNavbarState();
+            });
+
+            // Estado inicial
+            setNavbarState();
         });
     </script>
+
 </body>
 
 </html>
