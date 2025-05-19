@@ -105,7 +105,7 @@
         <div id="dropdownMenu">
             <ul class="p-6 text-5xl">
                 <li><a href="#inicio">Inicio <i class="bi bi-chevron-right"></i></a></li>
-                <li><a href="#Carta">Carta <i class="bi bi-chevron-right"></i></a></li>
+                <li><a href="{{ route('menu') }}">Carta <i class="bi bi-chevron-right"></i></a></li>
                 <li><a href="#Sobre Nosotros">Sobre Nosotros <i class="bi bi-chevron-right"></i></a></li>
                 <li><a href="#Contacto">Contacto <i class="bi bi-chevron-right"></i></a></li>
             </ul>
