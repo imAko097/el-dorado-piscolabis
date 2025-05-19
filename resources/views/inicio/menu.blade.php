@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="{{ asset('css/inicio/styles.css') }}">
     <title>El Dorado - Menú</title>
 </head>
-<body>    
+<body class="bg-yellow-50">
     <!-- Contenido -->
-    <div class="pt-32 px-6 md:px-40 bg-white text-black min-h-screen">
+    <div class="pt-32 px-6 md:px-40 text-black min-h-screen">
         <!-- Volver al inicio -->
         <a href="{{ route('inicio') }}" class="text-gray-500 flex items-center gap-2 mb-4 hover:text-black hover:underline transition-colors">
             <i class="bi bi-arrow-left"></i>
