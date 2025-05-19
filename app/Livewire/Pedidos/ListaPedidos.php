@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Pedidos;
 
+
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use App\Models\EstadoPedido;
 use App\Models\Pedido;
@@ -10,8 +12,11 @@ class ListaPedidos extends Component
 {
     public $pedidos;
     public $estados;
-    public $mostrarModal = false;
+    public $usuario;
+    public $productos;
     public $pedidoSeleccionado;
+
+
 
     public $filtroEstados = ['pendientes'];
 
@@ -22,6 +27,25 @@ class ListaPedidos extends Component
     {
         $this->estados = EstadoPedido::all();
     }
+    
+
+
+
+    public function mostrarDetalles($pedidoId)
+    {
+        $this->pedidoSeleccionado = Pedido::find($pedidoId); // solo sin relaciones
+        $this->usuario = $this->pedidoSeleccionado->usuario;
+        $this->productos = $this->pedidoSeleccionado->productos;
+    }
+
+    public function cerrarModal()
+    {
+        $this->pedidoSeleccionado = null;
+        $this->usuario = null;
+        $this->productos = null;
+    }
+
+
 
     public function toggleFiltroEstado($estado)
     {
@@ -67,26 +91,31 @@ class ListaPedidos extends Component
         };
     }
 
+
     public function render()
     {
-        // INICIALIZAMOS LA CONSULTA
-        $query = Pedido::with(['productos', 'usuario', 'estadoPedido']);
+        if ($this->pedidoSeleccionado) {
+            $this->productos = $this->pedidoSeleccionado->productos;
+        }
 
-        // APLICAMOS FILTROS
-        if (in_array('pendientes', $this->filtroEstados)) {
+        $query = Pedido::with(['usuario', 'estadoPedido', 'productos']);
+
+        if (!empty($this->filtroEstados)) {
             $query->whereHas('estadoPedido', function ($q) {
-                $q->whereNotIn('estado', ['entregado', 'cancelado']);
-            });
-        } elseif (!empty($this->filtroEstados)) {
-            $query->whereHas('estadoPedido', function ($q) {
-                $q->whereIn('estado', $this->filtroEstados);
+                if (in_array('pendientes', $this->filtroEstados)) {
+                    $q->whereNotIn(DB::raw('LOWER(estado)'), ['entregado', 'cancelado']);
+                } else {
+                    $q->whereIn(DB::raw('LOWER(estado)'), $this->filtroEstados);
+                }
             });
         }
 
-        // OBTENEMOS LOS PEDIDOS FILTRADOS
-        $this->pedidos = $query->orderBy('created_at', 'desc')->get();
+        $this->pedidos = $query->orderByDesc('created_at')->get();
 
-        return view('livewire.pedidos.lista-pedidos');
+        return view('livewire.pedidos.lista-pedidos', [
+            'pedidos' => $this->pedidos,
+            'estados' => $this->estados,
+        ]);
     }
 
 
