@@ -8,8 +8,7 @@
 @endphp
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 py-6">
-        @livewire('productos.producto-form')
+    <div class="max-w-7xl mx-auto px-4 py-6">  
         <ul class="flex flex-wrap justify-center gap-4 mb-6 mt-4">
             <li>
                 <a href="{{ route('productos.index') }}"

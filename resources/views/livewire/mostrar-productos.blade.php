@@ -1,4 +1,5 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+    @livewire('productos.producto-form')
     @foreach ($productos as $producto)
         <div
             class="flex flex-col bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full">
@@ -7,8 +8,6 @@
                     <img src="{{ asset('storage/' . $producto->imagen) }}" alt="{{ $producto->nombre }}"
                         class="w-full h-48 object-cover">
                 @endif
-
-
                 <label class="relative top-2 left-2 z-20 inline-flex items-center cursor-pointer select-none"
                     wire:key="switch-destacado-{{ $producto->id }}">
                     <input type="checkbox" class="sr-only peer" wire:click="toggleDestacado({{ $producto->id }})"
