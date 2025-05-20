@@ -41,114 +41,14 @@
             object-fit: cover;
         }
     </style>
-
-    <script>
-        $(document).ready(function() {
-            let index = 0;
-            const totalItems = $('.carousel-item').length;
-
-            function goToSlide(i) {
-                index = (i + totalItems) % totalItems;
-                $('.carousel-item').removeClass('active');
-                $('.carousel-item').eq(index).addClass('active');
-
-                $('.indicator').removeClass('active');
-                $(`.indicator[data-index="${index}"]`).addClass('active');
-            }
-
-
-            // Auto slide
-            let autoSlide = setInterval(() => {
-                goToSlide(index + 1);
-            }, 7000);
-
-            // Next/Prev controls
-            $('#nextSlide').click(() => {
-                goToSlide(index + 1);
-                resetAutoSlide();
-            });
-
-            $('#prevSlide').click(() => {
-                goToSlide(index - 1);
-                resetAutoSlide();
-            });
-
-            // Indicators
-            $('.indicator').click(function() {
-                const i = parseInt($(this).attr('data-index'));
-                goToSlide(i);
-                resetAutoSlide();
-            });
-
-            function resetAutoSlide() {
-                clearInterval(autoSlide);
-                autoSlide = setInterval(() => {
-                    goToSlide(index + 1);
-                }, 3000);
-            }
-
-            goToSlide(0); // Init
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            const $menu = $('#dropdownMenu');
-            const $icon = $('#menuIcon');
-            const $mainMenu = $('#mainMenu');
-            let isOpen = false;
-
-            function openMenu() {
-                $('#dropdownMenu').addClass('show'); /* Mostrar el menú */
-                $('#menuIcon').removeClass('bi-list').addClass('bi-x');
-                $('#mainMenu').removeClass('bg-transparent text-white').addClass('bg-white text-black shadow-lg');
-                isOpen = true;
-            }
-
-            function closeMenu() {
-                $('#dropdownMenu').removeClass('show'); /* Ocultar el menú */
-                $('#menuIcon').removeClass('bi-x').addClass('bi-list');
-                $('#mainMenu').removeClass('bg-white text-black shadow-lg').addClass('bg-transparent text-white');
-                isOpen = false;
-            }
-
-            // Alternar el menú al hacer clic en el icono
-            $('#menuToggle').click(function() {
-                if (!isOpen) {
-                    openMenu();
-                } else {
-                    closeMenu();
-                }
-            });
-
-            // Cerrar el menú al hacer clic fuera del área del menú
-            $('#closeMenu').click(function() {
-                closeMenu();
-            });
-        });
-    </script>
+    
+    @vite('resources/js/carrusel.js')
 </head>
 
 <body class="bg-white text-black">
-    <div>
-        <nav id="mainMenu"
-            class="p-6 pl-40 pr-40 flex justify-between items-center fixed top-0 left-0 w-full bg-transparent text-white z-50 transition-all duration-300 ease-in-out">
-            <img src="{{ asset('storage/img/eldorado.png') }}" alt="Logo" class="bg-white w-20 h-20 rounded-full" />
-            <!-- Botón de menú en el navbar -->
-            <button id="menuToggle" class="text-3xl">
-                <i id="menuIcon" class="bi bi-list"></i>
-            </button>
-        </nav>
-        <div id="dropdownMenu">
-            <ul class="p-6 text-5xl">
-                <li><a href="{{ route('inicio') }}">Inicio <i class="bi bi-chevron-right"></i></a></li>
-                <li><a href="{{ route('menu') }}">Carta <i class="bi bi-chevron-right"></i></a></li>
-                <li><a href="{{ route('sobrenosotros') }}">Sobre Nosotros <i class="bi bi-chevron-right"></i></a></li>
-                <li><a href="{{ route('contacto') }}">Contacto <i class="bi bi-chevron-right"></i></a></li>
-            </ul>
-
-        </div>
-    </div>
-
+    
+    <!-- Navbar -->
+    <x-menu-toggle/>
 
     <!-- Carrusel -->
     <div class="relative overflow-hidden">
@@ -283,58 +183,6 @@
         </div>
     </footer>
     <script>
-        $(document).ready(function() {
-            const $menu = $('#dropdownMenu');
-            const $icon = $('#menuIcon');
-            const $mainMenu = $('#mainMenu');
-            let isOpen = false;
-
-            function setNavbarState() {
-                if (isOpen || window.scrollY > 100) {
-                    $mainMenu.removeClass('bg-transparent text-white').addClass('bg-white text-black shadow-lg');
-                } else {
-                    $mainMenu.removeClass('bg-white text-black shadow-lg').addClass('bg-transparent text-white');
-                }
-            }
-
-            function openMenu() {
-                $menu.addClass('show');
-                $icon.removeClass('bi-list').addClass('bi-x');
-                $('body').addClass('overflow-hidden');
-                isOpen = true;
-                setNavbarState();
-            }
-
-            function closeMenu() {
-                $menu.removeClass('show');
-                $icon.removeClass('bi-x').addClass('bi-list');
-                $('body').removeClass('overflow-hidden');
-                isOpen = false;
-                setNavbarState(); // vuelve a aplicar estilo según scroll
-            }
-
-            $('#menuToggle').click(function() {
-                if (!isOpen) {
-                    openMenu();
-                } else {
-                    closeMenu();
-                }
-            });
-
-            $('#closeMenu').click(function() {
-                closeMenu();
-            });
-
-            // Detectar scroll
-            $(window).on('scroll', function() {
-                setNavbarState();
-            });
-
-            // Estado inicial
-            setNavbarState();
-        });
-    </script>
-    <script>
         document.addEventListener('DOMContentLoaded', function() {
             new Swiper('.multiple-slide-carousel', {
                 loop: true,
@@ -358,7 +206,5 @@
             });
         });
     </script>
-
 </body>
-
 </html>
