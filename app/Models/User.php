@@ -21,7 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -45,4 +47,32 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Devuelve si el usuario es admin
+     */
+    public function isAdmin() {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Devuelve si el usuario es cliente
+     */
+    public function isCliente() {
+        return $this->role === 'cliente';
+    }
+
+    /**
+     * Devuelve si el usuario es cliente
+     */
+    public function isEmpleado() {
+        return $this->role === 'empleado';
+    }
+
+    
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class, 'id_usuario');
+    }
+
 }
