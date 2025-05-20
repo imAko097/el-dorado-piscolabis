@@ -26,7 +26,7 @@
             @endforeach
         </ul>
         @if (isset($productos) && count($productos) > 0)
-            @livewire('mostrar-productos')
+            @livewire('productos.mostrar-productos')
         @else
             <div class="text-center text-gray-500 py-12">
                 No hay productos disponibles.

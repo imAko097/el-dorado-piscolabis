@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Productos;
 
 use Livewire\Component;
 use App\Models\Producto;
@@ -29,6 +29,6 @@ class MostrarProductos extends Component
 
     public function render()
     {
-        return view('livewire.mostrar-productos');
+        return view('livewire.productos.mostrar-productos');
     }
 }
