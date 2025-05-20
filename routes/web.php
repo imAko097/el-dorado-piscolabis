@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\CarruselImagenes;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Middleware\RolAdminEmpleado;
+
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -25,7 +27,7 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', RolAdminEmpleado::class])->group(function () {
     Route::resource('usuarios', UsuariosController::class);
     Route::resource('productos', ProductoController::class);
     Route::resource('pedidos', PedidoController::class);
@@ -48,5 +50,4 @@ Route::get('/pedido/confirmacion/{id}', function ($id) {
     return view('pedido.confirmacion', compact('id'));
 })->name('pedido.confirmacion');
 
-// Auth scaffolding (login, register, etc.)
 require __DIR__.'/auth.php';

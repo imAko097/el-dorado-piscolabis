@@ -2,17 +2,20 @@
     @php $user = auth()->user(); @endphp
 
     <!-- Botón editar -->
-    <div class="flex justify-center sm:justify-end">
-        <button wire:click="showModal"
-            class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 rounded-md shadow transition duration-200"
-            title="Editar usuario">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5m-10 2l6-6m0 0l3 3m-3-3v0" />
-            </svg>
-        </button>
-    </div>
+    @if ($user && ($user->isAdmin() || $user->id === $usuario->id))
+        <div class="flex justify-center sm:justify-end">
+            <button wire:click="showModal"
+                class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 rounded-md shadow transition duration-200"
+                title="Editar usuario">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5m-10 2l6-6m0 0l3 3m-3-3v0" />
+                </svg>
+            </button>
+        </div>
+    @endif
+
 
     <!-- Modal -->
     @if ($showForm)
@@ -62,18 +65,20 @@
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <!-- Rol -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700">Rol</label>
-                                <select wire:model="role"
-                                    class="px-3 py-2 mt-1 block w-full rounded-md border-[1.5px] border-gray-400 bg-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 text-sm capitalize">
-                                    <option value="">Seleccionar rol</option>
-                                    <option value="admin">Administrador</option>
-                                    <option value="empleado">Empleado</option>
-                                    <option value="cliente">Cliente</option>
-                                </select>
-                                @error('role') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                            </div>
+                            @if ($user && $user->isAdmin())
+                                <!-- Rol -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Rol</label>
+                                    <select wire:model="role"
+                                        class="px-3 py-2 mt-1 block w-full rounded-md border-[1.5px] border-gray-400 bg-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 text-sm capitalize">
+                                        <option value="">Seleccionar rol</option>
+                                        <option value="admin">Administrador</option>
+                                        <option value="empleado">Empleado</option>
+                                        <option value="cliente">Cliente</option>
+                                    </select>
+                                    @error('role') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                            @endif
                         </div>
 
                         <!-- Botones -->
