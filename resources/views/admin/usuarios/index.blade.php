@@ -44,7 +44,7 @@
                             </td>
                             <td class="px-4 py-2 text-center sm:text-right block sm:table-cell">
                                 <div class="inline-block sm:block">
-                                    @livewire('usuarios.editar-user-form', ['usuario' => $usuario], key('usuarios.editar-user-form-'.$usuario->id))
+                                    <livewire:usuarios.editar-user-form :usuario="$usuario" />
                                 </div>
                             </td>
                         </tr>
