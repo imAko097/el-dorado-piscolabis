@@ -15,15 +15,13 @@ class UserForm extends Component
         'name' => 'required|string|max:255',
         'email' => 'required|email|max:255',
         'password' => 'required|string|min:8|confirmed',
-        'role' => 'required|in:admin, empleado, cliente',
+        'role' => 'nullable|in:admin,empleado,cliente',
     ];
 
     protected $messages = [
         'name.required' => 'El nombre es obligatorio.',
         'email.required' => 'El correo electrónico es obligatorio.',
         'password.required' => 'La contraseña es obligatoria.',
-        'role.required' => 'El rol es obligatorio.',
-        'role.in' => 'El rol debe ser uno de los siguientes: admin, empleado, cliente.',
     ];
 
     public function showModal()
@@ -36,18 +34,23 @@ class UserForm extends Component
     {
         $this->validate();
 
-
         $user = new User();
         $user->name = $this->name;
         $user->email = $this->email;
         $user->password = Hash::make($this->password);
-        $user->role = $this->role;
+
+        // Asignar rol por defecto si no se especifica
+        $user->role = $this->role ?: 'empleado';
+
         $user->email_verified_at = now();
         $user->save();
 
         session()->flash('message', 'Usuario agregado correctamente.');
         return redirect()->route('usuarios.index');
     }
+
+
+
 
     public function render()
     {

@@ -57,18 +57,20 @@
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <!-- Rol -->
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700">Rol</label>
-                                <select wire:model="role"
-                                    class="px-3 py-2 mt-1 block w-full rounded-md border-[1.5px] border-gray-400 bg-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 text-sm capitalize">
-                                    <option value="">Seleccionar rol</option>
-                                    <option value="admin">Administrador</option>
-                                    <option value="empleado">Empleado</option>
-                                    <option value="cliente">Cliente</option>
-                                </select>
-                                @error('role') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                            </div>
+                            @if ($user && $user->isAdmin())
+                                <!-- Rol -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Rol</label>
+                                    <select wire:model="role"
+                                        class="px-3 py-2 mt-1 block w-full rounded-md border-[1.5px] border-gray-400 bg-white shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 text-sm capitalize">
+                                        <option value="">Seleccionar rol</option>
+                                        <option value="admin">Administrador</option>
+                                        <option value="empleado">Empleado</option>
+                                        <option value="cliente">Cliente</option>
+                                    </select>
+                                    @error('role') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                </div>
+                            @endif
                         </div>
 
                         <!-- Botones -->

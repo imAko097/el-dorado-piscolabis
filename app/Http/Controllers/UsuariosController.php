@@ -10,17 +10,12 @@ class UsuariosController extends Controller
 {
     public function index()
     {
-        $usuarios = User::all();
+        $authUser = Auth::user();
+
+        $usuarios = User::all()->sortBy(function ($user) use ($authUser) {
+            return $user->id === $authUser->id ? 0 : 1;
+        })->values();
 
         return view('admin.usuarios.index', compact('usuarios'));
-    }
-
-    public function mount()
-    {
-        $user = Auth::user();
-
-        if (!$user || $user->role !== 'admin') {
-            abort(403, 'No tienes permiso para crear usuarios.');
-        }
     }
 }
