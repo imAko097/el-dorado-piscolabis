@@ -15,6 +15,8 @@ class ProductoForm extends Component
     public $id_producto_tipos;
     public $producto;
     public $showForm = false;
+    public $categoriaSeleccionada;
+
 
     protected $rules = [
         'nombre' => 'required|string|max:255',
@@ -33,9 +35,17 @@ class ProductoForm extends Component
 
     public function showModal()
     {
-        $this->reset();
+        $this->reset(['nombre', 'ingredientes', 'precio', 'imagen', 'id_producto_tipos']);
         $this->showForm = true;
+
+        if ($this->categoriaSeleccionada) {
+            $tipo = \App\Models\ProductoTipo::where('tipo', $this->categoriaSeleccionada)->first();
+            if ($tipo) {
+                $this->id_producto_tipos = $tipo->id;
+            }
+        }
     }
+
 
     public function save()
     {
