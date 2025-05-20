@@ -68,6 +68,7 @@ class ProductoForm extends Component
     }
 
 
+
     public function render()
     {
         return view('livewire.productos.producto-form');

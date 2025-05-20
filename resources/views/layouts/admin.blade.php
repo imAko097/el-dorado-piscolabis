@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,8 +17,11 @@
 </script>
   @livewireStyles
   @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
+
 <body class="bg-[#F0F4FA] text-black">
+
 
 <div id="page-loader" class="fixed inset-0 z-50 flex items-center justify-center bg-white transition-opacity duration-500">
 
@@ -150,8 +154,7 @@
       <path fill-rule="evenodd" clip-rule="evenodd"
         d="M8.22 3.22a.75.75 0 000 1.06L14.94 11l-6.72 6.72a.75.75 0 101.06 1.06l7.25-7.25a.75.75 0 000-1.06L9.28 3.22a.75.75 0 00-1.06 0z"/>
     `;
-
-
+    
     let sidebarVisible = window.innerWidth >= 768;
 
     const updateUI = () => {
@@ -198,5 +201,7 @@
 
 </script>
 
+
 </body>
+
 </html>
