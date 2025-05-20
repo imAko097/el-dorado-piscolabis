@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('page-title', 'Título por defecto')</title>
   <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<script>
+  <script>
     const nav = performance.getEntriesByType("navigation")[0];
     if (nav && nav.type !== "reload") {
         window.location.reload();
     }
 </script>
+  
   @livewireStyles
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-
 </head>
-
 <body class="bg-[#F0F4FA] text-black">
-
 
 <div id="page-loader" class="fixed inset-0 z-50 flex items-center justify-center bg-white transition-opacity duration-500">
 
@@ -46,7 +43,7 @@
 </button>
 
 <aside id="logo-sidebar"
-  id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen bg-gray-200 text-black transform transition-transform duration-300 md:translate-x-0 translate-x-full shadow-lg"
+  class="fixed top-0 md:left-0 right-0 z-40 w-64 h-screen bg-gray-200 text-black transform transition-transform duration-300 translate-x-full shadow-lg"
   aria-label="Sidebar">
   <div class="h-full px-3 py-4 overflow-y-auto">  
       <div class="p-6 text-center text-3xl font-extrabold border-b border-gray-800">
@@ -95,11 +92,10 @@
                 <span class="ms-3">Menú</span>
             </a>
         </li>
-
       </ul>
     </div>
 
-      <div class="absolute bottom-0 left-0 w-full p-4 border-t border-gray-300 bg-gray-100">
+    <div class="absolute bottom-0 left-0 w-full p-4 border-t border-gray-300 bg-gray-100">
     <div x-data="{ open: false }" class="relative">
         <button @click="open = !open" class="w-full flex items-center justify-between text-sm font-medium text-left">
             <div>
@@ -127,7 +123,8 @@
         </div>
     </div>
   </div>
-</aside>
+  </aside>
+
 <div id="main-container" class="transition-all duration-300 pl-8">
   <main id="main-content" class="p-4">
     @yield('content')
@@ -154,7 +151,8 @@
       <path fill-rule="evenodd" clip-rule="evenodd"
         d="M8.22 3.22a.75.75 0 000 1.06L14.94 11l-6.72 6.72a.75.75 0 101.06 1.06l7.25-7.25a.75.75 0 000-1.06L9.28 3.22a.75.75 0 00-1.06 0z"/>
     `;
-    
+
+
     let sidebarVisible = window.innerWidth >= 768;
 
     const updateUI = () => {
@@ -190,18 +188,16 @@
     updateUI();
   });
 
-  // Ocultar el loader cuando todo haya cargado
-  window.addEventListener('load', () => {
-    const loader = document.getElementById('page-loader');
-    if (loader) {
-      loader.classList.add('opacity-0');
-      setTimeout(() => loader.remove(), 500); // se elimina después de la transición
-    }
-  });
-
+  
+    // Ocultar loader cuando se carga la página
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('page-loader');
+      if (loader) {
+        loader.classList.add('opacity-0');
+        setTimeout(() => loader.remove(), 500);
+      }
+    });
 </script>
 
-
 </body>
-
 </html>
