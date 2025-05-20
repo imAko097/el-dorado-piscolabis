@@ -19,7 +19,7 @@ class EditarUserForm extends Component
         'name' => 'required|string|max:255',
         'email' => 'required|email|max:255',
         'password' => 'nullable|min:8|same:password_confirmation',
-        'role' => 'required|in:admin, empleado, cliente',
+        'role' => 'required|in:admin,empleado,cliente',
     ];
 
     public function mount($usuario)
@@ -27,11 +27,11 @@ class EditarUserForm extends Component
         $this->usuario = $usuario;
     }
 
-    protected function puedeEditar()
-    {
-        $authUser = Auth::user();
-        return $authUser && ($authUser->role === 'admin' || $authUser->id === $this->usuario->id);
-    }
+    //protected function puedeEditar()
+    //{
+      //  $authUser = Auth::user();
+        //return $authUser && ($authUser->role === 'admin' || $authUser->id === $this->usuario->id);
+    //}
 
 
 
@@ -65,11 +65,12 @@ class EditarUserForm extends Component
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'password' => 'nullable|min:8|same:password_confirmation',
+            'role' => 'required|in:admin,empleado,cliente',
         ];
 
-        if (Auth::user()->role === 'admin') {
-            $rules['role'] = 'required|in:admin,empleado,cliente';
-        }
+       // if (Auth::user()->role === 'admin') {
+       //     $rules['role'] = 'required|in:admin,empleado,cliente';
+       // }
 
         $this->validate($rules);
 
@@ -81,15 +82,16 @@ class EditarUserForm extends Component
         $datos = [
             'name' => $this->name,
             'email' => $this->email,
+            'role' => $this->role,
         ];
 
         if (!empty($this->password)) {
             $datos['password'] = Hash::make($this->password);
         }
 
-        if (Auth::user()->role === 'admin') {
-            $datos['role'] = $this->role;
-        }
+        //if (Auth::user()->role === 'admin') {
+         //   $datos['role'] = $this->role;
+        //}
 
         $this->usuario->update($datos);
 
