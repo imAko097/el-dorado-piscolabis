@@ -11,6 +11,11 @@
     <title>El Dorado - Menú</title>
 </head>
 <body class="bg-yellow-50">
+    <!-- Menú desplegable -->
+     <div>
+         <x-menu-toggle/>
+     </div>
+
     <!-- Contenido -->
     <div class="pt-32 px-6 md:px-40 text-black min-h-screen">
         <!-- Volver al inicio -->

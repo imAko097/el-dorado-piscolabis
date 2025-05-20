@@ -11,6 +11,12 @@
     <title>El Dorado - Tu pedido</title>
 </head>
 <body>
+    <!-- Menú -->
+    <div>
+        <x-menu-toggle/>
+    </div>
+
+    <!-- Página de checkout -->
     <livewire:checkout />
 </body>
 </html>

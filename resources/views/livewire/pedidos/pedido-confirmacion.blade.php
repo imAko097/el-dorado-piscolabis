@@ -29,11 +29,11 @@
 
             <div>
                 <a href="{{ route('menu') }}" class="block w-full bg-gray-200 text-gray-700 text-center py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
-                    Volver al Menú
+                    Volver al menú
                 </a>
                 @if(Auth::check())
-                    <a href="{{ route('pedidos.mis-pedidos') }}" class="block w-full bg-yellow-400 text-center py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
-                        Ver Mis Pedidos
+                    <a href="{{ route('pedidos.mis-pedidos') }}" class="block w-full bg-yellow-400 text-center py-3 mt-2 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+                        Ver mis pedidos
                     </a>
                 @else
                     <div class="mt-3">
