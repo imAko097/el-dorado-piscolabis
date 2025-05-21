@@ -56,6 +56,7 @@
             @foreach ($carrusel_imagenes as $index => $imagen)
                 <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                     <img src="{{ $imagen->imagen }}" alt="Imagen del carrusel" />
+                    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
                 </div>
             @endforeach
         </div>
@@ -65,7 +66,6 @@
                 <div class="indicator" data-index="{{ $index }}"></div>
             @endforeach
         </div>
-
     </div>
 
 
