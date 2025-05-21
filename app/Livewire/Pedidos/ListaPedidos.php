@@ -49,20 +49,16 @@ class ListaPedidos extends Component
     public function toggleFiltroEstado($estado)
     {
         if (in_array($estado, $this->filtroEstados)) {
-            // Si ya está activo, se desmarca (lo quitamos del array)
             $this->filtroEstados = array_filter($this->filtroEstados, fn($e) => $e !== $estado);
         } else {
             if ($estado === 'pendientes') {
-                // Si activamos "pendientes", eliminamos todos los demás filtros
                 $this->filtroEstados = ['pendientes'];
             } else {
-                // Si "pendientes" está activo, lo quitamos antes de añadir otros
                 $this->filtroEstados = array_filter($this->filtroEstados, fn($e) => $e !== 'pendientes');
                 $this->filtroEstados[] = $estado;
             }
         }
 
-        // Reindexamos y eliminamos duplicados por seguridad
         $this->filtroEstados = array_values(array_unique($this->filtroEstados));
     }
 

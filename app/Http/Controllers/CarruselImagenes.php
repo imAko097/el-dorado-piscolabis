@@ -9,7 +9,6 @@ class CarruselImagenes extends Controller
 {
     public function index()
     {
-        // Obtener todas las imágenes del carrusel
         $carrusel_imagenes = Carrusel_imagenes::all();
         return view('admin.carrusel_imagenes.index', compact('carrusel_imagenes'));
     }
