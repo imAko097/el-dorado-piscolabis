@@ -12,7 +12,6 @@ class RolAdminEmpleado
     {
         $user = $request->user();
 
-        // Si no es admin ni empleado, redirigir al inicio con un mensaje opcional
         if (!$user || !in_array($user->role, ['admin', 'empleado'])) {
             return redirect('/')->with('error', 'No tienes permiso para acceder a esta sección.');
         }

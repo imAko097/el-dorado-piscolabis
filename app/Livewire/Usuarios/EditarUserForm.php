@@ -51,7 +51,6 @@ class EditarUserForm extends Component
             abort(403, 'No tienes permiso para actualizar este usuario.');
         }
 
-        // Copiamos las reglas y eliminamos 'role' si no es admin
         $rules = $this->rules;
         if (Auth::user()->role !== 'admin') {
             unset($rules['role']);
@@ -79,7 +78,7 @@ class EditarUserForm extends Component
 
         $this->usuario->update($datos);
 
-        $this->showForm = false; // Cerrar modal
+        $this->showForm = false;
         session()->flash('message', 'Usuario actualizado correctamente.');
         return redirect()->route('usuarios.index');
     }
