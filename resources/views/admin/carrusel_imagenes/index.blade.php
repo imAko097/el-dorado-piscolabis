@@ -3,45 +3,23 @@
 @section('title', 'Imágenes del Carrusel')
 
 @section('content_header')
+
 @endsection
 
 @section('content')
-<div class="container mt-4 position-relative">
-    @if ($carrusel_imagenes->isNotEmpty())
-    <form id="deleteForm" method="POST" action="{{ route('carrusel_imagenes.delete_multiple') }}">
-        @csrf
-        @method('DELETE')
+    <div class="container mt-4 position-relative">
+        @livewire('carrusel-galeria')
 
-        <div id="sortable-images" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-center">
-            @foreach ($carrusel_imagenes->sortBy('orden') as $imagen)
-            <div class="image-item relative cursor-pointer select-none" data-id="{{ $imagen->id }}">
-                <div class="bg-transparent text-light shadow-none border-0 max-w-xs mx-auto relative">
-                    <img src="{{ $imagen->imagen }}" alt="Imagen {{ $imagen->id }}"
-                        class="w-full h-[250px] object-cover rounded-lg shadow">
+        <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1050;">
+            @livewire('upload-imagenes')
 
-                    <input type="checkbox" name="ids[]" value="{{ $imagen->id }}"
-                        class="delete-checkbox absolute top-2 left-2 w-6 h-6 rounded border border-gray-400 bg-white"
-                        style="display:none; z-index: 10;">
-                </div>
-            </div>
-            @endforeach
-        </div>
-
-        {{-- Botones fijos abajo a la izquierda, dejando espacio para menú lateral --}}
-        <div style="position: fixed; bottom: 20px; left: 270px; z-index: 1100; display: flex; gap: 10px; align-items: center;">
-            <button type="button" id="toggleDeleteMode" class="btn btn-danger" title="Eliminar múltiple" style="display:flex; align-items:center; gap:5px;">
-                <svg xmlns="http://www.w3.org/2000/svg" style="width:18px; height:18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7L5 7M6 7L6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M10 11v6M14 11v6M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
-                </svg>
-                Eliminar múltiple
-            </button>
-            <button type="submit" id="confirmDelete" class="btn btn-success" style="display:none;">Confirmar</button>
         </div>
     </form>
     @else
     <div class="alert alert-info text-center text-gray-700 border-warning mt-4">
         No hay imágenes en el carrusel.
     </div>
+
     @endif
 
     {{-- Componente Livewire para subir imágenes --}}
@@ -49,6 +27,7 @@
         @livewire('upload-imagenes')
     </div>
 </div>
+
 @endsection
 
 @section('scripts')
@@ -109,6 +88,13 @@
                 }
             });
         });
-    });
-</script>
+
+        document.addEventListener('livewire:load', function () {
+            Livewire.on('imagenEliminada', () => {
+                alert('Imagen eliminada correctamente');
+            });
+        });
+
+    </script>
+
 @endsection

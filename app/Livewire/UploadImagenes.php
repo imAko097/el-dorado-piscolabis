@@ -26,21 +26,15 @@ class UploadImagenes extends Component
         $this->resetErrorBag();
     }
 
-    public function updatedImagenes()
-    {
-        $totalExistentes = Carrusel_imagenes::count();
-        $totalNuevas = count($this->imagenes);
-
-        if (($totalExistentes + $totalNuevas) > 6) {
-            $this->mensajeError = 'Solo se pueden subir 6 imágenes como máximo. Intenta quitar algunas.';
-            $this->imagenes = []; // Vacía las imágenes seleccionadas
-        } else {
-            $this->mensajeError = '';
-        }
-    }
-
     public function subirImagenes()
     {
+        $totalActual = \App\Models\Carrusel_imagenes::count();
+
+        if (($totalActual + count($this->imagenes)) > 6) {
+            $this->addError('limite', 'No puedes subir más de 6 imágenes al carrusel.');
+            return;
+        }
+
         $this->validate([
             'imagenes.*' => 'required|file|mimes:jpeg,jpg,png,gif,webp,heic',
         ]);
@@ -61,11 +55,11 @@ class UploadImagenes extends Component
             ]);
         }
 
-        session()->flash('mensaje', 'Imágenes subidas y guardadas correctamente.');
-
-        $this->reset(['imagenes', 'showForm', 'mensajeError']);
-        $this->resetErrorBag();
+        session()->flash('mensaje', 'Imágenes subidas correctamente.');
+        $this->dispatch('imagenesSubidas');
+        $this->reset(['imagenes', 'showForm']);
     }
+
 
     public function render()
     {
