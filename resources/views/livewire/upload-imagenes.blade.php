@@ -1,11 +1,13 @@
 <div>
-    <!-- Botón para abrir el modal -->
-    <button wire:click="showModal"
-        class="flex items-center justify-center w-12 h-12 bg-whites hover:bg-gray-100 rounded-full shadow-lg border-2 border-gray-300 text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring--500 focus:ring-offset-2 transition duration-200 ease-in-out">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
-            <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-        </svg>
-    </button>
+    <div wire:click="showModal" 
+        class="cursor-pointer flex flex-col justify-center items-center bg-white border-2 border-dashed border-gray-300 rounded-lg shadow p-4 hover:shadow-lg transition-shadow duration-300 max-w-xs h-[250px] mx-auto text-gray-500 hover:text-gray-700">
+        <div class="flex flex-col items-center justify-center text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            <span class="font-semibold">Agregar Imagen</span>
+        </div>
+    </div>
 
     <!-- Modal -->
     @if ($showForm)

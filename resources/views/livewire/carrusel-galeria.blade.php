@@ -17,4 +17,8 @@
             </div>
         </div>
     @endforeach
+    @if (count($imagenes) < 6)
+        @livewire('upload-imagenes')
+    @endif
+
 </div>
