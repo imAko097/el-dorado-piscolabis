@@ -12,18 +12,14 @@
     <div class="container mt-4 position-relative">
     @if ($carrusel_imagenes->isNotEmpty())
          @livewire('carrusel-galeria')
-
-        <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1050;">
-            @livewire('upload-imagenes')
-
-        </div>
-    </form>
     @else
     <div class="alert alert-info text-center text-gray-700 border-warning mt-4">
         No hay imágenes en el carrusel.
     </div>
-
     @endif
+        <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1050;">
+            @livewire('upload-imagenes')
+        </div>
 </div>
 
 @endsection
