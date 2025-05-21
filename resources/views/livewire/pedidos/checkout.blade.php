@@ -1,5 +1,5 @@
 <div class="min-h-screen bg-yellow-50 py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto my-[100px] px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Resumen del pedido -->
             <div class="bg-white rounded-lg shadow-lg p-6 border border-yellow-300">

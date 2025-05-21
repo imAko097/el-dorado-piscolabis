@@ -4,7 +4,7 @@
         <img src="{{ asset('storage/img/eldorado.png') }}" alt="Logo" class="bg-white w-20 h-20 rounded-full" />
         <!-- Botón de menú en el navbar -->
         <button id="menuToggle" class="text-3xl">
-            <i id="menuIcon" class="bi bi-list"></i>
+            <i id="menuIcon" class="bi bi-list text-black"></i>
         </button>
     </nav>
     <div id="dropdownMenu">

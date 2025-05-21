@@ -30,7 +30,7 @@ $(document).ready(function () {
         setNavbarState(); // vuelve a aplicar estilo según scroll
     }
 
-    $('#menuToggle').click(function () {
+    $('#menuToggle').on('click', function () {
         if (!isOpen) {
             openMenu();
         } else {
@@ -38,7 +38,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#closeMenu').click(function () {
+    $('#closeMenu').on('click', function () {
         closeMenu();
     });
 

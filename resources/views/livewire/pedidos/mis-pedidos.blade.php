@@ -3,7 +3,7 @@
         <div class="bg-white rounded-lg shadow-lg p-6">
             <h1 class="text-3xl font-bold mb-8">Mis Pedidos</h1>
 
-            @if($pedidos->isEmpty())
+            @if($this->pedidos->isEmpty())
                 <div class="text-center py-12">
                     <p class="text-gray-500 text-lg">No tienes pedidos realizados.</p>
                     <a href="{{ route('menu') }}" class="inline-block mt-4 bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition-colors">
@@ -12,7 +12,7 @@
                 </div>
             @else
                 <div class="space-y-6">
-                    @foreach($pedidos as $pedido)
+                    @foreach($this->pedidos as $pedido)
                         <div class="border rounded-lg p-6">
                             <div class="flex justify-between items-start mb-4">
                                 <div>
@@ -20,8 +20,8 @@
                                     <p class="text-gray-600">Realizado el {{ $pedido->created_at->format('d/m/Y H:i') }}</p>
                                 </div>
                                 <span class="px-4 py-2 rounded-full text-sm font-semibold
-                                    @if($pedido->estadoPedido->estado === 'pendiente') bg-yellow-100 text-yellow-800
-                                    @elseif($pedido->estadoPedido->estado === 'en_proceso') bg-blue-100 text-blue-800
+                                    @if($pedido->estadoPedido->estado === 'recibido') bg-yellow-100 text-yellow-800
+                                    @elseif($pedido->estadoPedido->estado === 'en preparación') bg-blue-100 text-blue-800
                                     @elseif($pedido->estadoPedido->estado === 'entregado') bg-green-100 text-green-800
                                     @elseif($pedido->estadoPedido->estado === 'cancelado') bg-red-100 text-red-800
                                     @endif">
