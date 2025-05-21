@@ -5,38 +5,52 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
-    public function store(Request $request): RedirectResponse
+    public function create()
     {
-        $request->validate([
-            'email' => ['required', 'email'],
+        return view('auth.login');
+    }
+
+    public function store(Request $request)
+    {
+        $credentials = $request->validate([
+            'email'    => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
-            return back()->withErrors([
-                'email' => trans('auth.failed'),
+        if (!Auth::attempt($credentials, $request->boolean('remember'))) {
+            throw ValidationException::withMessages([
+                'email' => __('auth.failed'),
             ]);
         }
 
         $request->session()->regenerate();
 
+        return redirect()->intended($this->redirectTo());
+    }
+
+    protected function redirectTo()
+    {
         $user = Auth::user();
 
-        // Redirección personalizada según el rol
-        if (in_array($user->role, ['admin', 'empleado'])) {
-            return redirect()->route('productos.index');
-        } else {
-            return redirect()->route('inicio');
+        switch ($user->role) {
+            case 'cliente':
+                return '/';
+            case 'admin':
+            case 'empleado':
+                return '/productos';
+            default:
+                Auth::logout();
+                abort(403, 'Rol no autorizado.');
         }
     }
 
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(Request $request)
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
