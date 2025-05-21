@@ -7,8 +7,6 @@
         </svg>
     </button>
 
-   
-
     <!-- Modal -->
     @if ($showForm)
     <div class="fixed inset-0 bg-opacity-50 z-40 flex items-center justify-center">
@@ -32,8 +30,15 @@
                     </label>
                 </div>
 
+                <!-- Mensajes de error -->
+                @if ($mensajeError)
+                    <div class="mt-2 text-red-600 text-sm font-semibold">
+                        {{ $mensajeError }}
+                    </div>
+                @endif
+
                 @error('imagenes.*')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <div class="mt-2 text-red-500 text-sm">{{ $message }}</div>
                 @enderror
 
                 @error('limite')
@@ -44,7 +49,8 @@
 
 
                 <div class="flex justify-end mt-4">
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                        @if ($mensajeError) disabled class="opacity-50 cursor-not-allowed" @endif>
                         Subir
                     </button>
                 </div>

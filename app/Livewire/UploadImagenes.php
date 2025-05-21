@@ -5,7 +5,6 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Carrusel_imagenes;
-use Illuminate\Http\Request;
 
 class UploadImagenes extends Component
 {
@@ -13,6 +12,7 @@ class UploadImagenes extends Component
 
     public $imagenes = [];
     public $showForm = false;
+    public $mensajeError = '';
 
     public function showModal()
     {
@@ -22,6 +22,7 @@ class UploadImagenes extends Component
     public function closeModal()
     {
         $this->showForm = false;
+        $this->reset(['imagenes', 'mensajeError']);
         $this->resetErrorBag();
     }
 
@@ -38,6 +39,14 @@ class UploadImagenes extends Component
             'imagenes.*' => 'required|file|mimes:jpeg,jpg,png,gif,webp,heic',
         ]);
 
+        $totalExistentes = Carrusel_imagenes::count();
+        $totalNuevas = count($this->imagenes);
+
+        if (($totalExistentes + $totalNuevas) > 6) {
+            $this->addError('imagenes', 'Solo se permiten un máximo de 6 imágenes en el carrusel.');
+            return;
+        }
+
         foreach ($this->imagenes as $imagen) {
             $path = $imagen->store('uploads', 'public');
 
@@ -50,7 +59,6 @@ class UploadImagenes extends Component
         $this->dispatch('imagenesSubidas');
         $this->reset(['imagenes', 'showForm']);
     }
-
 
 
     public function render()
