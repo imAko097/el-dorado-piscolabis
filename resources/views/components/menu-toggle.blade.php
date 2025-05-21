@@ -13,6 +13,12 @@
             <li><a href="{{ route('menu') }}">Carta</a></li>
             <li><a href="{{ route('sobrenosotros') }}">Sobre Nosotros</a></li>
             <li><a href="{{ route('contacto') }}">Contacto</a></li>
+            @auth
+                @if (auth()->user()->role === 'admin' || auth()->user()->role === 'empleado')
+                    <li><a href="{{ route('productos.index') }}">Panel Admin</a></li>
+                @endif
+            @endauth
+
         </ul>
     </div>
 </div>
