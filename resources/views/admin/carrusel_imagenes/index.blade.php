@@ -3,33 +3,19 @@
 @section('title', 'Imágenes del Carrusel')
 
 @section('content_header')
+
     
 @endsection
 
 @section('content')
     <div class="container mt-4 position-relative">
-        @if ($carrusel_imagenes->isNotEmpty())
-            <div id="sortable-images" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-center">
-                @foreach ($carrusel_imagenes->sortBy('orden') as $imagen)
-                    <div class="image-item" data-id="{{ $imagen->id }}">
-                        <div class="bg-transparent text-light shadow-none border-0 max-w-xs mx-auto">
-                            <img src="{{ $imagen->imagen }}" alt="Imagen {{ $imagen->id }}"
-                                class="w-full h-[250px] object-cover rounded-lg shadow">
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        @else
-            <div class="alert alert-info text-center text-gray-700 border-warning mt-4">
-                No hay imágenes en el carrusel.
-            </div>
-        @endif
+        @livewire('carrusel-galeria')
 
-        {{-- Componente Livewire para subir imágenes --}}
         <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1050;">
             @livewire('upload-imagenes')
         </div>
     </div>
+
 @endsection
 
 @section('scripts')
@@ -67,5 +53,13 @@
                 }
             });
         });
+
+
+        document.addEventListener('livewire:load', function () {
+            Livewire.on('imagenEliminada', () => {
+                alert('Imagen eliminada correctamente');
+            });
+        });
+
     </script>
 @endsection

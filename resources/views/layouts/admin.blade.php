@@ -9,6 +9,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <script src="https://unpkg.com/alpinejs" defer></script>
+
   <script>
     const nav = performance.getEntriesByType("navigation")[0];
     if (nav && nav.type !== "reload") {
