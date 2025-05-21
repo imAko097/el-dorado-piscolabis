@@ -1,6 +1,6 @@
 <div>
     <!-- Botón del carrito -->
-    <div class="fixed top-4 right-4 z-50">
+    <div class="fixed top-[150px] right-4 z-50">
         <button wire:click="toggleCarrito" class="bg-yellow-400 text-black p-3 rounded-full shadow-lg hover:bg-yellow-500 transition-colors relative">
             <i class="bi bi-cart3 text-2xl"></i>
             @if(count($productos) > 0)
@@ -18,7 +18,7 @@
             <div class="p-6">
                 <!-- Encabezado -->
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold">Tu Pedido</h2>
+                    <h2 class="text-2xl font-bold">Tu pedido</h2>
                     <button wire:click="toggleCarrito" class="text-gray-500 hover:text-gray-700">
                         <i class="bi bi-x text-2xl"></i>
                     </button>

@@ -8,15 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="{{ asset('css/inicio/styles.css') }}">
-    <title>El Dorado - Tu pedido</title>
+    <title>El Dorado - Mi Historial de Pedidos</title>
 </head>
 <body>
-    <!-- Menú -->
     <div>
-        <x-menu-toggle/>
+        <x-menu-toggle />
     </div>
 
-    <!-- Página de checkout -->
-    <livewire:checkout />
+    <livewire:pedidos.mis-pedidos />
 </body>
 </html>
