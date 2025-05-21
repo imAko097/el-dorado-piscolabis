@@ -1,12 +1,24 @@
 <div>
     <nav id="mainMenu"
-        class="p-6 pl-40 pr-40 flex justify-between items-center fixed top-0 left-0 w-full bg-transparent text-white z-50 transition-all duration-300 ease-in-out">
+        class="p-6 pl-40 pr-40 flex justify-between items-center fixed top-0 left-0 w-full bg-transparent text-white z-50 transition-all duration-300 ease-in-out shadow-lg">
+
+        <!-- Logo a la izquierda -->
         <img src="{{ asset('storage/img/eldorado.png') }}" alt="Logo" class="bg-white w-20 h-20 rounded-full" />
-        <!-- Botón de menú en el navbar -->
-        <button id="menuToggle" class="text-3xl">
-            <i id="menuIcon" class="bi bi-list text-black"></i>
-        </button>
+
+        <!-- Contenedor de botones a la derecha -->
+        <div class="flex items-center space-x-6">
+            <!-- Botón de login -->
+            <a href="{{ route('login') }}" class="text-3xl hover:text-gray-300">
+                <i class="bi bi-person-circle"></i>
+            </a>
+
+            <!-- Botón de menú -->
+            <button id="menuToggle" class="text-3xl">
+                <i id="menuIcon" class="bi bi-list"></i>
+            </button>
+        </div>
     </nav>
+
     <div id="dropdownMenu">
         <ul class="p-6 text-5xl">
             <li><a href="{{ route('inicio') }}">Inicio</a></li>
@@ -18,7 +30,6 @@
                     <li><a href="{{ route('productos.index') }}">Panel Admin</a></li>
                 @endif
             @endauth
-
         </ul>
     </div>
 </div>
