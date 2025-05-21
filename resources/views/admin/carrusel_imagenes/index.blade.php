@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+
+@section('page-title', 'Imágenes del Carrusel')
 @section('title', 'Imágenes del Carrusel')
 
 @section('content_header')
