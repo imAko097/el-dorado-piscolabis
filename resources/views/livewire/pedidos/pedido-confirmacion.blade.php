@@ -38,8 +38,12 @@
                 @else
                     <div class="mt-3">
                         <span class="text-gray-600">¿No tienes cuenta?
-                            <a href="{{ route('login') }}" class="text-yellow-900 text-center py-3 rounded-lg">
+                            <a href="{{ route('register') }}" class="text-yellow-900 text-center py-3 rounded-lg">
                                 ¡Regístrate para ver tus pedidos!
+                            </a>
+                            o
+                            <a href="{{ route('login') }}" class="text-yellow-900 text-center py-3 rounded-lg">
+                                ¡Inicia sesión!
                             </a>
                         </span>
                     </div>
