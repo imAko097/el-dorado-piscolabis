@@ -10,11 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\RolAdminEmpleado;
 use \App\Livewire\Pedidos\MisPedidos;
 
-
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
-    
 
 Route::post('/logout', function () {
     Auth::logout();
