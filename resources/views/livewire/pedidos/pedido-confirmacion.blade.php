@@ -1,5 +1,5 @@
 <div class="min-h-screen bg-yellow-50 py-10">
-    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl mx-auto px-4 mt-[105px] sm:px-6 lg:px-8">
         <div class="bg-white rounded-lg shadow-lg p-8 text-center border border-yellow-300">
             <div class="mb-1">
                 <i class="bi bi-check-circle-fill text-green-500 text-6xl"></i>

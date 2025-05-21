@@ -11,6 +11,9 @@
     <title>El Dorado - Tu pedido</title>
 </head>
 <body>
+    <div>
+        <x-menu-toggle/>
+    </div>
     <livewire:pedido-confirmacion :id="$id" />
 </body>
 </html>
