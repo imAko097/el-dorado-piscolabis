@@ -1,5 +1,10 @@
 <div class="min-h-screen py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <a href="{{ route('inicio') }}"
+            class="text-gray-500 flex items-center gap-2 mb-4 hover:text-black hover:underline transition-colors">
+            <i class="bi bi-arrow-left"></i>
+            Volver
+        </a>
         <div class="bg-white rounded-lg shadow-lg p-6">
             <h1 class="text-3xl font-bold mb-8">Mis Pedidos</h1>
 
