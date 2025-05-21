@@ -4,6 +4,9 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use App\Http\Middleware\EncryptCookies;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Session\Middleware\StartSession;
 
 Route::middleware('guest')->group(function () {
     Volt::route('register', 'pages.auth.register')
@@ -31,10 +34,3 @@ Route::middleware('auth')->group(function () {
         ->name('password.confirm');
 });
 
-Route::post('login', [AuthenticatedSessionController::class, 'store'])
-    ->middleware('guest')
-    ->name('login');
-
-Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('logout');

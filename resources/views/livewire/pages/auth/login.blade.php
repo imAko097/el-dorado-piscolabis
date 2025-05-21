@@ -20,8 +20,19 @@ new #[Layout('layouts.guest')] class extends Component
 
         Session::regenerate();
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        $user = auth()->user();
+
+        if ($user?->role === 'cliente') {
+            $this->redirectIntended(default: route('inicio', absolute: false), navigate: true);
+        } elseif (in_array($user?->role, ['admin', 'empleado'])) {
+            $this->redirectIntended(default: route('productos.index', absolute: false), navigate: true);
+        } else {
+            auth()->logout();
+            abort(403, 'Rol no autorizado');
+        }
     }
+
+
 }; ?>
 
 <div>
