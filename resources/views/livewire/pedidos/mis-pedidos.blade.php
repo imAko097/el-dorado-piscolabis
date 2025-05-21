@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-yellow-50 py-12">
+<div class="min-h-screen py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white rounded-lg shadow-lg p-6">
             <h1 class="text-3xl font-bold mb-8">Mis Pedidos</h1>
@@ -46,7 +46,7 @@
                                 x-transition:enter-end="opacity-100 transform translate-y-0"
                                 x-transition:leave="transition ease-in duration-150"
                                 x-transition:leave-start="opacity-100 transform translate-y-0"
-                                x-transition:leave-end="opacity-0 transform -translate-y-2">
+                                x-transition:leave-end="opacity-0 transform -translate-y-1">
                                 <div class="p-6 space-y-4">
                                     <!-- Productos -->
                                     <div>
@@ -77,9 +77,46 @@
 
                                     <!-- Total -->
                                     <div class="border-t pt-4">
-                                        <div class="flex justify-between items-center">
-                                            <span class="text-lg font-semibold">Total:</span>
-                                            <span class="text-xl font-bold text-yellow-600">{{ number_format($pedido->total, 2, ',', '.') }} €</span>
+                                        <div class="space-y-2">
+                                            @php
+                                                // Sumamos los precios totales de los productos (IGIC incluido)
+                                                $subtotalConIgic = $pedido->productos->sum(function($producto) {
+                                                    return $producto->pivot->precio_total;
+                                                });
+                                                
+                                                // Extraemos el IGIC del subtotal
+                                                $subtotalSinIgic = $subtotalConIgic / 1.07;
+                                                
+                                                // Añadimos el recargo de entrega si es a domicilio
+                                                $recargo = $pedido->direccion ? 1.50 : 0;
+                                                
+                                                // Calculamos la base imponible
+                                                $baseImponible = $subtotalSinIgic + $recargo;
+                                                
+                                                // Calculamos el IGIC sobre la base imponible
+                                                $igic = $baseImponible * 0.07;
+                                                
+                                                // El total final es la base imponible + IGIC
+                                                $totalCalculado = $baseImponible + $igic;
+                                            @endphp
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-gray-600">Subtotal:</span>
+                                                <span class="text-gray-600">{{ number_format($subtotalSinIgic, 2, ',', '.') }} €</span>
+                                            </div>
+                                            @if($pedido->direccion)
+                                                <div class="flex justify-between items-center">
+                                                    <span class="text-gray-600">Recargo entrega:</span>
+                                                    <span class="text-gray-600">{{ number_format($recargo, 2, ',', '.') }} €</span>
+                                                </div>
+                                            @endif
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-gray-600">IGIC (7%):</span>
+                                                <span class="text-gray-600">{{ number_format($igic, 2, ',', '.') }} €</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-lg font-semibold">Total:</span>
+                                                <span class="text-xl font-bold text-yellow-600">{{ number_format($totalCalculado, 2, ',', '.') }} €</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
