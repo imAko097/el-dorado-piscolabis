@@ -9,7 +9,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-  <script src="https://unpkg.com/alpinejs" defer></script>
 
   <script>
     const nav = performance.getEntriesByType("navigation")[0];
@@ -49,10 +48,10 @@
     class="fixed top-0 md:left-0 right-0 z-40 w-64 h-screen bg-gray-200 text-black transform transition-transform duration-300 translate-x-full shadow-lg"
     aria-label="Sidebar">
     <div class="h-full px-3 py-4 overflow-y-auto">
-      <div class="p-6 text-center text-3xl font-extrabold border-b border-gray-800">
-        <span class="block text-3xl">El</span>
-        <span class="block text-5xl">Dorado</span>
+      <div class="p-6 flex justify-center border-b border-gray-800">
+        <img src="{{ asset('storage/img/eldorado.png') }}" alt="Logo" class=" w-50 h-50 rounded-full" />
       </div>
+
       <ul class="space-y-2 font-medium mt-6">
         <li>
           <a href="{{ route('inicio') }}" class="flex items-center p-2 rounded-lg hover:bg-gray-400 hover:text-white focus:outline focus:ring-2 focus:ring-black">
