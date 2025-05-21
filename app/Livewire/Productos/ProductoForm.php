@@ -50,7 +50,6 @@ class ProductoForm extends Component
     public function save()
     {
         $this->validate();
-        // Guardar imagen si existe
         if ($this->imagen) {
             $path = $this->imagen->store('productos', 'public');
         }

@@ -11,14 +11,14 @@
                 {{ ucfirst($estado) }}
             </button>
         @endforeach
-    </div>
 
-    @if (!empty($filtroEstados))
-        <button wire:click="$set('filtroEstados', ['pendientes'])"
-                class="mb-4 px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium rounded-lg shadow transition">
-            Limpiar filtros
-        </button>
-    @endif
+        @if (!empty($filtroEstados))
+            <button wire:click="$set('filtroEstados', ['pendientes'])"
+                    class="px-4 py-2 bg-red-300 hover:bg-red-400 text-gray-800 font-medium rounded-full shadow transition">
+                Limpiar filtros
+            </button>
+        @endif
+    </div>
 
     <div wire:poll.5s>
         @if($pedidos->count() > 0)

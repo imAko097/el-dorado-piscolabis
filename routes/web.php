@@ -13,7 +13,7 @@ use App\Http\Middleware\RolAdminEmpleado;
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
-
+    
 
 Route::post('/logout', function () {
     Auth::logout();
@@ -21,6 +21,7 @@ Route::post('/logout', function () {
     request()->session()->regenerateToken();
     return redirect('/');
 })->name('logout');
+
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])

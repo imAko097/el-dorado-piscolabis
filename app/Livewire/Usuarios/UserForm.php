@@ -39,7 +39,6 @@ class UserForm extends Component
         $user->email = $this->email;
         $user->password = Hash::make($this->password);
 
-        // Asignar rol por defecto si no se especifica
         $user->role = $this->role ?: 'empleado';
 
         $user->email_verified_at = now();

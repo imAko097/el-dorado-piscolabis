@@ -22,7 +22,6 @@ class MostrarProductos extends Component
             $producto->destacado = !$producto->destacado;
             $producto->save();
 
-            // Actualizar la lista para reflejar el cambio
             $this->productos = Producto::with('tipo')->get();
         }
     }
