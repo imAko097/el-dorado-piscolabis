@@ -69,7 +69,7 @@ new #[Layout('layouts.guest')] class extends Component
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 href="{{ route('password.request') }}" wire:navigate>
+                <a href="{{ route('password.request') }}" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" wire:navigate>
                     {{ __('¿Olvidate tu contraseña?') }}
                 </a>
             @endif
@@ -77,6 +77,15 @@ new #[Layout('layouts.guest')] class extends Component
             <x-primary-button class="ms-3">
                 {{ __('Iniciar sesión') }}
             </x-primary-button>
+        </div>
+
+        <div class="mt-4 text-center">
+            <span class="text-sm text-gray-600 dark:text-gray-400">
+                ¿No tienes cuenta?
+                <a href="{{ route('register') }}" class="text-indigo-600 hover:underline" wire:navigate>
+                    Regístrate aquí
+                </a>
+            </span>
         </div>
     </form>
 </div>

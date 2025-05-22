@@ -142,7 +142,6 @@
                         @endforeach
                     </div>
 
-                    <!-- Botones personalizados estilo que diste -->
                     <div
                         class="absolute top-1/2 left-0 right-0 w-full px-4 flex justify-between items-center -translate-y-1/2 z-50">
                         <button id="slider-button-left"
