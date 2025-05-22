@@ -24,6 +24,14 @@ new #[Layout('layouts.guest')] class extends Component
         Session::flash('status', 'verification-link-sent');
     }
 
+
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new CustomVerifyEmail);
+    }
+
+
     /**
      * Log the current user out of the application.
      */
