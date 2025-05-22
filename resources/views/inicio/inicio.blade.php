@@ -46,7 +46,6 @@
 </head>
 
 <body class="bg-white text-black">
-    
     <!-- Navbar -->
     <x-menu-toggle/>
 
@@ -73,13 +72,13 @@
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-6">
             <!-- Tarjeta 1 -->
             <div class="relative rounded-2xl overflow-hidden shadow-lg h-72">
-                <img src="{{ asset('storage/img/div1.webp') }}" alt="Delicias para compartir"
+                <img src="{{ asset('storage/img/div1.jpg') }}" alt="Delicias para compartir"
                     class="absolute inset-0 w-full h-full object-cover" />
                 <div class="absolute inset-0 bg-black bg-opacity-40 p-6 flex flex-col justify-end text-white">
                     <h2 class="text-2xl font-bold mb-2">¡Delicias para compartir!</h2>
                     <p class="text-sm mb-4">Prueba nuestras especialidades caseras ideales para cualquier ocasión.</p>
-                    <button class="bg-white text-black font-semibold px-4 py-2 rounded-full w-max">DESCUBRIR
-                        MENÚ</button>
+                    <a href="{{ route('menu') }}" class="bg-white text-black font-semibold px-4 py-2 rounded-full w-max">DESCUBRIR
+                        MENÚ</a>
                 </div>
             </div>
 
@@ -91,7 +90,7 @@
                     <h2 class="text-2xl font-bold mb-2">¡Haz tu pedido online!</h2>
                     <p class="text-sm mb-4">Pide desde casa y recógelo en nuestro local sin esperar.</p>
                     <div class="flex gap-3">
-                        <button class="bg-yellow-300 text-black font-bold px-4 py-2 rounded-full">PEDIR AHORA</button>
+                        <a href="{{ route('menu') }}" class="bg-yellow-300 text-black font-bold px-4 py-2 rounded-full">PEDIR AHORA</a>
                         <button class="bg-white text-black font-semibold px-4 py-2 rounded-full">CÓMO FUNCIONA</button>
                     </div>
                 </div>
@@ -99,13 +98,13 @@
 
             <!-- Tarjeta 3 -->
             <div class="relative md:col-span-2 rounded-2xl overflow-hidden shadow-lg h-72">
-                <img src="{{ asset('storage/img/div3.webp') }}" alt="Nuestra pasión: calidad y cercanía"
+                <img src="{{ asset('storage/img/div3.jpg') }}" alt="Nuestra pasión: calidad y cercanía"
                     class="absolute inset-0 w-full h-full object-cover" />
                 <div class="absolute inset-0 bg-black bg-opacity-40 p-6 flex flex-col justify-end text-white">
                     <h2 class="text-3xl font-bold mb-2">Nuestra pasión: calidad y cercanía</h2>
                     <p class="text-sm mb-4">Conoce nuestro compromiso con los ingredientes frescos y el buen servicio.
                     </p>
-                    <button class="bg-white text-black font-semibold px-4 py-2 rounded-full w-max">CONOCE MÁS</button>
+                    <a href="{{ route('sobrenosotros') }}" class="bg-white text-black font-semibold px-4 py-2 rounded-full w-max">CONOCE MÁS</a>
                 </div>
             </div>
         </div>
