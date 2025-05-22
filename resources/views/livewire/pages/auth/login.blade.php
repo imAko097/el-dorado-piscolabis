@@ -78,5 +78,14 @@ new #[Layout('layouts.guest')] class extends Component
                 {{ __('Iniciar sesión') }}
             </x-primary-button>
         </div>
+
+        <div class="mt-4 text-center">
+            <span class="text-sm text-gray-600 dark:text-gray-400">
+                ¿No tienes cuenta?
+                <a href="{{ route('register') }}" class="text-indigo-600 hover:underline" wire:navigate>
+                    Regístrate aquí
+                </a>
+            </span>
+        </div>
     </form>
 </div>
