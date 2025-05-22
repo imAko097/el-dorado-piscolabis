@@ -4,7 +4,7 @@
         <button wire:click="toggleCarrito" class="bg-yellow-400 text-black p-3 rounded-full shadow-lg hover:bg-yellow-500 transition-colors relative">
             <i class="bi bi-cart3 text-2xl"></i>
             @if(count($productos) > 0)
-                <span :class="animate ? 'animate-bounce' : ''" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                <span :class="animate ? 'animate-pop' : ''" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {{ count($productos) }}
                 </span>
             @endif
@@ -90,4 +90,4 @@
             </div>
         </div>
     @endif
-</div> 
+</div>
