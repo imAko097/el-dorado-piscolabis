@@ -20,7 +20,10 @@ class Checkout extends Component
     public $total = 0;
     public $recargoEntrega = 1.5;
     public $tipoEntrega = 'domicilio';
-    public $direccion = '';
+    public $calle = '';
+    public $numero = '';
+    public $piso = '';
+    public $puerta = '';
     public $telefono = '';
     public $observaciones = '';
     public $formaPago = 'efectivo';
@@ -76,32 +79,50 @@ class Checkout extends Component
     {
         $this->validate([
             'tipoEntrega' => 'required|in:domicilio,local',
-            'direccion' => 'required_if:tipoEntrega,domicilio',
-            'telefono' => 'required',
+            'calle' => 'required_if:tipoEntrega,domicilio',
+            'numero' => 'required_if:tipoEntrega,domicilio|numeric|digits_between:1,2',
+            'piso' => 'required_if:tipoEntrega,domicilio|numeric|digits_between:1,2',
+            'puerta' => 'required_if:tipoEntrega,domicilio|string|max:1',
+            'telefono' => 'required|numeric|digits:9',
             'formaPago' => 'required|in:efectivo,tarjeta',
-            'numeroTarjeta' => 'required_if:formaPago,tarjeta|digits:16',
+            'numeroTarjeta' => 'required_if:formaPago,tarjeta|numeric|digits:16',
             'nombreTitular' => 'required_if:formaPago,tarjeta|min:3',
             'fechaExpiracion' => ['required_if:formaPago,tarjeta', 'regex:/^(0[1-9]|1[0-2])\/([0-9]{2})$/'],
-            'cvv' => 'required_if:formaPago,tarjeta|digits:3',
+            'cvv' => 'required_if:formaPago,tarjeta|numeric|digits:3',
             'observaciones' => 'nullable|string|max:1000',
         ], [
-            'direccion.required_if' => 'La dirección es obligatoria para entrega a domicilio.',
+            'calle.required_if' => 'La calle es obligatoria para entrega a domicilio.',
+            'numero.required_if' => 'El número es obligatorio para entrega a domicilio.',
+            'numero.numeric' => 'El número debe ser un valor numérico.',
+            'numero.digits_between' => 'El número debe tener entre 1 y 2 dígitos.',
+            'piso.numeric' => 'El piso debe ser un valor numérico.',
+            'piso.digits_between' => 'El piso debe tener entre 1 y 2 dígitos.',
+            'puerta.numeric' => 'La puerta debe ser un valor numérico.',
+            'puerta.digits_between' => 'La puerta debe tener entre 1 y 2 dígitos.',
             'telefono.required' => 'El teléfono es obligatorio.',
+            'telefono.numeric' => 'El teléfono debe ser un valor numérico.',
+            'telefono.digits' => 'El teléfono debe tener 9 dígitos.',
             'numeroTarjeta.required_if' => 'El número de tarjeta es obligatorio para pago con tarjeta.',
+            'numeroTarjeta.numeric' => 'El número de tarjeta debe ser un valor numérico.',
             'numeroTarjeta.digits' => 'El número de tarjeta debe tener 16 dígitos.',
             'nombreTitular.required_if' => 'El nombre del titular es obligatorio para pago con tarjeta.',
             'nombreTitular.min' => 'El nombre del titular debe tener al menos 3 caracteres.',
             'fechaExpiracion.required_if' => 'La fecha de expiración es obligatoria para pago con tarjeta.',
             'fechaExpiracion.regex' => 'La fecha de expiración debe tener el formato MM/YY.',
             'cvv.required_if' => 'El CVV es obligatorio para pago con tarjeta.',
+            'cvv.numeric' => 'El CVV debe ser un valor numérico.',
             'cvv.digits' => 'El CVV debe tener 3 dígitos.',
         ]);
 
         // Crear el pedido
+        $direccionCompleta = $this->tipoEntrega === 'domicilio' 
+            ? trim("{$this->calle}, {$this->numero}, " . "Piso: " .($this->piso ? "{$this->piso}º," : '') . " Puerta: " . ($this->puerta ? "{$this->puerta}" : ''))
+            : $this->tipoEntrega;
+
         $pedido = Pedido::create([
             'id_usuario' => Auth::check() ? Auth::id() : null,
             'id_estado_pedido' => EstadoPedido::where('estado', 'recibido')->first()->id,
-            'direccion' => $this->tipoEntrega === 'domicilio' ? $this->direccion : $this->tipoEntrega,
+            'direccion' => $direccionCompleta,
             'observaciones' => $this->observaciones,
             'telefono_contacto' => $this->telefono,
             'forma_pago' => $this->formaPago,

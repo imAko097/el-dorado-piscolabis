@@ -67,8 +67,24 @@
                         @if($tipoEntrega === 'domicilio')
                             <div>
                                 <label for="direccion" class="block text-sm font-medium text-gray-700">Dirección de entrega</label>
-                                <input type="text" wire:model.live="direccion" id="direccion" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500" placeholder="Calle, número, piso, etc.">
-                                @error('direccion') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                <div class="grid grid-cols-12 gap-2">
+                                    <div class="col-span-6">
+                                        <input type="text" wire:model.live="calle" id="calle" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500" placeholder="Calle" maxlength="500">
+                                        @error('calle') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-span-2">
+                                        <input type="text" wire:model.live="numero" id="numero" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500" placeholder="Nº" maxlength="2">
+                                        @error('numero') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-span-2">
+                                        <input type="text" wire:model.live="piso" id="piso" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500" placeholder="Piso" maxlength="2">
+                                        @error('piso') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-span-2">
+                                        <input type="text" wire:model.live="puerta" id="puerta" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500" placeholder="Puerta" maxlength="2">
+                                        @error('puerta') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
                             </div>
                         @endif
                     </div>
