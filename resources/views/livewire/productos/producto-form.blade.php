@@ -9,6 +9,19 @@
         </div>
     </div>
 
+    @if (session()->has('success'))
+        <div class="mb-4 text-green-700 bg-green-100 border border-green-300 rounded p-3">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session()->has('error'))
+        <div class="mb-4 text-red-700 bg-red-100 border border-red-300 rounded p-3">
+            {{ session('error') }}
+        </div>
+    @endif
+
+
     @if ($showForm)
         <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto px-4">
             <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl mx-auto my-10">

@@ -1,5 +1,6 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
     @livewire('productos.producto-form', ['categoriaSeleccionada' => request('categoria')])
+    
     @foreach ($productos as $producto)
         <div
             class="flex flex-col bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full">

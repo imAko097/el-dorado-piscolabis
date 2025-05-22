@@ -3,7 +3,9 @@
         class="p-6 pl-40 pr-40 flex justify-between items-center fixed top-0 left-0 w-full bg-transparent text-white z-50 transition-all duration-300 ease-in-out shadow-lg">
 
         <!-- Logo a la izquierda -->
-        <img src="{{ asset('storage/img/eldorado.png') }}" alt="Logo" class="bg-white w-20 h-20 rounded-full" />
+         <a href="{{ route('inicio') }}">
+            <img src="{{ asset('storage/img/eldorado.png') }}" alt="Logo" class="bg-white w-20 h-20 rounded-full" />
+        </a>
 
         <!-- Contenedor de botones a la derecha -->
         <div class="flex items-center space-x-6">

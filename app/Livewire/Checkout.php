@@ -7,6 +7,10 @@ use App\Models\Pedido;
 use App\Models\EstadoPedido;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Notifications\PedidoFacturaNotification;
+use App\Mail\PedidoFacturaMail;
+use Illuminate\Support\Facades\Mail;
+
 
 class Checkout extends Component
 {
@@ -115,6 +119,11 @@ class Checkout extends Component
                 'comentario' => (string) ($producto['comentario'] ?? ''),
             ]);
         }
+
+        $pedido->load(['productos', 'usuario']);
+        Mail::to(Auth::user()->email)->send(new PedidoFacturaMail($pedido));
+
+
 
         // Limpiar el carrito
         Session::forget('carrito');
