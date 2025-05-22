@@ -39,6 +39,10 @@ class Carrito extends Component
         }
 
         $this->actualizarCarrito();
+
+        $this->dispatch('producto-agregado', [
+            'nombre_producto' => ucfirst($producto->nombre)
+        ]);
     }
 
     // Elimina los productos del carrito
