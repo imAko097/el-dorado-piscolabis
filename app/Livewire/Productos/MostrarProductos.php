@@ -10,6 +10,14 @@ class MostrarProductos extends Component
 
     public $productos;
 
+    protected $listeners = ['productoAgregado' => 'actualizarProductos'];
+
+    public function actualizarProductos()
+    {
+        $this->productos = Producto::with('tipo')->get();
+    }
+
+
     public function mount()
     {
         $this->productos = Producto::with('tipo')->get();
