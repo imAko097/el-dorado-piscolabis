@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="{{ asset('css/inicio/styles.css') }}">
     <title>El Dorado - Mi Historial de Pedidos</title>
 </head>
-<body>
+<body class="bg-yellow-50">
     <div>
         <x-menu-toggle />
     </div>
 
-    <livewire:pedidos.mis-pedidos />
+    <div class="mx-auto mt-[100px]">
+        <livewire:pedidos.mis-pedidos />
+    </div>
 </body>
 </html>
