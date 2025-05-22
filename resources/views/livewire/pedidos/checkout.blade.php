@@ -81,21 +81,22 @@
                     </div>
 
                     <!-- Forma de pago -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Forma de pago</label>
-                        <div class="flex gap-4">
-                            <label class="flex items-center">
-                                <input type="radio" wire:model.live="formaPago" value="efectivo" class="mr-2" style="accent-color: #fbec96;">
-                                <span>Efectivo</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" wire:model.live="formaPago" value="tarjeta" class="mr-2" style="accent-color: #fbec96;">
-                                <span>Tarjeta</span>
-                            </label>
+                    @if($tipoEntrega === 'domicilio')
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Forma de pago</label>
+                            <div class="flex gap-4">
+                                <label class="flex items-center">
+                                    <input type="radio" wire:model.live="formaPago" value="efectivo" class="mr-2" style="accent-color: #fbec96;">
+                                    <span>Efectivo</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" wire:model.live="formaPago" value="tarjeta" class="mr-2" style="accent-color: #fbec96;">
+                                    <span>Tarjeta</span>
+                                </label>
+                            </div>
+                            @error('formaPago') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                         </div>
-                        @error('formaPago') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                    </div>
-
+                    @endif
                     <!-- Formulario de tarjeta -->
                     <div wire:key="card-form">
                         @if($formaPago === 'tarjeta')
