@@ -62,6 +62,7 @@ class ProductoForm extends Component
             'id_producto_tipos' => $this->id_producto_tipos,
         ]);
 
+        $this->dispatch('productoAgregado');
         session()->flash('message', 'Producto agregado correctamente.');
         return redirect()->route('productos.index');
     }

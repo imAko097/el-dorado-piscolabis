@@ -4,22 +4,15 @@
         class="p-6 pl-40 pr-40 flex justify-between items-center fixed top-0 left-0 w-full {{ $bgColor }} {{ $colorText }} z-50 transition-all duration-300 ease-in-out shadow-lg">
 
         <!-- Logo a la izquierda -->
-        <img src="{{ asset('storage/img/eldorado.png') }}" alt="Logo" class="bg-white w-20 h-20 rounded-full" />
+         <a href="{{ route('inicio') }}">
+            <img src="{{ asset('storage/img/eldorado.png') }}" alt="Logo" class="bg-white w-20 h-20 rounded-full" />
+        </a>
 
         <!-- Contenedor de botones a la derecha -->
         <div class="flex items-center space-x-6">
             <!-- Botón de login y registro -->
             @auth
-                <a href="{{ auth()->user()->isAdmin() || auth()->user()->isEmpleado() ? route('pedidos.index') : route('pedidos.mis-pedidos') }}"
-                   class="text-3xl hover:text-yellow-600 text-yellow-500 flex items-center gap-2 font-bold">
-                    <i class="bi bi-person-circle"></i> <span class="text-sm">{{ auth()->user()->name }}</span>
-                </a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="text-3xl text-red-300 hover:text-red-500 flex items-center gap-2" title="Cerrar sesión">
-                        <i class="bi bi-box-arrow-right"></i>
-                    </button>
-                </form>
+                <livewire:user-dropdown />
             @else
                 <a href="{{ route('login') }}" class="text-3xl hover:text-gray-200 flex items-center gap-2 $bgColor font-bold">
                     <i class="bi bi-person-circle"></i> <span class="text-sm">Iniciar sesión</span>
