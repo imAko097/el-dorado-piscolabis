@@ -1,21 +1,21 @@
-<div class="min-h-screen bg-yellow-50 py-10">
+<div class="min-h-screen bg-[#FFF8F0] py-10">
     <div class="max-w-2xl mx-auto px-4 mt-[105px] sm:px-6 lg:px-8">
-        <div class="bg-white rounded-lg shadow-lg p-8 text-center border border-yellow-300">
+        <div class="bg-white rounded-lg shadow-lg p-8 text-center border border-[#FCD34D]">
             <div class="mb-1">
-                <i class="bi bi-check-circle-fill text-green-500 text-6xl"></i>
+                <i class="bi bi-check-circle-fill text-green-600 text-6xl"></i>
             </div>
-            
-            <h1 class="text-3xl font-bold mb-3">¡Pedido Realizado con Éxito!</h1>
-            
+
+            <h1 class="text-3xl font-bold text-[#92400E] mb-3">¡Pedido Realizado con Éxito!</h1>
+
             <div class="mb-3">
-                <span class="text-gray-600">
+                <span class="text-[#1C1917]">
                     Tu pedido ha sido registrado correctamente. No salgas de la página para saber el estado de tu pedido.
                 </span>
             </div>
 
-            <div class="bg-gray-50 rounded-lg p-6 mb-6">
-                <h2 class="text-xl font-semibold mb-4">Detalles del Pedido</h2>
-                <div class="space-y-2 text-left">
+            <div class="bg-[#FFFBEB] rounded-lg p-6 mb-6 border border-[#FCD34D]">
+                <h2 class="text-xl font-semibold text-[#B45309] mb-4">Detalles del Pedido</h2>
+                <div class="space-y-2 text-left text-[#1C1917]">
                     <p><span class="font-bold">Número de pedido:</span> #{{ $pedido->id }}</p>
                     <p><span class="font-bold">Total:</span> {{ number_format($pedido->total, 2, ',', '.') }} €</p>
                     <p><span class="font-bold">Estado:</span> {{ ucfirst($pedido->estadoPedido->estado) }}</p>
@@ -28,21 +28,24 @@
             </div>
 
             <div>
-                <a href="{{ route('menu') }}" class="block w-full bg-gray-200 text-gray-700 text-center py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+                <a href="{{ route('menu') }}"
+                   class="block w-full bg-[#E5E7EB] text-[#1C1917] text-center py-3 rounded-lg font-semibold hover:bg-[#D1D5DB] transition-colors">
                     Volver al menú
                 </a>
+
                 @if(Auth::check())
-                    <a href="{{ route('pedidos.mis-pedidos') }}" class="block w-full bg-yellow-400 text-center py-3 mt-2 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+                    <a href="{{ route('pedidos.mis-pedidos') }}"
+                       class="block w-full bg-[#FBBF24] text-[#1C1917] text-center py-3 mt-2 rounded-lg font-semibold hover:bg-[#FACC15] transition-colors">
                         Ver mis pedidos
                     </a>
                 @else
                     <div class="mt-3">
-                        <span class="text-gray-600">¿No tienes cuenta?
-                            <a href="{{ route('register') }}" class="text-yellow-900 text-center py-3 rounded-lg">
+                        <span class="text-[#1C1917]">¿No tienes cuenta?
+                            <a href="{{ route('register') }}" class="text-[#92400E] font-medium hover:underline">
                                 ¡Regístrate para ver tus pedidos!
                             </a>
                             o
-                            <a href="{{ route('login') }}" class="text-yellow-900 text-center py-3 rounded-lg">
+                            <a href="{{ route('login') }}" class="text-[#92400E] font-medium hover:underline">
                                 ¡Inicia sesión!
                             </a>
                         </span>
@@ -51,4 +54,4 @@
             </div>
         </div>
     </div>
-</div> 
+</div>

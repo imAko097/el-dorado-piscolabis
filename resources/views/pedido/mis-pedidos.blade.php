@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/inicio/styles.css') }}">
     <title>El Dorado - Mi Historial de Pedidos</title>
 </head>
-<body class="bg-yellow-50">
+<body class="bg-[#FFF8F0]">
     <div>
         <x-menu-toggle />
     </div>
