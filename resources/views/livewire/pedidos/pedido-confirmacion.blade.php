@@ -23,7 +23,9 @@
                         <p><span class="font-bold">Dirección de entrega:</span> {{ $pedido->direccion }}</p>
                     @endif
                     <p><span class="font-bold">Teléfono:</span> {{ $pedido->telefono_contacto }}</p>
+                    @if($pedido->direccion !== 'local')
                     <p><span class="font-bold">Forma de pago:</span> {{ ucfirst($pedido->forma_pago) }}</p>
+                    @endif
                 </div>
             </div>
 

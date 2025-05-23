@@ -12,10 +12,24 @@
 </head>
 
 <body class="bg-yellow-50">
-    <!-- Menú desplegable -->
-    <div>
-        <x-menu-toggle />
-    </div>
+
+    @php
+        $isMenu = request()->routeIs('menu');
+        $bgColor = $isMenu ? 'bg-white' : 'bg-transparent';
+        $colorText = $isMenu ? 'text-black' : 'text-white';
+    @endphp
+
+    <script>
+        window.menuColors = {
+            bgColor: "{{ $bgColor }}",
+            colorText: "{{ $colorText }}"
+        };
+    </script>
+
+
+    <x-menu-toggle :colorText="$colorText" :bgColor="$bgColor" />
+
+
 
     <!-- Contenido -->
     <div class="pt-32 px-6 md:px-40 text-black min-h-screen">
@@ -33,6 +47,24 @@
         <h1 class="text-4xl font-bold mb-8 text-center">NUESTRA CARTA</h1>
         <livewire:menu />
     </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t mt-10">
+        <div class="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-gray-700 space-y-2">
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#" class="hover:underline">Legal</a>
+                <a href="#" class="hover:underline">Política de privacidad</a>
+                <a href="#" class="hover:underline">Política de cookies</a>
+                <a href="#" class="hover:underline">Bases legales promociones y sorteos</a>
+                <a href="#" class="hover:underline">Términos y Condiciones</a>
+                <a href="#" class="hover:underline">Configuración de cookies</a>
+            </div>
+            <div class="flex items-center justify-center space-x-2">
+                <span class="text-yellow-500 text-lg">🍴</span>
+                <span>Copyright © 2025 El Dorado Piscolabis</span>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
