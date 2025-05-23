@@ -7,7 +7,7 @@
 <div class="max-w-7xl mx-auto p-4 py-6">
     @livewire('usuarios.user-form')
 
-    {{-- Vista tipo tarjetas para móviles --}}
+
 <div class="sm:hidden space-y-4 mt-6">
     @if (isset($usuarios) && count($usuarios) > 0)
         @php $i = 1; @endphp
@@ -28,7 +28,6 @@
     @endif
 </div>
 
-{{-- Vista tipo tabla para pantallas medianas en adelante --}}
 <div class="hidden sm:block mt-6">
     <div class="overflow-x-auto bg-white rounded-lg shadow ring-1 ring-black ring-opacity-5">
         <table class="w-full text-sm text-left text-gray-700">
