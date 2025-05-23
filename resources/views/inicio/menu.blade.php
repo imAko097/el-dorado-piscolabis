@@ -12,10 +12,24 @@
 </head>
 
 <body class="bg-yellow-50">
-    <!-- Menú desplegable -->
-    <div>
-        <x-menu-toggle />
-    </div>
+
+    @php
+        $isMenu = request()->routeIs('menu');
+        $bgColor = $isMenu ? 'bg-white' : 'bg-transparent';
+        $colorText = $isMenu ? 'text-black' : 'text-white';
+    @endphp
+
+    <script>
+        window.menuColors = {
+            bgColor: "{{ $bgColor }}",
+            colorText: "{{ $colorText }}"
+        };
+    </script>
+
+
+    <x-menu-toggle :colorText="$colorText" :bgColor="$bgColor" />
+
+
 
     <!-- Contenido -->
     <div class="pt-32 px-6 md:px-40 text-black min-h-screen">
