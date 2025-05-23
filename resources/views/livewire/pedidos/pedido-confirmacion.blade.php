@@ -1,8 +1,8 @@
-<div class="min-h-screen bg-[#FFF8F0] py-10">
+<div class="min-h-screen bg-[#FFF8F0] py-10"> 
     <div class="max-w-2xl mx-auto px-4 mt-[105px] sm:px-6 lg:px-8">
-        <div class="bg-white rounded-lg shadow-lg p-8 text-center border border-[#FCD34D]">
+        <div class="bg-[#FFFFFF] rounded-lg shadow-lg p-8 text-center border border-[#FCD34D]">
             <div class="mb-1">
-                <i class="bi bi-check-circle-fill text-green-600 text-6xl"></i>
+                <i class="bi bi-check-circle-fill text-[#15803D] text-6xl"></i>
             </div>
 
             <h1 class="text-3xl font-bold text-[#92400E] mb-3">¡Pedido Realizado con Éxito!</h1>
@@ -13,8 +13,8 @@
                 </span>
             </div>
 
-            <div class="bg-[#FFFBEB] rounded-lg p-6 mb-6 border border-[#FCD34D]">
-                <h2 class="text-xl font-semibold text-[#B45309] mb-4">Detalles del Pedido</h2>
+            <div class="bg-[#D1FAE5] rounded-lg p-6 mb-6 border border-[#FCD34D]">
+                <h2 class="text-xl font-semibold text-[#92400E] mb-4">Detalles del Pedido</h2>
                 <div class="space-y-2 text-left text-[#1C1917]">
                     <p><span class="font-bold">Número de pedido:</span> #{{ $pedido->id }}</p>
                     <p><span class="font-bold">Total:</span> {{ number_format($pedido->total, 2, ',', '.') }} €</p>
@@ -31,13 +31,13 @@
 
             <div>
                 <a href="{{ route('menu') }}"
-                   class="block w-full bg-[#E5E7EB] text-[#1C1917] text-center py-3 rounded-lg font-semibold hover:bg-[#D1D5DB] transition-colors">
+                   class="block w-full bg-[#FFFFFF] text-[#1C1917] text-center py-3 rounded-lg font-semibold border border-[#FCD34D] hover:bg-[#FCD34D] hover:text-[#92400E] transition-colors">
                     Volver al menú
                 </a>
 
                 @if(Auth::check())
                     <a href="{{ route('pedidos.mis-pedidos') }}"
-                       class="block w-full bg-[#FBBF24] text-[#1C1917] text-center py-3 mt-2 rounded-lg font-semibold hover:bg-[#FACC15] transition-colors">
+                       class="block w-full bg-[#FCD34D] text-[#1C1917] text-center py-3 mt-2 rounded-lg font-semibold hover:bg-[#FBBF24] transition-colors">
                         Ver mis pedidos
                     </a>
                 @else
