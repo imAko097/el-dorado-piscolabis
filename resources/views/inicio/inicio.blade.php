@@ -41,13 +41,26 @@
             object-fit: cover;
         }
     </style>
-    
+
     @vite('resources/js/carrusel.js')
 </head>
 
 <body class="bg-white text-black">
-    <!-- Navbar -->
-    <x-menu-toggle/>
+    @php
+        $isInicio = request()->routeIs('inicio');
+        $bgColor = $isInicio ? 'bg-transparent' : 'bg-white';
+        $colorText = $isInicio ? 'text-white' : 'text-black';
+    @endphp
+
+    <script>
+        window.menuColors = {
+            bgColor: "{{ $bgColor }}",
+            colorText: "{{ $colorText }}"
+        };
+    </script>
+
+    <x-menu-toggle :colorText="$colorText" :bgColor="$bgColor" />
+
 
     <!-- Carrusel -->
     <div class="relative overflow-hidden">
@@ -55,7 +68,7 @@
             @foreach ($carrusel_imagenes as $index => $imagen)
                 <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                     <img src="{{ $imagen->imagen }}" alt="Imagen del carrusel" />
-                    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
                 </div>
             @endforeach
         </div>
@@ -77,7 +90,8 @@
                 <div class="absolute inset-0 bg-black bg-opacity-40 p-6 flex flex-col justify-end text-white">
                     <h2 class="text-2xl font-bold mb-2">¡Delicias para compartir!</h2>
                     <p class="text-sm mb-4">Prueba nuestras especialidades caseras ideales para cualquier ocasión.</p>
-                    <a href="{{ route('menu') }}" class="bg-white text-black font-semibold px-4 py-2 rounded-full w-max">DESCUBRIR
+                    <a href="{{ route('menu') }}"
+                        class="bg-white text-black font-semibold px-4 py-2 rounded-full w-max">DESCUBRIR
                         MENÚ</a>
                 </div>
             </div>
@@ -90,7 +104,8 @@
                     <h2 class="text-2xl font-bold mb-2">¡Haz tu pedido online!</h2>
                     <p class="text-sm mb-4">Pide desde casa y recógelo en nuestro local sin esperar.</p>
                     <div class="flex gap-3">
-                        <a href="{{ route('menu') }}" class="bg-yellow-300 text-black font-bold px-4 py-2 rounded-full">PEDIR AHORA</a>
+                        <a href="{{ route('menu') }}"
+                            class="bg-yellow-300 text-black font-bold px-4 py-2 rounded-full">PEDIR AHORA</a>
                         <button class="bg-white text-black font-semibold px-4 py-2 rounded-full">CÓMO FUNCIONA</button>
                     </div>
                 </div>
@@ -104,7 +119,8 @@
                     <h2 class="text-3xl font-bold mb-2">Nuestra pasión: calidad y cercanía</h2>
                     <p class="text-sm mb-4">Conoce nuestro compromiso con los ingredientes frescos y el buen servicio.
                     </p>
-                    <a href="{{ route('sobrenosotros') }}" class="bg-white text-black font-semibold px-4 py-2 rounded-full w-max">CONOCE MÁS</a>
+                    <a href="{{ route('sobrenosotros') }}"
+                        class="bg-white text-black font-semibold px-4 py-2 rounded-full w-max">CONOCE MÁS</a>
                 </div>
             </div>
         </div>
@@ -146,13 +162,13 @@
                         <button id="slider-button-left"
                             class="swiper-button-prev group p-2 flex justify-center items-center bg-white shadow-lg w-12 h-12 rounded-full transition-all duration-300 hover:bg-gray-100"
                             style="color: black;">
-                            
+
                         </button>
 
                         <button id="slider-button-right"
                             class="swiper-button-next group p-2 flex justify-center items-center bg-white shadow-lg w-12 h-12 rounded-full transition-all duration-300 hover:bg-gray-100"
                             style="color: black;">
-                            
+
                         </button>
                     </div>
 
@@ -205,4 +221,5 @@
         });
     </script>
 </body>
+
 </html>
