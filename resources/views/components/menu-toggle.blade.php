@@ -11,15 +11,7 @@
         <div class="flex items-center space-x-6">
             <!-- Botón de login y registro -->
             @auth
-                <a href="{{ auth()->user()->isAdmin() || auth()->user()->isEmpleado() ? route('pedidos.index') : route('pedidos.mis-pedidos') }}" class="text-3xl hover:text-yellow-600 text-yellow-500 flex items-center gap-2 font-bold">
-                    <i class="bi bi-person-circle"></i> <span class="text-sm">{{ auth()->user()->name }}</span>
-                </a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="text-3xl text-red-300 hover:text-red-500 flex items-center gap-2" title="Cerrar sesión">
-                        <i class="bi bi-box-arrow-right"></i>
-                    </button>
-                </form>
+                <livewire:user-dropdown />
             @else
                 <a href="{{ route('login') }}" class="text-3xl hover:text-yellow-600 flex items-center gap-2 text-gray-400 font-bold">
                     <i class="bi bi-person-circle"></i> <span class="text-sm">Iniciar sesión</span>
