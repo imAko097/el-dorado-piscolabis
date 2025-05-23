@@ -26,10 +26,7 @@
         };
     </script>
 
-
     <x-menu-toggle :colorText="$colorText" :bgColor="$bgColor" />
-
-
 
     <!-- Contenido -->
     <div class="pt-32 px-6 md:px-40 text-black min-h-screen">

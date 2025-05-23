@@ -13,8 +13,20 @@
 
 <body class="bg-white text-black">
 
-    <!-- Navbar -->
-    <x-menu-toggle />
+   @php
+        $isInicio = request()->routeIs('inicio');
+        $bgColor = $isInicio ? 'bg-transparent' : 'bg-white';
+        $colorText = $isInicio ? 'text-white' : 'text-black';
+    @endphp
+
+    <script>
+        window.menuColors = {
+            bgColor: "{{ $bgColor }}",
+            colorText: "{{ $colorText }}"
+        };
+    </script>
+
+    <x-menu-toggle :colorText="$colorText" :bgColor="$bgColor" />
 
     <!-- Encabezado -->
     <section class="relative h-96">

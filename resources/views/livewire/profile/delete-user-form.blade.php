@@ -7,6 +7,7 @@ use Livewire\Volt\Component;
 new class extends Component
 {
     public string $password = '';
+    public string $colorText = '';
 
     /**
      * Delete the currently authenticated user.

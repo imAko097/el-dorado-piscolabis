@@ -47,10 +47,11 @@
 
 <body class="bg-white text-black">
     @php
-        $isInicio = request()->routeIs('inicio');
-        $bgColor = $isInicio ? 'bg-transparent' : 'bg-white';
-        $colorText = $isInicio ? 'text-white' : 'text-black';
+        $isProfile = request()->routeIs('profile');
+        $bgColor = 'bg-transparent'; // empieza transparente siempre
+        $colorText = 'text-white'; // empieza con texto blanco siempre
     @endphp
+
 
     <script>
         window.menuColors = {
@@ -198,8 +199,8 @@
     </footer>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            new Swiper('.multiple-slide-carousel', {
-                loop: true,
+            const swiper = new Swiper('.multiple-slide-carousel', {
+                loop: false, // Sin loop para controlar manualmente
                 spaceBetween: 20,
                 slidesPerView: 1,
                 navigation: {
@@ -208,18 +209,50 @@
                 },
                 breakpoints: {
                     640: {
-                        slidesPerView: 1,
+                        slidesPerView: 1
                     },
                     768: {
-                        slidesPerView: 2,
+                        slidesPerView: 2
                     },
                     1024: {
-                        slidesPerView: 3,
+                        slidesPerView: 3
                     },
                 },
             });
+
+            // Detectar cuando intentan avanzar más allá del último slide (tope adelante)
+            swiper.on('reachEnd', () => {
+                // Aquí puedes mostrar un aviso o simplemente no dejar avanzar más
+                console.log("Has llegado al último producto");
+            });
+
+            // Detectar cuando intentan ir atrás más allá del primero
+            swiper.on('reachBeginning', () => {
+                // En vez de detener, saltamos al último slide (efecto infinito hacia atrás)
+                swiper.slideTo(swiper.slides.length - swiper.params.slidesPerView, 0);
+            });
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const items = document.querySelectorAll('.carousel-item');
+            let current = 0;
+
+            function showSlide(index) {
+                items.forEach((item, i) => {
+                    item.classList.remove('active');
+                    if (i === index) item.classList.add('active');
+                });
+            }
+
+            setInterval(() => {
+                current = (current + 1) % items.length;
+                showSlide(current);
+            }, 5000);
+        });
+    </script>
+
 </body>
 
 </html>
