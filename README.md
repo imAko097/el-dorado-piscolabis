@@ -22,7 +22,7 @@ El Dorado Piscolabis es una aplicación web moderna desarrollada con Laravel 12 
 - Composer
 - Node.js >= 18
 - NPM
-- MySQL/PostgreSQL/SQLite
+- MySQL
 
 ## Estructura del Proyecto
 ```
