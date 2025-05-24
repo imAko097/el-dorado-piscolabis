@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Producto;
 use App\Models\ProductoTipo;
 use Livewire\Attributes\On;
+use function Livewire\browser;
 
 class Menu extends Component
 {
@@ -40,6 +41,7 @@ class Menu extends Component
     public function agregarAlCarrito($id)
     {
         $this->dispatch('agregarAlCarrito', id: $id);
+        $this->dispatch('carrito-actualizado');
     }
 
     // Función para renderizar la vista

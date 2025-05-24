@@ -1,27 +1,51 @@
 import $ from 'jquery';
 
-$(document).ready(function () {
+function initializeNavbar() {
     const $menu = $('#dropdownMenu');
     const $icon = $('#menuIcon');
     const $mainMenu = $('#mainMenu');
     let isOpen = false;
 
+    // Clases iniciales definidas en Blade y pasadas a JS
+    const initialBg = window.menuColors?.bgColor || 'bg-transparent';
+    const initialText = window.menuColors?.colorText || 'text-white';
+
+    // Clases para cuando el menú está abierto o se hace scroll
+    const scrolledBg = 'bg-white';
+    const scrolledText = 'text-black';
+    const shadowClass = 'shadow-lg';
+
+    function setNavbarState() {
+        if (isOpen || window.scrollY > 100) {
+            // Cambiar a fondo blanco, texto negro y sombra
+            $mainMenu
+                .removeClass(`${initialBg} ${initialText}`)
+                .addClass(`${scrolledBg} ${scrolledText} ${shadowClass}`);
+        } else {
+            // Volver a estado inicial según ruta
+            $mainMenu
+                .removeClass(`${scrolledBg} ${scrolledText} ${shadowClass}`)
+                .addClass(`${initialBg} ${initialText}`);
+        }
+    }
+
     function openMenu() {
-        $('#dropdownMenu').addClass('show'); /* Mostrar el menú */
-        $('#menuIcon').removeClass('bi-list').addClass('bi-x');
-        $('#mainMenu').removeClass('bg-transparent text-white').addClass('bg-white text-black shadow-lg');
+        $menu.addClass('show');
+        $icon.removeClass('bi-list').addClass('bi-x');
+        $('body').addClass('overflow-hidden');
         isOpen = true;
+        setNavbarState();
     }
 
     function closeMenu() {
-        $('#dropdownMenu').removeClass('show'); /* Ocultar el menú */
-        $('#menuIcon').removeClass('bi-x').addClass('bi-list');
-        $('#mainMenu').removeClass('bg-white text-black shadow-lg').addClass('bg-transparent text-white');
+        $menu.removeClass('show');
+        $icon.removeClass('bi-x').addClass('bi-list');
+        $('body').removeClass('overflow-hidden');
         isOpen = false;
+        setNavbarState();
     }
 
-    // Alternar el menú al hacer clic en el icono
-    $('#menuToggle').click(function () {
+    $('#menuToggle').off('click').on('click', function () {
         if (!isOpen) {
             openMenu();
         } else {
@@ -29,8 +53,26 @@ $(document).ready(function () {
         }
     });
 
-    // Cerrar el menú al hacer clic fuera del área del menú
-    $('#closeMenu').click(function () {
+    // Si tienes botón para cerrar menú aparte, puedes usar este handler
+    $('#closeMenu').off('click').on('click', function () {
         closeMenu();
     });
+
+    // Escuchar scroll para cambiar navbar
+    $(window).off('scroll').on('scroll', function () {
+        setNavbarState();
+    });
+
+    // Estado inicial al cargar página
+    setNavbarState();
+}
+
+// Inicializa cuando DOM esté listo
+$(function () {
+    initializeNavbar();
 });
+
+// Si usas Livewire, reinicializa el menú cuando haya cambios en la página
+document.addEventListener('livewire:load', initializeNavbar);
+document.addEventListener('livewire:update', initializeNavbar);
+document.addEventListener('livewire:navigated', initializeNavbar);

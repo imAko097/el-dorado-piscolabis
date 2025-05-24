@@ -38,42 +38,58 @@ new class extends Component
     }
 }; ?>
 
-<section>
+<section aria-labelledby="password-form-title">
     <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Update Password') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
+        <h2 id="password-form-title" class="sr-only">Formulario de contraseña</h2>
+        <p class="mt-1 text-sm text-[#4B5563]">
+            {{ __('Asegúrate de usar una contraseña larga y aleatoria para mantener la seguridad de tu cuenta.') }}
         </p>
     </header>
 
-    <form wire:submit="updatePassword" class="mt-6 space-y-6">
+    <form wire:submit="updatePassword" class="mt-6 space-y-6" novalidate>
+        <!-- Contraseña actual -->
         <div>
-            <x-input-label for="update_password_current_password" :value="__('Current Password')" />
-            <x-text-input wire:model="current_password" id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-            <x-input-error :messages="$errors->get('current_password')" class="mt-2" />
+            <x-input-label for="update_password_current_password" :value="__('Contraseña Actual')" class="text-[#1F2937]" />
+            <x-text-input wire:model.defer="current_password"
+                id="update_password_current_password"
+                name="current_password" type="password"
+                class="mt-1 block w-full rounded-lg border-[#E2E8F0] shadow-sm focus:border-[#D97706] focus:ring-[#D97706] text-[#1F2937]"
+                autocomplete="current-password" />
+            <x-input-error :messages="$errors->get('current_password')" class="mt-2 text-red-600" />
         </div>
 
+        <!-- Nueva contraseña -->
         <div>
-            <x-input-label for="update_password_password" :value="__('New Password')" />
-            <x-text-input wire:model="password" id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <x-input-label for="update_password_password" :value="__('Nueva Contraseña')" class="text-[#1F2937]" />
+            <x-text-input wire:model.defer="password"
+                id="update_password_password"
+                name="password" type="password"
+                class="mt-1 block w-full rounded-lg border-[#E2E8F0] shadow-sm focus:border-[#D97706] focus:ring-[#D97706] text-[#1F2937]"
+                autocomplete="new-password" />
+            <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-600" />
         </div>
 
+        <!-- Confirmar nueva contraseña -->
         <div>
-            <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input wire:model="password_confirmation" id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+            <x-input-label for="update_password_password_confirmation" :value="__('Confirmar Contraseña')" class="text-[#1F2937]" />
+            <x-text-input wire:model.defer="password_confirmation"
+                id="update_password_password_confirmation"
+                name="password_confirmation" type="password"
+                class="mt-1 block w-full rounded-lg border-[#E2E8F0] shadow-sm focus:border-[#D97706] focus:ring-[#D97706] text-[#1F2937]"
+                autocomplete="new-password" />
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 text-red-600" />
         </div>
 
+        <!-- Botón de guardar -->
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button class="bg-[#D97706] hover:bg-[#92400E] focus:ring-[#D97706] focus:outline-none focus:ring-2 focus:ring-offset-2 text-white font-semibold">
+                {{ __('Guardar') }}
+            </x-primary-button>
 
-            <x-action-message class="me-3" on="password-updated">
-                {{ __('Saved.') }}
+            <x-action-message class="ml-3 text-green-700" on="password-updated">
+                {{ __('Contraseña actualizada.') }}
             </x-action-message>
         </div>
     </form>
 </section>
+

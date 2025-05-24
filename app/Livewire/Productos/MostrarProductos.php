@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Productos;
 
 use Livewire\Component;
 use App\Models\Producto;
@@ -9,6 +9,14 @@ class MostrarProductos extends Component
 {
 
     public $productos;
+
+    protected $listeners = ['productoAgregado' => 'actualizarProductos'];
+
+    public function actualizarProductos()
+    {
+        $this->productos = Producto::with('tipo')->get();
+    }
+
 
     public function mount()
     {
@@ -22,13 +30,12 @@ class MostrarProductos extends Component
             $producto->destacado = !$producto->destacado;
             $producto->save();
 
-            // Actualizar la lista para reflejar el cambio
             $this->productos = Producto::with('tipo')->get();
         }
     }
 
     public function render()
     {
-        return view('livewire.mostrar-productos');
+        return view('livewire.productos.mostrar-productos');
     }
 }

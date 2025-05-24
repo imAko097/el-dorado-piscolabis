@@ -11,14 +11,14 @@
                 {{ ucfirst($estado) }}
             </button>
         @endforeach
-    </div>
 
-    @if (!empty($filtroEstados))
-        <button wire:click="$set('filtroEstados', ['pendientes'])"
-                class="mb-4 px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium rounded-lg shadow transition">
-            Limpiar filtros
-        </button>
-    @endif
+        @if (!empty($filtroEstados))
+            <button wire:click="$set('filtroEstados', ['pendientes'])"
+                    class="px-4 py-2 bg-red-300 hover:bg-red-400 text-gray-800 font-medium rounded-full shadow transition">
+                Limpiar filtros
+            </button>
+        @endif
+    </div>
 
     <div wire:poll.5s>
         @if($pedidos->count() > 0)
@@ -47,8 +47,12 @@
                             </div>
 
                             <div class="flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="w-5 h-5 text-emerald-500"  fill="currentColor">
+                                    <path d="M600-120q-118 0-210-67T260-360H120v-80h122q-3-24-2.5-44.5T242-520H120v-80h140q38-106 130-173t210-67q69 0 130.5 24.5T840-748l-57 56q-37-32-83.5-50T600-760q-85 0-152 44.5T347-600h253v80H323q-4 27-3 47.5t3 32.5h277v80H347q34 71 101 115.5T600-200q53 0 99.5-18t83.5-50l57 56q-48 43-109.5 67.5T600-120Z"/>
+                                </svg>
                                 <span><strong>Total:</strong> {{ number_format($pedido->total, 2) }} €</span>
                             </div>
+
 
                             <div class="flex items-center space-x-2">
                                 <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -57,6 +61,11 @@
                                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                                 <span><strong>Fecha:</strong> {{ $pedido->created_at->format('d/m/Y H:i') }}</span>
+                            </div>
+
+                            <div class="flex items-center space-x-2">
+                                <x-icono-repartidor width="20" height="20" />
+                                <span><strong>Dirección:</strong> {{ $pedido->direccion ?? 'No disponible' }}</span>
                             </div>
                         </div>
 
@@ -109,6 +118,7 @@
                     <p><strong>Cliente:</strong> {{ $usuario->name ?? 'Usuario no registrado' }}</p>
                     <p><strong>Estado:</strong> {{ ucfirst($pedidoSeleccionado->estadoPedido->estado) }}</p>
                     <p><strong>Fecha:</strong> {{ $pedidoSeleccionado->created_at->format('d/m/Y H:i') }}</p>
+                    <p><strong>Dirección:</strong> {{ $pedidoSeleccionado->direccion ?? 'No disponible' }}</p>
                 </div>
 
                 <h3 class="text-lg font-semibold mt-6 mb-2">Productos:</h3>
