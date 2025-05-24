@@ -18,9 +18,9 @@ class MostrarProductos extends Component
     }
 
 
-    public function mount()
+    public function mount($productos)
     {
-        $this->productos = Producto::with('tipo')->get();
+        $this->productos = $productos;
     }
 
     public function toggleDestacado($productoId)
