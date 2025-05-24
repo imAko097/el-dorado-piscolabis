@@ -142,7 +142,9 @@ class Checkout extends Component
         }
 
         $pedido->load(['productos', 'usuario']);
-        Mail::to(Auth::user()->email)->send(new PedidoFacturaMail($pedido));
+       if (Auth::check()) {
+            Mail::to(Auth::user()->email)->send(new PedidoFacturaMail($pedido));
+        }
 
 
 
