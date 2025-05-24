@@ -6,11 +6,26 @@ function initializeNavbar() {
     const $mainMenu = $('#mainMenu');
     let isOpen = false;
 
+    // Clases iniciales definidas en Blade y pasadas a JS
+    const initialBg = window.menuColors?.bgColor || 'bg-transparent';
+    const initialText = window.menuColors?.colorText || 'text-white';
+
+    // Clases para cuando el menú está abierto o se hace scroll
+    const scrolledBg = 'bg-white';
+    const scrolledText = 'text-black';
+    const shadowClass = 'shadow-lg';
+
     function setNavbarState() {
         if (isOpen || window.scrollY > 100) {
-            $mainMenu.removeClass('bg-transparent text-white').addClass('bg-white text-black shadow-lg');
+            // Cambiar a fondo blanco, texto negro y sombra
+            $mainMenu
+                .removeClass(`${initialBg} ${initialText}`)
+                .addClass(`${scrolledBg} ${scrolledText} ${shadowClass}`);
         } else {
-            $mainMenu.removeClass('bg-white text-black shadow-lg').addClass('bg-transparent text-white');
+            // Volver a estado inicial según ruta
+            $mainMenu
+                .removeClass(`${scrolledBg} ${scrolledText} ${shadowClass}`)
+                .addClass(`${initialBg} ${initialText}`);
         }
     }
 
@@ -30,7 +45,6 @@ function initializeNavbar() {
         setNavbarState();
     }
 
-    // Evento para el botón de menú
     $('#menuToggle').off('click').on('click', function () {
         if (!isOpen) {
             openMenu();
@@ -39,35 +53,26 @@ function initializeNavbar() {
         }
     });
 
-    // Evento para cerrar el menú
+    // Si tienes botón para cerrar menú aparte, puedes usar este handler
     $('#closeMenu').off('click').on('click', function () {
         closeMenu();
     });
 
-    // Evento de scroll
+    // Escuchar scroll para cambiar navbar
     $(window).off('scroll').on('scroll', function () {
         setNavbarState();
     });
 
-    // Estado inicial
+    // Estado inicial al cargar página
     setNavbarState();
 }
 
-// Inicializar cuando el documento está listo
+// Inicializa cuando DOM esté listo
 $(function () {
     initializeNavbar();
 });
 
-// Reinicializar después de cada actualización de Livewire
-document.addEventListener('livewire:load', function () {
-    initializeNavbar();
-});
-
-document.addEventListener('livewire:update', function () {
-    initializeNavbar();
-});
-
-// Asegurarse de que el navbar se actualice después de cualquier actualización de Livewire
-document.addEventListener('livewire:navigated', function () {
-    initializeNavbar();
-});
+// Si usas Livewire, reinicializa el menú cuando haya cambios en la página
+document.addEventListener('livewire:load', initializeNavbar);
+document.addEventListener('livewire:update', initializeNavbar);
+document.addEventListener('livewire:navigated', initializeNavbar);

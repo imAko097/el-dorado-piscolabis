@@ -79,9 +79,18 @@
 
                             <!-- Vista previa -->
                             @if ($imagen)
-                                <img src="{{ $imagen->temporaryUrl() }}" class="mt-4 rounded-md w-40 h-auto border border-gray-200 shadow-sm">
+                                <div class="mt-4">
+                                    <p class="text-sm text-gray-600">Imagen nueva:</p>
+                                    <img src="{{ $imagen->temporaryUrl() }}" class="mt-4 rounded-md w-40 h-auto border border-gray-200 shadow-sm">
+                                </div>
+                            @elseif ($imagen_actual)
+                                <div class="mt-4">
+                                    <p class="text-sm text-gray-600">Imagen anterior:</p>
+                                    <img src="{{ asset('storage/' . $imagen_actual) }}" class="mt-1 rounded-md w-40 h-auto border border-gray-200 shadow-sm">
+                                </div>
                             @endif
                             @error('imagen') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                            
                         </div>
 
                         <!-- Botones -->
