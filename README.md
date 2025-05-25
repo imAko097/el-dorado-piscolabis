@@ -185,5 +185,5 @@ El sistema cuenta con validaciones de formularios en tiempo real y manejo de err
 Las contribuciones están abiertas.  
 Puedes enviar un pull request o crear un issue si encuentras algún error o tienes sugerencias.
 
-Si quieres echarle un vistazo, visita nuestra página de preproducción:
+Si quieres echarle un vistazo, visita nuestra página de preproducción:  
 https://eldoradojinamar.zapto.org/
