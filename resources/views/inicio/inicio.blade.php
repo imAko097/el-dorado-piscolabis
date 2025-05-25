@@ -47,9 +47,9 @@
 
 <body class="bg-white text-black">
     @php
-        $isProfile = request()->routeIs('profile');
-        $bgColor = 'bg-transparent'; // empieza transparente siempre
-        $colorText = 'text-white'; // empieza con texto blanco siempre
+    $isProfile = request()->routeIs('profile');
+    $bgColor = 'bg-transparent'; // empieza transparente siempre
+    $colorText = 'text-white'; // empieza con texto blanco siempre
     @endphp
 
 
@@ -67,16 +67,16 @@
     <div class="relative overflow-hidden">
         <div class="carousel">
             @foreach ($carrusel_imagenes as $index => $imagen)
-                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                    <img src="{{ $imagen->imagen }}" alt="Imagen del carrusel" />
-                    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-                </div>
+            <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                <img src="{{ $imagen->imagen }}" alt="Imagen del carrusel" />
+                <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+            </div>
             @endforeach
         </div>
 
         <div class="carousel-indicators flex justify-center mt-4">
             @foreach ($carrusel_imagenes as $index => $imagen)
-                <div class="indicator" data-index="{{ $index }}"></div>
+            <div class="indicator" data-index="{{ $index }}"></div>
             @endforeach
         </div>
     </div>
@@ -129,52 +129,42 @@
 
     <section class="max-w-7xl mx-auto px-4 py-12">
         <h2 class="text-3xl font-bold text-center mb-8">Productos Destacados</h2>
+        <p class="text-center text-gray-600 mb-6">Descubre nuestros platos más populares, elaborados con los mejores
+            ingredientes y mucho cariño.</p>
 
         @if ($productosDestacados->isEmpty())
-            <p class="text-center text-gray-500">No hay productos destacados por el momento.</p>
+        <p class="text-center text-gray-500">No hay productos destacados por el momento.</p>
         @else
-            <div class="w-full relative">
-                <div class="swiper multiple-slide-carousel swiper-container relative">
-                    <div class="swiper-wrapper mb-16">
-                        @foreach ($productosDestacados as $producto)
-                            <div class="swiper-slide">
-                                <div
-                                    class="bg-white rounded-2xl h-96 flex flex-col justify-center items-center shadow-md overflow-hidden max-w-xs mx-auto">
-                                    @if ($producto->imagen)
-                                        <img src="{{ asset('storage/' . $producto->imagen) }}"
-                                            alt="{{ $producto->nombre }}"
-                                            class="w-full h-48 object-cover rounded-t-2xl" />
-                                    @endif
-                                    <div class="p-4 text-center flex flex-col justify-center flex-grow">
-                                        <h3 class="text-xl font-semibold text-gray-800">{{ $producto->nombre }}</h3>
-                                        <p class="text-gray-600 mt-2 flex-grow">
-                                            {{ Str::limit($producto->ingredientes, 60) }}</p>
-                                        <div class="mt-4 font-semibold text-blue-700">
-                                            {{ number_format($producto->precio, 2, ',', '.') }} €
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+        <div class="swiper multiple-slide-carousel mx-auto h-96">
+            <div class="swiper-wrapper">
+                @foreach ($productosDestacados as $producto)
+                <div class="swiper-slide">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden w-full max-w-sm mx-auto p-6"> <!-- Cambiado max-w-xs a max-w-sm y agregado p-6 -->
+                        @if ($producto->imagen)
+                        <img src="{{ asset('storage/' . $producto->imagen) }}"
+                            alt="{{ $producto->nombre }}"
+                            class="w-full h-48 object-cover rounded-lg " /> 
+                        @endif
+                        <div class="pt-4 text-center">
+                            <h3 class="text-lg font-semibold text-gray-800 mt-2">{{ $producto->nombre }}</h3>
+                            <p class="text-gray-600 mt-2 text-sm">
+                                {{ Str::limit($producto->ingredientes, 60) }}
+                            </p>
+                        </div>
                     </div>
-
-                    <div
-                        class="absolute top-1/2 left-0 right-0 w-full px-4 flex justify-between items-center -translate-y-1/2 z-50">
-                        <button id="slider-button-left"
-                            class="swiper-button-prev group p-2 flex justify-center items-center bg-white shadow-lg w-12 h-12 rounded-full transition-all duration-300 hover:bg-gray-100"
-                            style="color: black;">
-
-                        </button>
-
-                        <button id="slider-button-right"
-                            class="swiper-button-next group p-2 flex justify-center items-center bg-white shadow-lg w-12 h-12 rounded-full transition-all duration-300 hover:bg-gray-100"
-                            style="color: black;">
-
-                        </button>
-                    </div>
-
                 </div>
+                @endforeach
             </div>
+
+            <button id="slider-button-left"
+                class="swiper-button-prev "
+                style="color: black;">
+            </button>
+            <button id="slider-button-right"
+                class="swiper-button-next"
+                style="color: black;">
+            </button>
+        </div>
         @endif
     </section>
 
@@ -200,8 +190,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const swiper = new Swiper('.multiple-slide-carousel', {
-                loop: false, // Sin loop para controlar manualmente
-                spaceBetween: 20,
+                loop: true,
+                spaceBetween: 0,
+                centeredSlides: true,
                 slidesPerView: 1,
                 navigation: {
                     nextEl: '#slider-button-right',
@@ -218,18 +209,6 @@
                         slidesPerView: 3
                     },
                 },
-            });
-
-            // Detectar cuando intentan avanzar más allá del último slide (tope adelante)
-            swiper.on('reachEnd', () => {
-                // Aquí puedes mostrar un aviso o simplemente no dejar avanzar más
-                console.log("Has llegado al último producto");
-            });
-
-            // Detectar cuando intentan ir atrás más allá del primero
-            swiper.on('reachBeginning', () => {
-                // En vez de detener, saltamos al último slide (efecto infinito hacia atrás)
-                swiper.slideTo(swiper.slides.length - swiper.params.slidesPerView, 0);
             });
         });
     </script>
