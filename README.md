@@ -8,14 +8,20 @@
 
 Asegúrate de tener instaladas las siguientes herramientas:
 
-- PHP >= 8.1  
-- Composer >= 2.x  
-- Laravel >= 10  
-- Node.js >= 18  
-- NPM >= 9  
-- MySQL o MariaDB  
-- Extensiones PHP requeridas:  
-  `pdo`, `mbstring`, `openssl`, `fileinfo`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`, `curl`
+Backend:
+    - PHP 8.2
+    - Laravel 12
+    - Livewire 3
+    - Livewire Volt
+Frontend:
+    - TailwindCSS
+    - Alpine.js
+    - Vite
+    - Animate.css
+    - jQuery
+    - Toastify.js
+    - Extensiones PHP requeridas:  
+      `pdo`, `mbstring`, `openssl`, `fileinfo`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`, `curl`
 
 ---
 
@@ -24,8 +30,8 @@ Asegúrate de tener instaladas las siguientes herramientas:
 ### 1. Clona el repositorio
 
 ```bash
-git clone https://github.com/usuario/el-dorado.git
-cd el-dorado
+git clone https://github.com/imAko097/el-dorado-piscolabis.git
+cd el-dorado-piscolabis
 ```
 
 ### 2. Instala las dependencias de PHP
@@ -101,11 +107,11 @@ http://localhost:8000
 
 El sistema incluye usuarios de ejemplo tras ejecutar los seeders:
 
-| Rol           | Email                  | Contraseña |
-|---------------|------------------------|------------|
-| Administrador | admin@dorado.com       | password   |
-| Empleado      | empleado@dorado.com    | password   |
-| Cliente       | cliente@dorado.com     | password   |
+| Rol           | Email                       | Contraseña |
+|---------------|-----------------------------|------------|
+| Administrador | admin@admin.com             | Pilotes20! |
+| Empleado      | empleado@dorado.com         | Pilotes20! |
+| Cliente       | clientedorado1@gmail.com    | Pilotes20! |
 
 Puedes registrar nuevos usuarios desde la interfaz y activar sus roles desde el panel de administración (si tienes rol de administrador).
 
