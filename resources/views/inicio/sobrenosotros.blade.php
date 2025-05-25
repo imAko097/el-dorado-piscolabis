@@ -78,39 +78,39 @@
 
     <!-- Equipo -->
     <section class="bg-[#FCD34D] py-16">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold text-white mb-10">Conoce al equipo</h2>
-            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-white text-center mb-10">Conoce al equipo</h2>
+
+            <div class="flex flex-col sm:flex-row sm:justify-between gap-10">
                 <!-- Miembro del equipo -->
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden">
-                    <img src="{{ asset('storage/img/chef1.jpg') }}" alt="Chef Ana"
-                        class="w-full h-60 object-cover">
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold text-[#1C1917]">Ana García</h3>
-                        <p class="text-gray-600 text-sm">Chef Ejecutiva</p>
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden w-full sm:w-1/2">
+                    <img
+                        src="{{ asset('storage/img/chef1.jpg') }}"
+                        alt="Chef"
+                        class="w-full h-60 object-cover object-center">
+                    <div class="p-4 text-center">
+                        <h3 class="text-xl font-semibold text-[#1C1917]">Juan Guerra</h3>
+                        <p class="text-gray-600 text-sm">Chef Ejecutivo</p>
                     </div>
                 </div>
                 <!-- Otro miembro -->
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden">
-                    <img src="{{ asset('storage/img/chef2.jpg') }}" alt="Chef Marco"
-                        class="w-full h-60 object-cover">
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold text-[#1C1917]">Marco Díaz</h3>
-                        <p class="text-gray-600 text-sm">Maestro Parrillero</p>
-                    </div>
-                </div>
-                <!-- Otro miembro -->
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden">
-                    <img src="{{ asset('storage/img/chef3.jpg') }}" alt="Manager"
-                        class="w-full h-60 object-cover">
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold text-[#1C1917]">Laura Pérez</h3>
-                        <p class="text-gray-600 text-sm">Gerente General</p>
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden w-full sm:w-1/2">
+                    <img
+                        src="{{ asset('storage/img/chef2.jpg') }}"
+                        alt="Camarera"
+                        class="w-full h-60 object-cover object-center">
+                    <div class="p-4 text-center">
+                        <h3 class="text-xl font-semibold text-[#1C1917]">Carmen Dorada</h3>
+                        <p class="text-gray-600 text-sm">Camarera</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+
+
+
 
     <!-- Footer -->
     <footer class="bg-white border-t mt-10">
