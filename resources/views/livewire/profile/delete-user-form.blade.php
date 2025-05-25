@@ -24,9 +24,10 @@ new class extends Component
     }
 }; ?>
 
-<section class="space-y-6">
+<section class="space-y-6" aria-labelledby="delete-account-heading">
     <header>
-        <p class="mt-1 text-sm text-gray-600">
+        <h2 id="delete-account-heading" class="sr-only">Eliminar cuenta</h2>
+        <p class="mt-1 text-sm text-[#4B5563]">
             {{ __('Una vez que se elimine tu cuenta, todos tus datos serán eliminados permanentemente. Asegúrate de descargar cualquier información que desees conservar antes de continuar.') }}
         </p>
     </header>
@@ -34,7 +35,7 @@ new class extends Component
     <x-danger-button
         x-data="{}"
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-        class="bg-red-600 hover:bg-red-700 focus:ring-red-500"
+        class="bg-red-600 hover:bg-red-700 focus:ring-red-500 text-white font-semibold"
     >
         {{ __('Eliminar Cuenta') }}
     </x-danger-button>
@@ -45,7 +46,7 @@ new class extends Component
                 {{ __('¿Estás seguro de que deseas eliminar tu cuenta?') }}
             </h2>
 
-            <p class="mt-2 text-sm text-gray-600">
+            <p class="mt-2 text-sm text-[#4B5563]">
                 {{ __('Una vez eliminada, todos tus datos serán borrados de forma permanente. Por favor, introduce tu contraseña para confirmar esta acción irreversible.') }}
             </p>
 
@@ -58,21 +59,22 @@ new class extends Component
                     name="password"
                     type="password"
                     placeholder="{{ __('Contraseña') }}"
-                    class="mt-1 block w-3/4 rounded-lg border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500"
+                    class="mt-1 block w-3/4 rounded-lg border-[#E2E8F0] shadow-sm focus:border-[#D97706] focus:ring-[#D97706] text-[#1F2937]"
                 />
 
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-600" />
             </div>
 
-            <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
+            <div class="mt-6 flex justify-end gap-3">
+                <x-secondary-button x-on:click="$dispatch('close')" class="focus:ring-gray-400">
                     {{ __('Cancelar') }}
                 </x-secondary-button>
 
-                <x-danger-button class="ml-3 bg-red-600 hover:bg-red-700 focus:ring-red-500">
+                <x-danger-button class="bg-red-600 hover:bg-red-700 focus:ring-red-500 text-white font-semibold">
                     {{ __('Eliminar Cuenta') }}
                 </x-danger-button>
             </div>
         </form>
     </x-modal>
 </section>
+

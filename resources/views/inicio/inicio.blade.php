@@ -16,7 +16,6 @@
             position: relative;
             width: 100%;
             height: 610px;
-            /* o lo que necesites */
         }
 
         .carousel-item {
@@ -45,11 +44,13 @@
     @vite('resources/js/carrusel.js')
 </head>
 
-<body class="bg-white text-black">
+<body class="bg-[#FFF8F0] text-[#1C1917]">
     @php
+
     $isProfile = request()->routeIs('profile');
     $bgColor = 'bg-transparent'; // empieza transparente siempre
     $colorText = 'text-white'; // empieza con texto blanco siempre
+
     @endphp
 
 
@@ -61,7 +62,6 @@
     </script>
 
     <x-menu-toggle :colorText="$colorText" :bgColor="$bgColor" />
-
 
     <!-- Carrusel -->
     <div class="relative overflow-hidden">
@@ -79,10 +79,10 @@
             <div class="indicator" data-index="{{ $index }}"></div>
             @endforeach
         </div>
+
     </div>
 
-
-    <section class="bg-yellow-400 py-10 px-4">
+    <section class="bg-[#FCD34D] py-10 px-4">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-6">
             <!-- Tarjeta 1 -->
             <div class="relative rounded-2xl overflow-hidden shadow-lg h-72">
@@ -92,8 +92,7 @@
                     <h2 class="text-2xl font-bold mb-2">¡Delicias para compartir!</h2>
                     <p class="text-sm mb-4">Prueba nuestras especialidades caseras ideales para cualquier ocasión.</p>
                     <a href="{{ route('menu') }}"
-                        class="bg-white text-black font-semibold px-4 py-2 rounded-full w-max">DESCUBRIR
-                        MENÚ</a>
+                        class="bg-[#FFFFFF] text-[#1C1917] font-semibold px-4 py-2 rounded-full w-max">DESCUBRIR MENÚ</a>
                 </div>
             </div>
 
@@ -106,8 +105,8 @@
                     <p class="text-sm mb-4">Pide desde casa y recógelo en nuestro local sin esperar.</p>
                     <div class="flex gap-3">
                         <a href="{{ route('menu') }}"
-                            class="bg-yellow-300 text-black font-bold px-4 py-2 rounded-full">PEDIR AHORA</a>
-                        <button class="bg-white text-black font-semibold px-4 py-2 rounded-full">CÓMO FUNCIONA</button>
+                            class="bg-[#FCD34D] text-[#1C1917] font-bold px-4 py-2 rounded-full">PEDIR AHORA</a>
+                        <button class="bg-[#FFFFFF] text-[#1C1917] font-semibold px-4 py-2 rounded-full">CÓMO FUNCIONA</button>
                     </div>
                 </div>
             </div>
@@ -118,10 +117,9 @@
                     class="absolute inset-0 w-full h-full object-cover" />
                 <div class="absolute inset-0 bg-black bg-opacity-40 p-6 flex flex-col justify-end text-white">
                     <h2 class="text-3xl font-bold mb-2">Nuestra pasión: calidad y cercanía</h2>
-                    <p class="text-sm mb-4">Conoce nuestro compromiso con los ingredientes frescos y el buen servicio.
-                    </p>
+                    <p class="text-sm mb-4">Conoce nuestro compromiso con los ingredientes frescos y el buen servicio.</p>
                     <a href="{{ route('sobrenosotros') }}"
-                        class="bg-white text-black font-semibold px-4 py-2 rounded-full w-max">CONOCE MÁS</a>
+                        class="bg-[#FFFFFF] text-[#1C1917] font-semibold px-4 py-2 rounded-full w-max">CONOCE MÁS</a>
                 </div>
             </div>
         </div>
@@ -135,6 +133,7 @@
         @if ($productosDestacados->isEmpty())
         <p class="text-center text-gray-500">No hay productos destacados por el momento.</p>
         @else
+
         <div class="swiper multiple-slide-carousel mx-auto h-96">
             <div class="swiper-wrapper">
                 @foreach ($productosDestacados as $producto)
@@ -168,26 +167,27 @@
         @endif
     </section>
 
-
-
-
-    <footer class="bg-white border-t mt-10">
-        <div class="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-gray-700 space-y-2">
+    <footer class="bg-[#FFFFFF] border-t-2 border-[#FCD34D] mt-10">
+        <div class="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-[#1C1917] space-y-2">
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="#" class="hover:underline">Legal</a>
-                <a href="#" class="hover:underline">Política de privacidad</a>
-                <a href="#" class="hover:underline">Política de cookies</a>
-                <a href="#" class="hover:underline">Bases legales promociones y sorteos</a>
-                <a href="#" class="hover:underline">Términos y Condiciones</a>
-                <a href="#" class="hover:underline">Configuración de cookies</a>
+                <a href="#" class="hover:underline text-[#92400E]">Legal</a>
+                <a href="#" class="hover:underline text-[#92400E]">Política de privacidad</a>
+                <a href="#" class="hover:underline text-[#92400E]">Política de cookies</a>
+                <a href="#" class="hover:underline text-[#92400E]">Bases legales promociones y sorteos</a>
+                <a href="#" class="hover:underline text-[#92400E]">Términos y Condiciones</a>
+                <a href="#" class="hover:underline text-[#92400E]">Configuración de cookies</a>
             </div>
             <div class="flex items-center justify-center space-x-2">
-                <span class="text-yellow-500 text-lg">🍴</span>
+                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#92400E">
+                    <path d="M280-80v-366q-51-14-85.5-56T160-600v-280h80v280h40v-280h80v280h40v-280h80v280q0 56-34.5 98T360-446v366h-80Zm400 0v-320H560v-280q0-83 58.5-141.5T760-880v800h-80Z"/>
+                </svg>
                 <span>Copyright © 2025 El Dorado Piscolabis</span>
             </div>
         </div>
     </footer>
+
     <script>
+
         document.addEventListener('DOMContentLoaded', function() {
             const swiper = new Swiper('.multiple-slide-carousel', {
                 loop: true,
@@ -208,6 +208,7 @@
                     1024: {
                         slidesPerView: 3
                     },
+
                 },
             });
         });

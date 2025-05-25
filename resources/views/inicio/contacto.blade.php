@@ -12,7 +12,7 @@
     <livewire:styles />
 </head>
 
-<body class="bg-white text-black">
+<body class="bg-[#FFF8F0] text-[#1C1917]">
 
     @php
     $isInicio = request()->routeIs('inicio');
@@ -42,10 +42,11 @@
     <section class="max-w-6xl mx-auto py-16 px-4 grid md:grid-cols-2 gap-10">
         <!-- Información de contacto -->
         <div>
-            <h2 class="text-3xl font-bold text-yellow-500 mb-6">Estamos aquí para ti</h2>
+            <h2 class="text-3xl font-bold text-[#92400E] mb-6">Estamos aquí para ti</h2>
             <p class="text-lg mb-6">
                 ¿Tienes preguntas, sugerencias o quieres reservar una mesa? Puedes contactarnos por cualquiera de estos medios:
             </p>
+
             <ul class="space-y-4 text-gray-800">
                 <li><i class="bi bi-telephone-fill text-yellow-500 mr-2"></i><strong>Teléfono:</strong> +34 928 71 59 00</li>
                 <li><i class="bi bi-envelope-fill text-yellow-500 mr-2"></i><strong>Email:</strong> contacto@eldorado.com</li>
@@ -63,22 +64,23 @@
         </div>
 
         <!-- Formulario de contacto -->
+
       @livewire('contacto-form')
-
-
     </section>
 
     <!-- Footer -->
     <footer class="bg-white border-t mt-10">
-        <div class="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-gray-700 space-y-2">
+        <div class="max-w-7xl mx-auto px-4 py-6 text-center text-sm text-[#1C1917] space-y-2">
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="#" class="hover:underline">Legal</a>
-                <a href="#" class="hover:underline">Política de privacidad</a>
-                <a href="#" class="hover:underline">Política de cookies</a>
-                <a href="#" class="hover:underline">Términos y Condiciones</a>
+                <a href="#" class="hover:underline text-[#92400E]">Legal</a>
+                <a href="#" class="hover:underline text-[#92400E]">Política de privacidad</a>
+                <a href="#" class="hover:underline text-[#92400E]">Política de cookies</a>
+                <a href="#" class="hover:underline text-[#92400E]">Términos y Condiciones</a>
             </div>
             <div class="flex items-center justify-center space-x-2">
-                <span class="text-yellow-500 text-lg">🍴</span>
+                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#B7791F">
+                    <path d="M280-80v-366q-51-14-85.5-56T160-600v-280h80v280h40v-280h80v280h40v-280h80v280q0 56-34.5 98T360-446v366h-80Zm400 0v-320H560v-280q0-83 58.5-141.5T760-880v800h-80Z"/>
+                </svg>
                 <span>Copyright © 2025 El Dorado Piscolabis</span>
             </div>
         </div>
