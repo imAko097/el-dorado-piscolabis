@@ -16,18 +16,25 @@ function initializeNavbar() {
     const shadowClass = 'shadow-lg';
 
     function setNavbarState() {
+        const $userButton = $('#userDropdownToggle');
+
         if (isOpen || window.scrollY > 100) {
-            // Cambiar a fondo blanco, texto negro y sombra
             $mainMenu
                 .removeClass(`${initialBg} ${initialText}`)
                 .addClass(`${scrolledBg} ${scrolledText} ${shadowClass}`);
+
+            //  Actualiza el botón del usuario
+            $userButton.removeClass(initialText).addClass(scrolledText);
         } else {
-            // Volver a estado inicial según ruta
             $mainMenu
                 .removeClass(`${scrolledBg} ${scrolledText} ${shadowClass}`)
                 .addClass(`${initialBg} ${initialText}`);
+
+            // Vuelve a su color inicial
+            $userButton.removeClass(scrolledText).addClass(initialText);
         }
     }
+
 
     function openMenu() {
         $menu.addClass('show');

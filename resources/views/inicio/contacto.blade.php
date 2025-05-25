@@ -9,12 +9,25 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/inicio/styles.css') }}">
+    <livewire:styles />
 </head>
 
 <body class="bg-[#FFF8F0] text-[#1C1917]">
 
-    <!-- Navbar -->
-    <x-menu-toggle />
+    @php
+    $isInicio = request()->routeIs('inicio');
+    $bgColor = $isInicio ? 'bg-transparent' : 'bg-white';
+    $colorText = $isInicio ? 'text-white' : 'text-black';
+    @endphp
+
+    <script>
+        window.menuColors = {
+            bgColor: "{{ $bgColor }}",
+            colorText: "{{ $colorText }}"
+        };
+    </script>
+
+    <x-menu-toggle :colorText="$colorText" :bgColor="$bgColor" />
 
     <!-- Encabezado -->
     <section class="relative h-96">
@@ -33,47 +46,26 @@
             <p class="text-lg mb-6">
                 ¿Tienes preguntas, sugerencias o quieres reservar una mesa? Puedes contactarnos por cualquiera de estos medios:
             </p>
-            <ul class="space-y-4 text-[#1C1917]">
-                <li><i class="bi bi-telephone-fill text-[#FCD34D] mr-2"></i><strong>Teléfono:</strong> +34 928 71 59 00</li>
-                <li><i class="bi bi-envelope-fill text-[#FCD34D] mr-2"></i><strong>Email:</strong> mrdorado.piscolabis@gmail.com</li>
-                <li><i class="bi bi-geo-alt-fill text-[#FCD34D] mr-2"></i><strong>Dirección:</strong> Manuel Alemán Álamo, 35220 Valle de Jinamar, Las Palmas</li>
-                <li><i class="bi bi-clock-fill text-[#FCD34D] mr-2"></i><strong>Horario:</strong> Lun-Dom 12:00 – 23:00</li>
+
+            <ul class="space-y-4 text-gray-800">
+                <li><i class="bi bi-telephone-fill text-yellow-500 mr-2"></i><strong>Teléfono:</strong> +34 928 71 59 00</li>
+                <li><i class="bi bi-envelope-fill text-yellow-500 mr-2"></i><strong>Email:</strong> contacto@eldorado.com</li>
+                <li><i class="bi bi-geo-alt-fill text-yellow-500 mr-2"></i><strong>Dirección:</strong> C. Manuel Alemán Álamo, 35220 Valle de Jinamar, Las Palmas</li>
+                <li><i class="bi bi-clock-fill text-yellow-500 mr-2"></i><strong>Horario:</strong> Lun-Dom 12:00 – 23:00</li>
             </ul>
 
             <!-- Mapa -->
             <div class="mt-10">
                 <iframe class="w-full h-64 rounded-2xl shadow-lg"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.413320160752!2d-3.703790484265457!3d40.41677597936427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd422997fe7f7b59%3A0x54b4c9d88b4c64e!2sMadrid!5e0!3m2!1ses!2ses!4v1716300000000!5m2!1ses!2ses"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3363.175099309951!2d-15.408437984519056!3d28.00989501503308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc40958e7b187fc3%3A0x6f0cc5b48fa4725d!2sC.%20Manuel%20Alem%C3%A1n%20%C3%81lamo%2C%2035220%20Valle%20de%20Jin%C3%A1mar%2C%20Las%20Palmas!5e0!3m2!1ses!2ses!4v1716617750000!5m2!1ses!2ses"
                     allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
+
         </div>
 
         <!-- Formulario de contacto -->
-        <div>
-            <h2 class="text-3xl font-bold text-[#92400E] mb-6">Envíanos un mensaje</h2>
-            <form action="" method="POST" class="space-y-6">
-                @csrf
-                <div>
-                    <label for="nombre" class="block text-sm font-medium">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" required
-                        class="mt-1 block w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-[#FCD34D] focus:border-[#FCD34D]" />
-                </div>
-                <div>
-                    <label for="email" class="block text-sm font-medium">Correo electrónico</label>
-                    <input type="email" id="email" name="email" required
-                        class="mt-1 block w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-[#FCD34D] focus:border-[#FCD34D]" />
-                </div>
-                <div>
-                    <label for="mensaje" class="block text-sm font-medium">Mensaje</label>
-                    <textarea id="mensaje" name="mensaje" rows="5" required
-                        class="mt-1 block w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-[#FCD34D] focus:border-[#FCD34D]"></textarea>
-                </div>
-                <button type="submit"
-                    class="bg-[#FCD34D] hover:bg-yellow-500 text-[#1C1917] font-semibold px-6 py-3 rounded-full">
-                    Enviar Mensaje
-                </button>
-            </form>
-        </div>
+
+      @livewire('contacto-form')
     </section>
 
     <!-- Footer -->
@@ -93,6 +85,7 @@
             </div>
         </div>
     </footer>
+    <livewire:scripts />
 </body>
 
 </html>

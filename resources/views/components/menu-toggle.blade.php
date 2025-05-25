@@ -1,7 +1,9 @@
 
 <div class="shadow-lg">
     <nav id="mainMenu"
-         class="p-6 pl-40 pr-40 flex justify-between items-center fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out shadow-lg"> 
+
+        class="{{ $bgColor }} {{ $colorText }} p-6 pl-40 pr-40 flex justify-between items-center fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out shadow-lg">
+
         <!-- Logo a la izquierda -->
          <a href="{{ route('inicio') }}">
             <img src="{{ asset('storage/img/eldorado.png') }}" alt="Logo" class="bg-white w-20 h-20 rounded-full" />
@@ -11,7 +13,7 @@
         <div class="flex items-center space-x-6">
             <!-- Botón de login y registro -->
             @auth
-                <livewire:user-dropdown />
+                <livewire:user-dropdown :colorText="$colorText" />
             @else
                 <a href="{{ route('login') }}" class="text-3xl hover:text-gray-200 flex items-center gap-2 font-bold">
                     <i class="bi bi-person-circle"></i> <span class="text-sm">Iniciar sesión</span>
