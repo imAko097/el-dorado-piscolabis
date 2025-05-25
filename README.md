@@ -1,61 +1,178 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🟡 El Dorado
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**El Dorado** es una plataforma digital desarrollada con Laravel, Livewire y Tailwind CSS para la gestión de pedidos en un local de piscolabis. Incluye una interfaz de cliente para realizar pedidos y un panel administrativo para la gestión de productos, usuarios, pedidos e imágenes promocionales.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📦 Requisitos del sistema
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Asegúrate de tener instaladas las siguientes herramientas:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP >= 8.1  
+- Composer >= 2.x  
+- Laravel >= 10  
+- Node.js >= 18  
+- NPM >= 9  
+- MySQL o MariaDB  
+- Extensiones PHP requeridas:  
+  `pdo`, `mbstring`, `openssl`, `fileinfo`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`, `curl`
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🚀 Instalación
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 1. Clona el repositorio
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+git clone https://github.com/usuario/el-dorado.git
+cd el-dorado
+```
 
-## Laravel Sponsors
+### 2. Instala las dependencias de PHP
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+composer install
+```
 
-### Premium Partners
+### 3. Instala las dependencias de JavaScript
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+npm install
+```
 
-## Contributing
+### 4. Configura el entorno
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+cp .env.example .env
+```
 
-## Code of Conduct
+Edita el archivo `.env` con la configuración de tu base de datos:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=el_dorado
+DB_USERNAME=root
+DB_PASSWORD=secret
+```
 
-## Security Vulnerabilities
+### 5. Genera la clave de aplicación
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan key:generate
+```
 
-## License
+### 6. Ejecuta las migraciones y seeders
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan migrate --seed
+```
+
+Esto creará las tablas necesarias y usuarios de prueba con roles predefinidos.
+
+### 7. Compila los assets
+
+```bash
+npm run dev
+```
+
+Para entorno de producción:
+
+```bash
+npm run build
+```
+
+### 8. Inicia el servidor de desarrollo
+
+```bash
+php artisan serve
+```
+
+Accede a la aplicación en tu navegador:
+
+```
+http://localhost:8000
+```
+
+---
+
+## 👤 Acceso al panel de administración
+
+El sistema incluye usuarios de ejemplo tras ejecutar los seeders:
+
+| Rol           | Email                  | Contraseña |
+|---------------|------------------------|------------|
+| Administrador | admin@dorado.com       | password   |
+| Empleado      | empleado@dorado.com    | password   |
+| Cliente       | cliente@dorado.com     | password   |
+
+Puedes registrar nuevos usuarios desde la interfaz y activar sus roles desde el panel de administración (si tienes rol de administrador).
+
+---
+
+## ⚙️ Funcionalidades principales
+
+### Para clientes
+
+- Consultar menú  
+- Realizar pedidos  
+- Ver historial de compras  
+- Recibir factura digital  
+- Ver promociones en el carrusel  
+
+### Para administradores
+
+- CRUD de productos  
+- Gestión de pedidos por estado  
+- Gestión de usuarios y roles  
+- Subida y ordenamiento de imágenes del carrusel  
+- Destacar productos en la página principal  
+
+---
+
+## 🔒 Autenticación y roles
+
+El sistema usa autenticación con verificación por correo. Tras registrarse, los usuarios deben confirmar su cuenta para acceder. El sistema redirige automáticamente a cada usuario según su rol:
+
+- **Cliente**: Página principal  
+- **Empleado**: Panel de gestión limitado  
+- **Administrador**: Panel completo  
+
+---
+
+## 🧪 Pruebas
+
+Puedes realizar pruebas manuales desde el navegador utilizando los usuarios de prueba.  
+El sistema cuenta con validaciones de formularios en tiempo real y manejo de errores con Livewire.
+
+---
+
+## 🧰 Tecnologías usadas
+
+- **Backend**: Laravel 10, Livewire  
+- **Frontend**: Blade, Tailwind CSS, Alpine.js, Sortable.js  
+- **Base de datos**: MySQL  
+
+**Librerías adicionales**:
+
+- Spatie Laravel-Permission  
+- Laravel Breeze  
+- Livewire File Uploads  
+
+---
+
+## ✨ Próximas mejoras
+
+- Sistema de puntos de fidelidad para clientes  
+- Códigos de descuento administrables  
+- Sistema de reservas de mesas  
+- Gestión de proveedores y stock  
+- Mejoras responsive en ciertas secciones  
+
+---
+
+## 🧑‍💻 Contribuciones
+
+Las contribuciones están abiertas.  
+Puedes enviar un pull request o crear un issue si encuentras algún error o tienes sugerencias.
