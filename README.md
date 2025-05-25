@@ -48,6 +48,70 @@ composer install
 npm install
 ```
 
+4. Configurar el entorno:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+5. Configurar la base de datos en el archivo `.env`:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=el_dorado_piscolabis
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+6. Ejecutar las migraciones:
+```bash
+php artisan migrate
+```
+
+7. Compilar los assets:
+```bash
+npm run build
+```
+
+## Desarrollo
+
+Para iniciar el servidor de desarrollo:
+```bash
+php artisan serve
+npm run dev
+```
+
+O usar el comando de desarrollo que ejecuta todo en paralelo:
+```bash
+composer dev
+```
+
+## Testing
+
+Ejecutar los tests:
+```bash
+composer test
+```
+
+## Características Principales
+- Sistema de autenticación
+- Gestión de usuarios
+- Panel de administración
+- Interfaz responsive
+- Notificaciones en tiempo real
+- Optimización de rendimiento
+
+## Contribución
+1. Fork el proyecto
+2. Crea tu rama de características (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## Licencia
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+=======
 ### 4. Configura el entorno
 
 ```bash

@@ -11,22 +11,14 @@ use Illuminate\Http\Request;
 class ProductoController extends Controller
 {
 
-    public function index(Request $request)
+    public function index()
     {
-        $categoria = $request->input('categoria');
         $categorias = \App\Models\ProductoTipo::pluck('tipo');
-
-
-        $productos = Producto::with('tipo')
-            ->when($categoria, function ($query, $categoria) {
-                $query->whereHas('tipo', function ($q) use ($categoria) {
-                    $q->where('tipo', $categoria);
-                });
-            })
-            ->get();
+        $productos = \App\Models\Producto::with('tipo')->get();
 
         return view('admin.producto.index', compact('productos', 'categorias'));
     }
+
 
     public function toggleDestacado(Request $request, Producto $producto)
     {

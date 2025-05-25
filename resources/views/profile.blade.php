@@ -12,9 +12,26 @@
     <link rel="stylesheet" href="{{ asset('css/inicio/styles.css') }}">
 </head>
 
-<body class="bg-[#FFF8F0] text-[#1C1917]">
-    <!-- Navbar -->
-    <x-menu-toggle />
+<body>
+
+    @php
+    $isProfile = request()->routeIs('profile');
+
+    // Ahora, SI estás en profile → fondo blanco, texto negro.
+    // Si NO estás en profile → fondo transparente, texto blanco.
+    $bgColor = $isProfile ? 'bg-white' : 'bg-transparent';
+    $colorText = $isProfile ? 'text-black' : 'text-white';
+    @endphp
+
+    <script>
+        window.menuColors = {
+            bgColor: "{{ $bgColor }}",
+            colorText: "{{ $colorText }}"
+        };
+    </script>
+
+
+    <x-menu-toggle :colorText="$colorText" :bgColor="$bgColor" />
 
     <!-- Encabezado -->
     <header class="py-12 shadow-inner">
@@ -29,9 +46,9 @@
         <div class="max-w-4xl mx-auto px-4 space-y-10">
 
             @if (session('message'))
-                <div class="bg-green-100 text-[#15803D] p-2 rounded mb-4">
-                    {{ session('message') }}
-                </div>
+            <div class="bg-green-100 text-[#15803D] p-2 rounded mb-4">
+                {{ session('message') }}
+            </div>
             @endif
 
             <!-- Actualizar perfil -->

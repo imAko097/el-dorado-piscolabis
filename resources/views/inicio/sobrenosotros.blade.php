@@ -12,9 +12,21 @@
 </head>
 
 <body class="bg-[#FFF8F0] text-[#1C1917]">
-    
-    <!-- Navbar -->
-    <x-menu-toggle />
+
+    @php
+    $isProfile = request()->routeIs('profile');
+    $bgColor = $isProfile ? 'bg-white' : 'bg-transparent';
+    $colorText = $isProfile ? 'text-black' : 'text-white';
+    @endphp
+
+    <script>
+        window.menuColors = {
+            bgColor: "{{ $bgColor }}",
+            colorText: "{{ $colorText }}"
+        };
+    </script>
+
+    <x-menu-toggle :colorText="$colorText" :bgColor="$bgColor" />
 
     <!-- Encabezado -->
     <section class="relative h-96">
@@ -66,39 +78,39 @@
 
     <!-- Equipo -->
     <section class="bg-[#FCD34D] py-16">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold text-white mb-10">Conoce al equipo</h2>
-            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-white text-center mb-10">Conoce al equipo</h2>
+
+            <div class="flex flex-col sm:flex-row sm:justify-between gap-10">
                 <!-- Miembro del equipo -->
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden">
-                    <img src="{{ asset('storage/img/chef1.jpg') }}" alt="Chef Ana"
-                        class="w-full h-60 object-cover">
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold text-[#1C1917]">Ana García</h3>
-                        <p class="text-gray-600 text-sm">Chef Ejecutiva</p>
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden w-full sm:w-1/2">
+                    <img
+                        src="{{ asset('storage/img/chef1.jpg') }}"
+                        alt="Chef"
+                        class="w-full h-60 object-cover object-center">
+                    <div class="p-4 text-center">
+                        <h3 class="text-xl font-semibold text-[#1C1917]">Juan Guerra</h3>
+                        <p class="text-gray-600 text-sm">Chef Ejecutivo</p>
                     </div>
                 </div>
                 <!-- Otro miembro -->
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden">
-                    <img src="{{ asset('storage/img/chef2.jpg') }}" alt="Chef Marco"
-                        class="w-full h-60 object-cover">
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold text-[#1C1917]">Marco Díaz</h3>
-                        <p class="text-gray-600 text-sm">Maestro Parrillero</p>
-                    </div>
-                </div>
-                <!-- Otro miembro -->
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden">
-                    <img src="{{ asset('storage/img/chef3.jpg') }}" alt="Manager"
-                        class="w-full h-60 object-cover">
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold text-[#1C1917]">Laura Pérez</h3>
-                        <p class="text-gray-600 text-sm">Gerente General</p>
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden w-full sm:w-1/2">
+                    <img
+                        src="{{ asset('storage/img/chef2.jpg') }}"
+                        alt="Camarera"
+                        class="w-full h-60 object-cover object-center">
+                    <div class="p-4 text-center">
+                        <h3 class="text-xl font-semibold text-[#1C1917]">Carmen Dorada</h3>
+                        <p class="text-gray-600 text-sm">Camarera</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+
+
+
 
     <!-- Footer -->
     <footer class="bg-white border-t mt-10">
@@ -111,7 +123,7 @@
             </div>
             <div class="flex items-center justify-center space-x-2">
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#B7791F">
-                    <path d="M280-80v-366q-51-14-85.5-56T160-600v-280h80v280h40v-280h80v280h40v-280h80v280q0 56-34.5 98T360-446v366h-80Zm400 0v-320H560v-280q0-83 58.5-141.5T760-880v800h-80Z"/>
+                    <path d="M280-80v-366q-51-14-85.5-56T160-600v-280h80v280h40v-280h80v280h40v-280h80v280q0 56-34.5 98T360-446v366h-80Zm400 0v-320H560v-280q0-83 58.5-141.5T760-880v800h-80Z" />
                 </svg>
                 <span>Copyright © 2025 El Dorado Piscolabis</span>
             </div>
