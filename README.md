@@ -9,18 +9,20 @@
 Asegúrate de tener instaladas las siguientes herramientas:
 
 Backend:
-    - PHP 8.2
-    - Laravel 12
-    - Livewire 3
-    - Livewire Volt
+- PHP 8.2
+- Laravel 12
+- Livewire 3
+- Livewire Volt
+
 Frontend:
-    - TailwindCSS
-    - Alpine.js
-    - Vite
-    - Animate.css
-    - jQuery
-    - Toastify.js
-    - Extensiones PHP requeridas:  
+- TailwindCSS
+- Alpine.js
+- Vite
+- Animate.css
+- jQuery
+- Toastify.js
+
+Extensiones PHP requeridas:  
       `pdo`, `mbstring`, `openssl`, `fileinfo`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`, `curl`
 
 ---
