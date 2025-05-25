@@ -45,14 +45,12 @@
 </head>
 
 <body class="bg-[#FFF8F0] text-[#1C1917]">
+
     @php
-
     $isProfile = request()->routeIs('profile');
-    $bgColor = 'bg-transparent'; // empieza transparente siempre
-    $colorText = 'text-white'; // empieza con texto blanco siempre
-
+    $bgColor = $isProfile ? 'bg-white' : 'bg-transparent';
+    $colorText = $isProfile ? 'text-black' : 'text-white';
     @endphp
-
 
     <script>
         window.menuColors = {
@@ -142,7 +140,7 @@
                         @if ($producto->imagen)
                         <img src="{{ asset('storage/' . $producto->imagen) }}"
                             alt="{{ $producto->nombre }}"
-                            class="w-full h-48 object-cover rounded-lg " /> 
+                            class="w-full h-48 object-cover rounded-lg " />
                         @endif
                         <div class="pt-4 text-center">
                             <h3 class="text-lg font-semibold text-gray-800 mt-2">{{ $producto->nombre }}</h3>
@@ -179,7 +177,7 @@
             </div>
             <div class="flex items-center justify-center space-x-2">
                 <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#92400E">
-                    <path d="M280-80v-366q-51-14-85.5-56T160-600v-280h80v280h40v-280h80v280h40v-280h80v280q0 56-34.5 98T360-446v366h-80Zm400 0v-320H560v-280q0-83 58.5-141.5T760-880v800h-80Z"/>
+                    <path d="M280-80v-366q-51-14-85.5-56T160-600v-280h80v280h40v-280h80v280h40v-280h80v280q0 56-34.5 98T360-446v366h-80Zm400 0v-320H560v-280q0-83 58.5-141.5T760-880v800h-80Z" />
                 </svg>
                 <span>Copyright © 2025 El Dorado Piscolabis</span>
             </div>
@@ -187,7 +185,6 @@
     </footer>
 
     <script>
-
         document.addEventListener('DOMContentLoaded', function() {
             const swiper = new Swiper('.multiple-slide-carousel', {
                 loop: true,

@@ -14,10 +14,10 @@
 
 <body class="bg-[#FFF8F0] text-[#1C1917]">
 
-    @php
-    $isInicio = request()->routeIs('inicio');
-    $bgColor = $isInicio ? 'bg-transparent' : 'bg-white';
-    $colorText = $isInicio ? 'text-white' : 'text-black';
+     @php
+    $isProfile = request()->routeIs('profile');
+    $bgColor = $isProfile ? 'bg-white' : 'bg-transparent';
+    $colorText = $isProfile ? 'text-black' : 'text-white';
     @endphp
 
     <script>

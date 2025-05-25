@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Carrusel_imagenes;
 use App\Models\Producto;
 
@@ -8,6 +9,8 @@ use Illuminate\Http\Request;
 
 class InicioController extends Controller
 {
+
+
     public function inicio()
     {
         $carrusel_imagenes = Carrusel_imagenes::orderBy('orden', 'asc')->get();

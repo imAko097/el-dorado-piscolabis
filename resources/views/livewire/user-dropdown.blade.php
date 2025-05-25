@@ -1,17 +1,5 @@
 <div class="relative" x-data="{ open: false }" @click.away="open = false">
 
-      @php
-        $isMenu = request()->routeIs('menu');
-        $bgColor = $isMenu ? 'bg-white' : 'bg-transparent';
-        $colorText = $isMenu ? 'text-black' : 'text-white';
-    @endphp
-
-    <script>
-        window.menuColors = {
-            bgColor: "{{ $bgColor }}",
-            colorText: "{{ $colorText }}"
-        };
-    </script>
 
     <button id="userDropdownToggle" @click="open = !open" class="text-3xl hover:text-gray-200p {{ $colorText }} flex items-center gap-2 font-bold">
         <i class="bi bi-person-circle"></i>

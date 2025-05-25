@@ -3,35 +3,39 @@ import $ from 'jquery';
 function initializeNavbar() {
     const $menu = $('#dropdownMenu');
     const $icon = $('#menuIcon');
+    const $userToggle = $('#userDropdownToggle');
     const $mainMenu = $('#mainMenu');
     let isOpen = false;
 
-    // Clases iniciales definidas en Blade y pasadas a JS
-    const initialBg = window.menuColors?.bgColor || 'bg-transparent';
-    const initialText = window.menuColors?.colorText || 'text-white';
-
-    // Clases para cuando el menú está abierto o se hace scroll
-    const scrolledBg = 'bg-white';
-    const scrolledText = 'text-black';
-    const shadowClass = 'shadow-lg';
+    // Definimos initialText y initialBg usando window.menuColors
+    const initialBg = window.menuColors.bgColor;     // 'bg-transparent' o 'bg-white'
+    const initialText = window.menuColors.colorText;   // 'text-white'       o 'text-black'
 
     function setNavbarState() {
-        const $userButton = $('#userDropdownToggle');
-
         if (isOpen || window.scrollY > 100) {
+            // Navbar
             $mainMenu
-                .removeClass(`${initialBg} ${initialText}`)
-                .addClass(`${scrolledBg} ${scrolledText} ${shadowClass}`);
+                .removeClass(initialBg).removeClass(initialText)
+                .addClass('bg-white text-black shadow-lg');
 
-            //  Actualiza el botón del usuario
-            $userButton.removeClass(initialText).addClass(scrolledText);
+            // Botón de usuario
+            if ($userToggle.length) {
+                $userToggle
+                    .removeClass(initialText)
+                    .addClass('text-black');
+            }
         } else {
+            // Navbar
             $mainMenu
-                .removeClass(`${scrolledBg} ${scrolledText} ${shadowClass}`)
-                .addClass(`${initialBg} ${initialText}`);
+                .removeClass('bg-white text-black shadow-lg')
+                .addClass(initialBg).addClass(initialText);
 
-            // Vuelve a su color inicial
-            $userButton.removeClass(scrolledText).addClass(initialText);
+            // Botón de usuario
+            if ($userToggle.length) {
+                $userToggle
+                    .removeClass('text-black')
+                    .addClass(initialText);
+            }
         }
     }
 
