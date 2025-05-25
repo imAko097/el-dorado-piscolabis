@@ -9,6 +9,7 @@ use App\Http\Controllers\CarruselImagenes;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\RolAdminEmpleado;
 use \App\Livewire\Pedidos\MisPedidos;
+use App\Http\Controllers\MensajeController;
 
 
 Route::post('/logout', function () {
@@ -35,6 +36,7 @@ Route::middleware(['auth', RolAdminEmpleado::class])->group(function () {
     Route::get('carrusel_imagenes', [CarruselImagenes::class, 'index'])->name('carrusel.index');
     Route::post('/carrusel/update-order', [CarruselImagenes::class, 'updateOrder'])->name('carrusel.updateOrder');
     Route::delete('/admin/carrusel-imagenes/delete-multiple', [CarruselImagenes::class, 'deleteMultiple'])->name('carrusel_imagenes.delete_multiple');
+    Route::get('/mensajes', [MensajeController::class, 'index'])->name('mensajes.index');
 });
 
 Route::get('/', [InicioController::class, 'inicio'])->name('inicio');
